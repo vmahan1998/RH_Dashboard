@@ -45,22 +45,27 @@ sed_rast_cropped <- terra::mask(sed_rast, S_area.shp)
 # Bathymetry
 bath_rast <- terra::rast(paste0(path.input,('Idw_Aquinnah3.tif')))
 bath_rast <- terra::project(bath_rast, "EPSG:4269")
+#bath_rast <- terra::mask(bath_rast, A_area.rast)
 
 # Salinity
 salinity_rast <- terra::rast(paste0(path.input, "Idw_Salinity_4.tif"))
 salinity_rast <- terra::project(salinity_rast, "EPSG:4269")
+#salinity_rast <- terra::mask(salinity_rast, S_area.shp)
 
 # Velocity
 velocity_rast <- terra::rast(paste0(path.input, "Idw_FlowTest_1.tif"))
 velocity_rast <- terra::project(velocity_rast, "EPSG:4269")
+#velocity_rast <- terra::mask(velocity_rast, A_area.rast)
 
 # Temperature
 temperature_rast <- terra::rast(paste0(path.input, "Idw_TempTest.tif"))
 temperature_rast <- terra::project(temperature_rast, "EPSG:4269")
+#temperature_rast <- terra::mask(temperature_rast, S_area.shp)
 
 # SAV
 SAV_rast <- terra::rast(paste0(path.input, "Reclass_10p32_1.tif"))
 SAV_rast <- terra::project(SAV_rast, "EPSG:4269")
+#SAV_rast <- terra::mask(SAV_rast, S_area.shp)
 
 ####################################################################
 # Resample rasters to match the resolution of raster_mask without interpolation
@@ -94,105 +99,570 @@ SAV_rast_reclassified <- classify(SAV_rast_resampled, classification_matrix)
 # If you want to include values less than 0.5 as 0, you can add an 'others' argument
 SAV_rast_reclassified <- classify(SAV_rast_resampled, classification_matrix, others = 0)
 
-ui <- dashboardPage(
-  dashboardHeader(title = "River Herring Habitat Model Application: Aquinnah, Massachusetts"),
-  dashboardSidebar(
-    sidebarMenu(
-      menuItem("Project Area", tabName = "project_area", icon = icon("home")),
-      menuItem("Input Data", tabName = "input_data", icon = icon("th")),
-      menuItem("Alewife Suitability Indices", tabName = "suitability", icon = icon("fish"))
-    )
-  ),
-  dashboardBody(
-    tabItems(
-      tabItem(tabName = "project_area",
-              fluidRow(
-                box(title = "Herring Creek Fishery", status = "info", solidHeader = TRUE,
-                    leafletOutput("map", height = 600)),
-                box(title = "Area/Project Description", status = "info", solidHeader = TRUE,
-                    HTML("<p>Insert your description here.</p>"))
-              )
-      ),
-      tabItem(tabName = "input_data",
-              fluidRow(
-                column(width = 3,
-                       selectInput("parameter", "Select Parameter", choices = c("Average Daily Temperature (C)", "Depth (m)", "Salinity (psu)", "Average Daily Flow Velocity (m/s)", "Substrate Classification", "Sub-Aquatic Vegetation: Presence/Absence (1,0)"))),
-                column(width = 6,
-                       box(status = "info", solidHeader = FALSE,
-                           leafletOutput("input_map", height = 600, width = 600)))
-              ),
-              fluidRow(
-                column(width = 12,
-                       box(title = "Input Data Description", status = "info", solidHeader = TRUE,
-                           textOutput("data_description")))  # Output for data description
-              )
-      ),
-      tabItem(tabName = "suitability",
-              h2("Suitability Indices for Alewives"),
-              h3("Temperature"),
-              fluidRow(
-                box(title = "Spawning Adults", status = "info", solidHeader = TRUE,
-                    plotOutput("spawning_temp_plot", height = 250)),
-                box(title = "Eggs & Larvae", status = "info", solidHeader = TRUE,
-                    plotOutput("eggs_temp_plot", height = 250)),
-                box(title = "Non-Migratory Juveniles", status = "info", solidHeader = TRUE,
-                    plotOutput("juveniles_temp_plot", height = 250))
-              ),
-              h3("Depth"),
-              fluidRow(
-                box(title = "Spawning Adults", status = "info", solidHeader = TRUE,
-                    plotOutput("spawning_depth_plot", height = 250)),
-                box(title = "Eggs & Larvae", status = "info", solidHeader = TRUE,
-                    plotOutput("eggs_depth_plot", height = 250)),
-                box(title = "Non-Migratory Juveniles", status = "info", solidHeader = TRUE,
-                    plotOutput("juveniles_depth_plot", height = 250))
-              ),
-              h3("Salinity"),
-              fluidRow(
-                box(title = "Spawning Adults", status = "info", solidHeader = TRUE,
-                    plotOutput("spawning_salinity_plot", height = 250)),
-                box(title = "Eggs & Larvae", status = "info", solidHeader = TRUE,
-                    plotOutput("eggs_salinity_plot", height = 250)),
-                box(title = "Non-Migratory Juveniles", status = "info", solidHeader = TRUE,
-                    plotOutput("juveniles_salinity_plot", height = 250))
-              ),
-              h3("Flow Velocity"),
-              fluidRow(
-                box(title = "Spawning Adults", status = "info", solidHeader = TRUE,
-                    plotOutput("spawning_velocity_plot", height = 250)),
-                box(title = "Eggs & Larvae", status = "info", solidHeader = TRUE,
-                    plotOutput("eggs_velocity_plot", height = 250)),
-                box(title = "Non-Migratory Juveniles", status = "info", solidHeader = TRUE,
-                    plotOutput("juveniles_velocity_plot", height = 250))
-              ),
-              h3("Substrate"),
-              fluidRow(
-                box(title = "Spawning Adults", status = "info", solidHeader = TRUE,
-                    plotOutput("spawning_substrate_plot", height = 250)),
-                box(title = "Eggs & Larvae", status = "info", solidHeader = TRUE,
-                    plotOutput("eggs_substrate_plot", height = 250)),
-                box(title = "Non-Migratory Juveniles", status = "info", solidHeader = TRUE,
-                    plotOutput("juveniles_substrate_plot", height = 250))
-              )
+ui <- fluidPage(
+  titlePanel("River Herring Project"),
+  sidebarLayout(
+    sidebarPanel(
+      tabsetPanel(type = "tabs", 
+                  tabPanel("Homepage", 
+                           h2("Welcome to the River Herring Project"),
+                           p("This app is designed to visualize and analyze data on river herring populations."),
+                           p("Data and information in this app are based on the following reports:"),
+                           tags$ul(
+                             tags$li("River Herring Habitat Model Report 2024"),
+                             tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
+                           ),
+                           p("River herring are anadromous fish species, including alewives and blueback herring, that migrate from the ocean to freshwater rivers and streams to spawn.")
+                  ),
+                  tabPanel("Species Information", 
+                           h2("Species Information"),
+                           p("Detailed information about the river herring species, including alewives and blueback herring."),
+                           h3("Alewives"),
+                           p("Alewives (Alosa pseudoharengus) are a species of anadromous fish in the herring family."),
+                           tags$ul(
+                             tags$li("Description"),
+                             tags$li("Habitat"),
+                             tags$li("Life Cycle")
+                           ),
+                           h3("Blueback Herring"),
+                           p("Blueback herring (Alosa aestivalis) are similar to alewives but have distinct ecological and behavioral differences."),
+                           tags$ul(
+                             tags$li("Description"),
+                             tags$li("Habitat"),
+                             tags$li("Life Cycle")
+                           )
+                  ),
+                  tabPanel("Project Introduction", 
+                           h2("Project Area and Introduction"),
+                           p("This project focuses on studying the river herring populations in the designated project area."),
+                           leafletOutput("map_project_area")
+                  ),
+                  tabPanel("Input Data",
+                           h2("Input Data"),
+                           p("Description of the input data used in the project."),
+                           tableOutput("input_data_table"),
+                           selectInput("parameter", "Select Parameter:", 
+                                       choices = c("Average Daily Temperature (C)",
+                                                   "Depth (m)",
+                                                   "Salinity (psu)",
+                                                   "Average Daily Flow Velocity (m/s)",
+                                                   "Substrate Classification",
+                                                   "Sub-Aquatic Vegetation: Presence/Absence (1,0)")),
+                           leafletOutput("input_map"),
+                           textOutput("parameter_info")
+                  )
+      )
+    ),
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Spawning Adult Alewives",
+                 h2("Spawning Adult Alewives"),
+                 tabsetPanel(
+                   tabPanel("Habitat Results"),
+                   tabPanel("Average Daily Temperature (C)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_adult_temp_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_adult_temp_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Depth (m)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_adult_depth_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_adult_depth_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Salinity (psu)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_adult_salinity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_adult_salinity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Average Daily Flow Velocity (m/s)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_adult_velocity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_adult_velocity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Substrate Classification",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_adult_substrate_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_adult_substrate_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Sub-Aquatic Vegetation: Presence/Absence (1,0)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_adult_sav_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_adult_sav_habitat")
+                              )
+                            )
+                   )
+                 )
+        ),
+        tabPanel("Alewife Eggs & Larvae",
+                 h2("Alewife Eggs & Larvae"),
+                 tabsetPanel(
+                   tabPanel("Habitat Results"),
+                   tabPanel("Average Daily Temperature (C)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_eggs_temp_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_eggs_temp_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Depth (m)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_eggs_depth_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_eggs_depth_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Salinity (psu)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_eggs_salinity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_eggs_salinity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Average Daily Flow Velocity (m/s)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_eggs_velocity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_eggs_velocity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Substrate Classification",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_eggs_substrate_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_eggs_substrate_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Sub-Aquatic Vegetation: Presence/Absence (1,0)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_eggs_sav_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_eggs_sav_habitat")
+                              )
+                            )
+                   )
+                 )
+        ),
+        tabPanel("Non-Migratory Juvenile Alewives",
+                 h2("Non-Migratory Juvenile Alewives"),
+                 tabsetPanel(
+                   tabPanel("Habitat Results"),
+                   tabPanel("Average Daily Temperature (C)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_juvenile_temp_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_juvenile_temp_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Depth (m)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_juvenile_depth_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_juvenile_depth_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Salinity (psu)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_juvenile_salinity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_juvenile_salinity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Average Daily Flow Velocity (m/s)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_juvenile_velocity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_juvenile_velocity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Substrate Classification",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_juvenile_substrate_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_juvenile_substrate_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Sub-Aquatic Vegetation: Presence/Absence (1,0)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_alewives_juvenile_sav_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_alewives_juvenile_sav_habitat")
+                              )
+                            )
+                   )
+                 )
+        ),
+        tabPanel("Spawning Adult Blueback Herring",
+                 h2("Spawning Adult Blueback Herring"),
+                 tabsetPanel(
+                   tabPanel("Habitat Results"),
+                   tabPanel("Average Daily Temperature (C)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_adult_temp_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_adult_temp_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Depth (m)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_adult_depth_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_adult_depth_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Salinity (psu)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_adult_salinity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_adult_salinity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Average Daily Flow Velocity (m/s)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_adult_velocity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_adult_velocity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Substrate Classification",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_adult_substrate_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_adult_substrate_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Sub-Aquatic Vegetation: Presence/Absence (1,0)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_adult_sav_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_adult_sav_habitat")
+                              )
+                            )
+                   )
+                 )
+        ),
+        tabPanel("Blueback Herring Eggs & Larvae",
+                 h2("Blueback Herring Eggs & Larvae"),
+                 tabsetPanel(
+                   tabPanel("Habitat Results"),
+                   tabPanel("Average Daily Temperature (C)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_eggs_temp_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_eggs_temp_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Depth (m)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_eggs_depth_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_eggs_depth_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Salinity (psu)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_eggs_salinity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_eggs_salinity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Average Daily Flow Velocity (m/s)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_eggs_velocity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_eggs_velocity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Substrate Classification",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_eggs_substrate_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_eggs_substrate_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Sub-Aquatic Vegetation: Presence/Absence (1,0)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_eggs_sav_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_eggs_sav_habitat")
+                              )
+                            )
+                   )
+                 )
+        ),
+        tabPanel("Non-Migratory Juvenile Blueback Herring",
+                 h2("Non-Migratory Juvenile Blueback Herring"),
+                 tabsetPanel(
+                   tabPanel("Habitat Results"),
+                   tabPanel("Average Daily Temperature (C)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_juvenile_temp_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_juvenile_temp_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Depth (m)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_juvenile_depth_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_juvenile_depth_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Salinity (psu)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_juvenile_salinity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_juvenile_salinity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Average Daily Flow Velocity (m/s)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_juvenile_velocity_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_juvenile_velocity_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Substrate Classification",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_juvenile_substrate_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_juvenile_substrate_habitat")
+                              )
+                            )
+                   ),
+                   tabPanel("Sub-Aquatic Vegetation: Presence/Absence (1,0)",
+                            fluidRow(
+                              column(6, 
+                                     h3("Suitability Index"),
+                                     plotOutput("plot_blueback_juvenile_sav_suitability")
+                              ),
+                              column(6, 
+                                     h3("Habitat Suitability"),
+                                     plotOutput("plot_blueback_juvenile_sav_habitat")
+                              )
+                            )
+                   )
+                 )
+        ),
+        tabPanel("River Herring Migration Model", 
+                 h2("River Herring Migration Model"),
+                 leafletOutput("map_migration_model"))
       )
     )
   )
 )
 
 server <- function(input, output, session) {
-  
-  # Project Area
-  output$map <- renderLeaflet({
-    # Example map centered on Aquinnah, Massachusetts
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%  # Add satellite imagery
-      setView(lng = -70.7916, lat = 41.3328, zoom = 13) %>%  # Adjust the coordinates and zoom level as needed
-      addMarkers(lng = -70.785763, lat = 41.330420, popup = "Herring Creek Fishery")  # Add marker with popup
+  # Sample data
+  data <- reactive({
+    # Replace this with actual data loading
+    data.frame(date = seq.Date(from = as.Date("2020-01-01"), to = Sys.Date(), by = "month"),
+               population_alewives_adult = runif(60, 1000, 5000),
+               population_alewives_eggs = runif(60, 5000, 20000),
+               population_alewives_juvenile = runif(60, 3000, 15000),
+               population_blueback_adult = runif(60, 1000, 5000),
+               population_blueback_eggs = runif(60, 5000, 20000),
+               population_blueback_juvenile = runif(60, 3000, 15000))
   })
   
-  # Input Data
+  # Sample input data
+  input_data <- data.frame(
+    Variable = c("Date", "Population Alewives Adult", "Population Alewives Eggs", "Population Alewives Juvenile", "Population Blueback Adult", "Population Blueback Eggs", "Population Blueback Juvenile"),
+    Description = c("Date of observation", "Number of spawning adult alewives", "Number of alewife eggs and larvae", "Number of non-migratory juvenile alewives", "Number of spawning adult blueback herring", "Number of blueback herring eggs and larvae", "Number of non-migratory juvenile blueback herring")
+  )
+  
+  output$input_data_table <- renderTable({
+    input_data
+  })
+  
+  output$map_project_area <- renderLeaflet({
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 13) %>%
+      addMarkers(lng = -70.785763, lat = 41.330420, popup = "Herring Creek Fishery")
+  })
+  
   observeEvent(input$parameter, {
-    
+
     # Get the selected parameter
     selected_parameter <- input$parameter
     
@@ -212,103 +682,17 @@ server <- function(input, output, session) {
     # Add the raster layer to the map on the "Input Data" tab
     output$input_map <- renderLeaflet({
       leaflet() %>%
-        addProviderTiles("Esri.WorldImagery") %>%  # Add satellite imagery
-        setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%  # Adjust the coordinates and zoom level as needed
-        addRasterImage(raster_layer) %>%
+        addProviderTiles("Esri.WorldImagery") %>%
+        setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+        addRasterImage(raster_layer, colors = viridis(10)) %>%
         addLegend("bottomright", colors = viridis(10), labels = seq(min_value, max_value, length.out = 10))
     })
     
-    # Output parameter information (placeholder)
     output$parameter_info <- renderText({
       paste("You selected:", selected_parameter)
-      # Add more information about the selected parameter here if needed
     })
   })
-  # Example data for the suitability indices
-  suitability_index <- function(x, shift = 0) { 1 / (1 + exp(-x + 5 + shift)) }
-  x <- seq(0, 10, length.out = 100)
   
-  # Generate example plots for each parameter and category
-  # Temperature
-  output$spawning_temp_plot <- renderPlot({
-    y <- suitability_index(x)
-    plot(x, y, type = "l", col = "blue", lwd = 2, main = "Spawning Adults", xlab = "Temperature", ylab = "Suitability Index")
-  })
-  
-  output$eggs_temp_plot <- renderPlot({
-    y <- suitability_index(x, shift = 1)
-    plot(x, y, type = "l", col = "green", lwd = 2, main = "Eggs & Larvae", xlab = "Temperature", ylab = "Suitability Index")
-  })
-  
-  output$juveniles_temp_plot <- renderPlot({
-    y <- suitability_index(x, shift = -1)
-    plot(x, y, type = "l", col = "red", lwd = 2, main = "Non-Migratory Juveniles", xlab = "Temperature", ylab = "Suitability Index")
-  })
-  
-  # Depth
-  output$spawning_depth_plot <- renderPlot({
-    y <- suitability_index(x / 2)
-    plot(x, y, type = "l", col = "blue", lwd = 2, main = "Spawning Adults", xlab = "Depth", ylab = "Suitability Index")
-  })
-  
-  output$eggs_depth_plot <- renderPlot({
-    y <- suitability_index(x / 2, shift = 1)
-    plot(x, y, type = "l", col = "green", lwd = 2, main = "Eggs & Larvae", xlab = "Depth", ylab = "Suitability Index")
-  })
-  
-  output$juveniles_depth_plot <- renderPlot({
-    y <- suitability_index(x / 2, shift = -1)
-    plot(x, y, type = "l", col = "red", lwd = 2, main = "Non-Migratory Juveniles", xlab = "Depth", ylab = "Suitability Index")
-  })
-  
-  # Salinity
-  output$spawning_salinity_plot <- renderPlot({
-    y <- suitability_index(x + 1)
-    plot(x, y, type = "l", col = "blue", lwd = 2, main = "Spawning Adults", xlab = "Salinity", ylab = "Suitability Index")
-  })
-  
-  output$eggs_salinity_plot <- renderPlot({
-    y <- suitability_index(x + 2, shift = 1)
-    plot(x, y, type = "l", col = "green", lwd = 2, main = "Eggs & Larvae", xlab = "Salinity", ylab = "Suitability Index")
-  })
-  
-  output$juveniles_salinity_plot <- renderPlot({
-    y <- suitability_index(x, shift = -1)
-    plot(x, y, type = "l", col = "red", lwd = 2, main = "Non-Migratory Juveniles", xlab = "Salinity", ylab = "Suitability Index")
-  })
-  
-  # Flow Velocity
-  output$spawning_velocity_plot <- renderPlot({
-    y <- suitability_index(x - 1)
-    plot(x, y, type = "l", col = "blue", lwd = 2, main = "Spawning Adults", xlab = "Flow Velocity", ylab = "Suitability Index")
-  })
-  
-  output$eggs_velocity_plot <- renderPlot({
-    y <- suitability_index(x - 2, shift = 1)
-    plot(x, y, type = "l", col = "green", lwd = 2, main = "Eggs & Larvae", xlab = "Flow Velocity", ylab = "Suitability Index")
-  })
-  
-  output$juveniles_velocity_plot <- renderPlot({
-    y <- suitability_index(x - 1, shift = -1)
-    plot(x, y, type = "l", col = "red", lwd = 2, main = "Non-Migratory Juveniles", xlab = "Flow Velocity", ylab = "Suitability Index")
-  })
-  
-  # Substrate
-  output$spawning_substrate_plot <- renderPlot({
-    y <- suitability_index(x / 2 + 1)
-    plot(x, y, type = "l", col = "blue", lwd = 2, main = "Spawning Adults", xlab = "Substrate", ylab = "Suitability Index")
-  })
-  
-  output$eggs_substrate_plot <- renderPlot({
-    y <- suitability_index(x / 2 + 2, shift = 1)
-    plot(x, y, type = "l", col = "green", lwd = 2, main = "Eggs & Larvae", xlab = "Substrate", ylab = "Suitability Index")
-  })
-  
-  output$juveniles_substrate_plot <- renderPlot({
-    y <- suitability_index(x / 2, shift = -1)
-    plot(x, y, type = "l", col = "red", lwd = 2, main = "Non-Migratory Juveniles", xlab = "Substrate", ylab = "Suitability Index")
-  })
-
 }
 
 shinyApp(ui = ui, server = server)
