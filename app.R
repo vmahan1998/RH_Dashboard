@@ -100,13 +100,13 @@ SAV_rast_reclassified <- classify(SAV_rast_resampled, classification_matrix)
 SAV_rast_reclassified <- classify(SAV_rast_resampled, classification_matrix, others = 0)
 
 ui <- fluidPage(
-  titlePanel("River Herring Project"),
+  titlePanel("River Herring Ecological Modeling"),
   sidebarLayout(
     sidebarPanel(
       tabsetPanel(type = "tabs", 
                   tabPanel("Homepage", 
                            h2("Welcome to the River Herring Project"),
-                           p("This app is designed to visualize and analyze data on river herring populations."),
+                           p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe and all results and data contained within this app remain property of the Tribe. Explicit permission must be granted for reuse."),
                            p("Data and information in this app are based on the following reports:"),
                            tags$ul(
                              tags$li("River Herring Habitat Model Report 2024"),
@@ -132,8 +132,8 @@ ui <- fluidPage(
                              tags$li("Life Cycle")
                            )
                   ),
-                  tabPanel("Project Introduction", 
-                           h2("Project Area and Introduction"),
+                  tabPanel("Project Description", 
+                           h2("Project Area and Background"),
                            p("This project focuses on studying the river herring populations in the designated project area."),
                            leafletOutput("map_project_area")
                   ),
@@ -625,7 +625,34 @@ ui <- fluidPage(
         ),
         tabPanel("River Herring Migration Model", 
                  h2("River Herring Migration Model"),
-                 leafletOutput("map_migration_model"))
+                 fluidRow(
+                   column(6, 
+                          h3("Baseline Simulation (No Predation)"),
+                          plotOutput("plot_migration_baseline")
+                   ),
+                   column(6, 
+                          h3("Description of Model Application"),
+                          p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
+                          p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
+                          p("By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
+                   )
+                 ),
+                 fluidRow(
+                   column(6, 
+                          h3("Low Predation"),
+                          plotOutput("plot_blueback_juvenile_sav_suitability")
+                   ),
+                   column(6, 
+                          h3("Low Predation"),
+                          plotOutput("plot_blueback_juvenile_sav_habitat")
+                   )
+                 ),
+                 fluidRow(
+                   column(12,
+                          h3("Summary of Results"),
+                          p("This section provides a summary of the simulation results. It includes key findings and insights derived from the model simulations, highlighting the most significant factors affecting river herring migration success.")
+                   )
+                 ))
       )
     )
   )
