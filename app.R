@@ -104,17 +104,19 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       tabsetPanel(type = "tabs", 
-                  tabPanel("Homepage", 
-                           h2("Welcome to the River Herring Project"),
-                           p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe and all results and data contained within this app remain property of the Tribe. Explicit permission must be granted for reuse."),
-                           p("Data and information in this app are based on the following reports:"),
-                           tags$ul(
-                             tags$li("River Herring Habitat Model Report 2024"),
-                             tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
-                           ),
-                           p("River herring are anadromous fish species, including alewives and blueback herring, that migrate from the ocean to freshwater rivers and streams to spawn.")
+                  tabPanel(
+                    title = tagList(icon("home"), "Homepage"), 
+                    h2("Welcome to the River Herring Project"),
+                    p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe and all results and data contained within this app remain property of the Tribe. Explicit permission must be granted for reuse."),
+                    p("Data and information in this app are based on the following reports:"),
+                    tags$ul(
+                      tags$li("River Herring Habitat Model Report 2024"),
+                      tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
+                    ),
+                    p("River herring are anadromous fish species, including alewives and blueback herring, that migrate from the ocean to freshwater rivers and streams to spawn.")
                   ),
-                  tabPanel("Species Information", 
+                  tabPanel(
+                    title = tagList(icon("fish"),"Species Information"), 
                            h2("Species Information"),
                            p("Detailed information about the river herring species, including alewives and blueback herring."),
                            h3("Alewives"),
@@ -132,12 +134,14 @@ ui <- fluidPage(
                              tags$li("Life Cycle")
                            )
                   ),
-                  tabPanel("Project Description", 
+                  tabPanel(
+                    title = tagList(icon("user"), "Project Description"), 
                            h2("Project Area and Background"),
                            p("This project focuses on studying the river herring populations in the designated project area."),
                            leafletOutput("map_project_area")
                   ),
-                  tabPanel("Input Data",
+                  tabPanel(
+                    title = tagList(icon("line-chart"), "Input Data"),
                            h2("Input Data"),
                            p("Description of the input data used in the project."),
                            tableOutput("input_data_table"),
@@ -623,7 +627,8 @@ ui <- fluidPage(
                    )
                  )
         ),
-        tabPanel("River Herring Migration Model", 
+        tabPanel(
+                 title = tagList(icon("star"),"River Herring Migration Model"), 
                  h2("River Herring Migration Model"),
                  fluidRow(
                    column(6, 
