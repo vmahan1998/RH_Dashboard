@@ -17,6 +17,7 @@ library(plotly)
 
 path.input <- '/Users/RDEL1VMM/Desktop/current projects/Aquinnah Herring Hatchery/Model_results_5_7_24/'
 
+migration.model.input <- "/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/output"
 # Fetch corresponding raster data based on the selected parameter
 ## Preprocessing
 
@@ -113,11 +114,8 @@ egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_data.
 juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_data.tif"))
 
 # Suitability Indices
-
 # Adult Alewife
-## Temperature
-
-adult_alwife_temp_suitability_data <- data.frame(
+adult_alewife_temp_suitability_data <- data.frame(
   Temperature = c(0, 3, 7, 11, 16, 28, 30, 35),  # Add a higher value for plotting purposes
   SuitabilityIndex = c(0.0, 0.1, 0.3, 0.5, 1.0, 0.1, 0.0, 0.0)  # Ensure the length matches Temperature
 )
@@ -147,43 +145,144 @@ adult_alewife_SAV_suitability_data <- data.frame(
 )
 
 # Alewife Eggs & Larvae
-# Suitability Indices for Alewife Eggs and Larvae - Temperature
 alewife_eggs_temp_suitability_data <- data.frame(
   Temperature = c(0, 3, 7, 11, 20, 23, 28, 30),  # Add a higher value for plotting purposes
   SuitabilityIndex = c(0.0, 0.1, 0.5, 0.8, 1.0, 0.5, 0.1, 0.1)  # Ensure the length matches Temperature
 )
 
-# Suitability Indices for Alewife Eggs and Larvae - Depth
 alewife_eggs_depth_suitability_data <- data.frame(
   Depth = c(-3, 0, 5.0, 10.0, 20.0, 25.0),
   SuitabilityIndex = c(0.5, 1.0, 0.7, 0.5, 0.0, 0.0)
 )
 
-# Suitability Indices for Alewife Eggs and Larvae - Salinity
 alewife_eggs_salinity_suitability_data <- data.frame(
   Salinity = c(0, 0.5, 10.0, 25.0, 30.0),
   SuitabilityIndex = c(0.0, 0.5, 1.0, 0.8, 0.8)
 )
 
-# Suitability Indices for Alewife Eggs and Larvae - Flow Velocity
 alewife_eggs_velocity_suitability_data <- data.frame(
   Velocity = c(0, 0.1, 0.17, 0.3, 3.5, 4.5, 5.0),
   SuitabilityIndex = c(1.0, 0.7, 0.5, 0.3, 0.1, 0.0, 0.0)
 )
 
-# Suitability Indices for Alewife Eggs and Larvae - Substrate
 alewife_eggs_substrate_suitability_data <- data.frame(
   Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
   SuitabilityIndex = c(1.0, 0.3, 0.0)
 )
 
-# Suitability Indices for Alewife Eggs and Larvae - Substrate
 alewife_eggs_SAV_suitability_data <- data.frame(
   SAV = c("Present SAV", "Absent SAV"),
   SuitabilityIndex = c(1.0, 0.5)
 )
 
 # Juvenile ALewives
+juvenile_alewife_temp_suitability_data <- data.frame(
+  Temperature = c(0, 3, 7, 11, 20, 23, 28, 30),  # Add a higher value for plotting purposes
+  SuitabilityIndex = c(0.0, 0.1, 0.5, 0.8, 1.0, 0.5, 0.1, 0.1)  # Ensure the length matches Temperature
+)
+
+juvenile_alewife_depth_suitability_data <- data.frame(
+  Depth = c(-3, 0, 5.0, 10.0, 20.0, 25.0),
+  SuitabilityIndex = c(0.5, 1.0, 0.7, 0.5, 0.0, 0.0)
+)
+
+juvenile_alewife_salinity_suitability_data <- data.frame(
+  Salinity = c(0, 0.5, 10.0, 25.0, 30.0),
+  SuitabilityIndex = c(0.0, 0.5, 1.0, 0.8, 0.8)
+)
+
+juvenile_alewife_velocity_suitability_data <- data.frame(
+  Velocity = c(0, 0.1, 0.17, 0.3, 3.5, 4.5, 5.0),
+  SuitabilityIndex = c(1.0, 0.7, 0.5, 0.3, 0.1, 0.0, 0.0)
+)
+
+juvenile_alewife_substrate_suitability_data <- data.frame(
+  Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
+  SuitabilityIndex = c(1.0, 0.3, 0.0)
+)
+
+juvenile_alewife_SAV_suitability_data <- data.frame(
+  SAV = c("Present SAV", "Absent SAV"),
+  SuitabilityIndex = c(1.0, 0.5)
+)
+
+# Blueback Herring
+# Adult Blueback Herring
+blueback_adult_temp_suitability_data <- data.frame(
+  Temperature = c(0, 3, 10, 13, 17, 20, 25, 27, 30),  # Add a higher value for plotting purposes
+  SuitabilityIndex = c(0.0, 0.3, 0.5, 0.7, 1.0, 0.5, 0.3, 0.0, 0.0)  # Ensure the length matches Temperature
+)
+blueback_adult_depth_suitability_data <- data.frame(
+  Depth = c(-3, 0, 2.0, 5.0, 10.0, 15.0, 20.0, 25.0),
+  SuitabilityIndex = c(1.0, 1.0, 0.8, 0.5, 0.3, 0.1, 0.0, 0.0)
+)
+blueback_adult_salinity_suitability_data <- data.frame(
+  Salinity = c(0, 8.0, 15.0, 20.0, 25.0),
+  SuitabilityIndex = c(1.0, 0.8, 0.5, 0.0, 0.0)
+)
+blueback_adult_velocity_suitability_data <- data.frame(
+  Velocity = c(0, 0.1, 0.5, 1.7, 3.5, 4.5, 5.0),
+  SuitabilityIndex = c(0.3, 1.0, 0.8, 0.5, 0.1, 0.0, 0.0)
+)
+blueback_adult_substrate_suitability_data <- data.frame(
+  Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
+  SuitabilityIndex = c(1.0, 0.1, 0.0)
+)
+blueback_adult_SAV_suitability_data <- data.frame(
+  SAV = c("Present SAV", "Absent SAV"),
+  SuitabilityIndex = c(1.0, 0.1)
+)
+# Suitability Indices for Blueback Herring Eggs and Larvae
+blueback_eggs_temp_suitability_data <- data.frame(
+  Temperature = c(0, 3, 10, 13, 19, 24, 26, 34, 35),  # Add a higher value for plotting purposes
+  SuitabilityIndex = c(0.0, 0.3, 0.5, 1.0, 0.7, 0.5, 0.1, 0.0, 0.0)  # Ensure the length matches Temperature
+)
+blueback_eggs_depth_suitability_data <- data.frame(
+  Depth = c(-3, 0.8, 2, 5, 10, 15),
+  SuitabilityIndex = c(0.5, 1.0, 0.3, 0.1, 0.0, 0.0)
+)
+blueback_eggs_salinity_suitability_data <- data.frame(
+  Salinity = c(0, 0.5, 12.0, 15.0, 20.0, 25.0),
+  SuitabilityIndex = c(1.0, 0.8, 0.8, 0.8, 0.75, 0.75)
+)
+blueback_eggs_velocity_suitability_data <- data.frame(
+  Velocity = c(0, 0.1, 0.5, 1.0, 2.0, 3.0, 4.5, 5.0),
+  SuitabilityIndex = c(0.3, 0.5, 0.7, 1.0, 0.5, 0.1, 0.0, 0.0)
+)
+blueback_eggs_substrate_suitability_data <- data.frame(
+  Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
+  SuitabilityIndex = c(0.1, 1.0, 0.0)
+)
+blueback_eggs_SAV_suitability_data <- data.frame(
+  SAV = c("Present SAV", "Absent SAV"),
+  SuitabilityIndex = c( 1.0, 0.1)
+)
+
+# Juvenile Blueback Herring
+juvenile_blueback_temp_suitability_data <- data.frame(
+  Temperature = c(0, 3, 7, 11, 21, 30, 33, 35),  # Add a higher value for plotting purposes
+  SuitabilityIndex = c(0.0, 0.1, 0.5, 0.8, 1.0, 0.3, 0.0, 0.0)  # Ensure the length matches Temperature
+)
+juvenile_blueback_depth_suitability_data <- data.frame(
+  Depth = c(-3, 0, 5.0, 10.0, 20.0, 25.0),
+  SuitabilityIndex = c(0.3, 1.0, 0.7, 0.5, 0.0, 0.0)
+)
+juvenile_blueback_salinity_suitability_data <- data.frame(
+  Salinity = c(0, 0.5, 10.0, 25.0, 30.0),
+  SuitabilityIndex = c(0.5, 0.5, 1.0, 1.0, 1.0)
+)
+juvenile_blueback_velocity_suitability_data <- data.frame(
+  Velocity = c(0, 0.1, 0.17, 0.3, 3.5, 4.5, 5.0),
+  SuitabilityIndex = c(1.0, 0.7, 0.5, 0.3, 0.1, 0.0, 0.0)
+)
+juvenile_blueback_substrate_suitability_data <- data.frame(
+  Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
+  SuitabilityIndex = c(1.0, 0.1, 0.0)
+)
+juvenile_blueback_SAV_suitability_data <- data.frame(
+  SAV = c("Present SAV", "Absent SAV"),
+  SuitabilityIndex = c(1.0, 0.5)
+)
 
 ui <- fluidPage(
   titlePanel("River Herring Ecological Modeling"),
@@ -240,13 +339,51 @@ ui <- fluidPage(
                                             "Sub-Aquatic Vegetation: Presence/Absence (1,0)")),
                     leafletOutput("input_map"),
                     textOutput("parameter_info")
+                  ),
+                  tabPanel(
+                    title = tagList(icon("book"), "Glossary"), 
+                    h2("Glossary of Terms"),
+                    p("This section provides definitions and explanations of key terms used in the River Herring Ecological Modeling Project."),
+                    tags$ul(
+                      tags$li(tags$b("Agent-based Model:"), " A class of computational models for simulating the actions and interactions of autonomous agents to assess their effects on the system."),
+                      tags$li(tags$b("Agents:"), " Individual entities within an agent-based model that interact with each other and their environment according to predefined rules."),
+                      tags$li(tags$b("Alewives:"), " A species of anadromous fish (Alosa pseudoharengus) that migrates from the ocean to freshwater rivers and streams to spawn."),
+                      tags$li(tags$b("Anadromous Fish:"), " Fish that migrate from the sea to freshwater rivers and streams to spawn."),
+                      tags$li(tags$b("Blueback Herring:"), " A species of anadromous fish (Alosa aestivalis) similar to alewives but with distinct ecological and behavioral differences."),
+                      tags$li(tags$b("Diadromous Fish:"), " Fish that migrate between freshwater and saltwater during their life cycle, which includes anadromous and catadromous fish."),
+                      tags$li(tags$b("Ecological Modeling:"), " The use of mathematical and computational techniques to represent and study the interactions within ecosystems."),
+                      tags$li(tags$b("Flow Velocity:"), " The speed of water movement in a river or stream, usually measured in meters per second (m/s)."),
+                      tags$li(tags$b("Habitat Quality:"), " An assessment of the overall condition of a habitat, including its ability to support the species of interest."),
+                      tags$li(tags$b("Habitat Suitability:"), " An assessment of the suitability of a specific area for supporting a particular species based on environmental variables."),
+                      tags$li(tags$b("Habitat Suitability Model:"), " A model used to evaluate the appropriateness of habitat conditions for a particular species based on environmental factors."),
+                      tags$li(tags$b("Hard Substrates:"), " Firm and stable bottom materials in a river or stream, such as rocks or gravel."),
+                      tags$li(tags$b("MLLW (Mean Lower Low Water):"), " The average of the lower low water height of each tidal day observed over the National Tidal Datum Epoch."),
+                      tags$li(tags$b("Patches:"), " Discrete areas within a model's environment where agents interact and experience different conditions."),
+                      tags$li(tags$b("Peat:"), " A type of substrate made up of partially decomposed plant material, commonly found in wetlands."),
+                      tags$li(tags$b("Predation:"), " The act of one organism hunting and consuming another organism for food."),
+                      tags$li(tags$b("Salinity:"), " The concentration of salt in water, usually measured in practical salinity units (psu)."),
+                      tags$li(tags$b("Soft Substrates:"), " Unconsolidated bottom materials in a river or stream, such as sand or silt."),
+                      tags$li(tags$b("Spawning:"), " The process by which fish release eggs and sperm into the water for fertilization."),
+                      tags$li(tags$b("Striped Bass:"), " A species of anadromous fish (Morone saxatilis) known for migrating between freshwater and saltwater, commonly found along the Atlantic coast."),
+                      tags$li(tags$b("Sub-Aquatic Vegetation:"), " Aquatic plants that grow below the water's surface, providing habitat and food for various aquatic species."),
+                      tags$li(tags$b("Substrate:"), " The type of bottom material in a river or stream, such as sand, gravel, or rock."),
+                      tags$li(tags$b("Suitability Index:"), " A numerical scale used to evaluate the appropriateness of habitat conditions for a particular species."),
+                      tags$li(tags$b("Temperature:"), " The warmth or coldness of water, usually measured in degrees Celsius (°C).")
+                    )
                   )
       )
     ),
     mainPanel(
       tabsetPanel(
         tabPanel("Spawning Adult Alewives",
-                 h2("Spawning Adult Alewives"),
+                 h2(""),
+                 tabPanel(
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   fluidRow(
+                     column(6, 
+                   h2("Net Habitat Suitability"),
+                   leafletOutput("map_adult_alewife_habitat_results")))
+                 ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
@@ -320,21 +457,23 @@ ui <- fluidPage(
                               )
                             )
                    )
-                 ),
-                 tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_adult_alewife_habitat_results")
                  )
         ),
         tabPanel("Alewife Eggs & Larvae",
-                 h2("Alewife Eggs & Larvae"),
+                 h2(""),
+                 tabPanel(
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   fluidRow(
+                     column(6, 
+                   h2("Net Habitat Suitability"),
+                   leafletOutput("map_egg_larvae_alewife_habitat_results")))
+                 ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("egg_alewife_temp_plot")
+                                     plotlyOutput("eggs_alewife_temp_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -346,7 +485,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("egg_alewife_depth_plot")
+                                     plotlyOutput("eggs_alewife_depth_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -358,7 +497,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("egg_alewife_salinity_plot")
+                                     plotlyOutput("eggs_alewife_salinity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -370,7 +509,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("egg_alewife_velocity_plot")
+                                     plotlyOutput("eggs_alewife_velocity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -382,7 +521,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("egg_alewife_sediment_plot")
+                                     plotlyOutput("eggs_alewife_sediment_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -394,7 +533,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("egg_alewife_SAV_plot")
+                                     plotlyOutput("eggs_alewife_SAV_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -402,21 +541,23 @@ ui <- fluidPage(
                               )
                             )
                    )
-                 ),
-                 tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_egg_larvae_alewife_habitat_results")
                  )
         ),
         tabPanel("Non-Migratory Juvenile Alewives",
-                 h2("Non-Migratory Juvenile Alewives"),
+                 h2(""),
+                 tabPanel(
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   fluidRow(
+                     column(6, 
+                   h2("Net Habitat Suitability"),
+                   leafletOutput("map_juv_alewife_habitat_results")))
+                 ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_alewives_juvenile_temp_suitability")
+                                     plotlyOutput("juv_alewife_temp_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -428,7 +569,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_alewives_juvenile_depth_suitability")
+                                     plotlyOutput("juv_alewife_depth_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -440,7 +581,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_alewives_juvenile_salinity_suitability")
+                                     plotlyOutput("juv_alewife_salinity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -452,7 +593,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_alewives_juvenile_velocity_suitability")
+                                     plotlyOutput("juv_alewife_velocity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -464,7 +605,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("adult_alewife_substrate_plot")
+                                     plotlyOutput("juv_alewife_sediment_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -476,7 +617,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_alewives_juvenile_sav_suitability")
+                                     plotlyOutput("juv_alewife_SAV_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -484,21 +625,23 @@ ui <- fluidPage(
                               )
                             )
                    )
-                 ),
-                 tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_juv_alewife_habitat_results")
                  )
         ),
         tabPanel("Spawning Adult Blueback Herring",
-                 h2("Spawning Adult Blueback Herring"),
+                 h2(""),
+                 tabPanel(
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   fluidRow(
+                     column(6, 
+                   h2("Net Habitat Suitability"),
+                   leafletOutput("map_adult_blueback_habitat_results")))
+                 ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_adult_temp_suitability")
+                                     plotlyOutput("adult_blueback_temp_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -510,7 +653,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_adult_depth_suitability")
+                                     plotlyOutput("adult_blueback_depth_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -522,7 +665,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_adult_salinity_suitability")
+                                     plotlyOutput("adult_blueback_salinity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -534,7 +677,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_adult_velocity_suitability")
+                                     plotlyOutput("adult_blueback_velocity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -546,7 +689,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_adult_substrate_suitability")
+                                     plotlyOutput("adult_blueback_sediment_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -558,7 +701,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_adult_sav_suitability")
+                                     plotlyOutput("adult_blueback_SAV_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -566,21 +709,23 @@ ui <- fluidPage(
                               )
                             )
                    )
-                 ),
-                 tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_adult_blueback_habitat_results")
                  )
         ),
         tabPanel("Blueback Herring Eggs & Larvae",
-                 h2("Blueback Herring Eggs & Larvae"),
+                 h2(""),
+                 tabPanel(
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   fluidRow(
+                     column(6, 
+                   h2("Net Habitat Suitability"),
+                   leafletOutput("map_egg_larvae_blueback_habitat_results")))
+                 ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotlyOutput("egg_blueback_temp_plot")
+                                     plotlyOutput("eggs_blueback_temp_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -592,7 +737,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_eggs_depth_suitability")
+                                     plotlyOutput("eggs_blueback_depth_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -604,7 +749,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_eggs_salinity_suitability")
+                                     plotlyOutput("eggs_blueback_salinity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -616,7 +761,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_eggs_velocity_suitability")
+                                     plotlyOutput("eggs_blueback_velocity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -628,7 +773,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_eggs_substrate_suitability")
+                                     plotlyOutput("eggs_blueback_sediment_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -640,7 +785,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_eggs_sav_suitability")
+                                     plotlyOutput("eggs_blueback_SAV_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -648,21 +793,23 @@ ui <- fluidPage(
                               )
                             )
                    )
-                 ),
-                 tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_egg_larvae_blueback_habitat_results")
                  )
         ),
         tabPanel("Non-Migratory Juvenile Blueback Herring",
-                 h2("Non-Migratory Juvenile Blueback Herring"),
+                 h2(""),
+                 tabPanel(
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   fluidRow(
+                     column(6, 
+                   h2("Net Habitat Suitability"),
+                   leafletOutput("map_juv_blueback_habitat_results")))
+                 ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_juvenile_temp_suitability")
+                                     plotlyOutput("juv_blueback_temp_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -674,7 +821,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_juvenile_depth_suitability")
+                                     plotlyOutput("juv_blueback_depth_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -686,7 +833,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_juvenile_salinity_suitability")
+                                     plotlyOutput("juv_blueback_salinity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -698,7 +845,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_juvenile_velocity_suitability")
+                                     plotlyOutput("juv_blueback_velocity_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -710,7 +857,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_juvenile_substrate_suitability")
+                                     plotlyOutput("juv_blueback_sediment_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -722,7 +869,7 @@ ui <- fluidPage(
                             fluidRow(
                               column(6, 
                                      h3("Suitability Index"),
-                                     plotOutput("plot_blueback_juvenile_sav_suitability")
+                                     plotlyOutput("juv_blueback_SAV_plot")
                               ),
                               column(6, 
                                      h3("Habitat Suitability"),
@@ -730,59 +877,65 @@ ui <- fluidPage(
                               )
                             )
                    )
-                 ),
-                 tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_juv_blueback_habitat_results")
                  )
         ),
         tabPanel(
-          title = tagList(icon("star"),"River Herring Migration Model"), 
-          h2("River Herring Migration Model"),
+          title = tagList(icon("star"), "River Herring Migration Model"), 
+          h2(""),
           fluidRow(
             column(6, 
-                   h3("Baseline Simulation (No Predation)"),
-                   plotOutput("plot_migration_baseline")
+                   tags$img(src = "Conceptual_Model_B_W.png", height = "500px", width = "650px")
             ),
             column(6, 
-                   h3("Description of Model Application"),
+                   h3("River Herring Migration Model"),
                    p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
                    p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
                    p("By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
             )
           ),
-          h2("Low Predation"),
           fluidRow(
             column(6, 
-                   h3("Fish Consumed"),
-                   plotOutput("plot_blueback_juvenile_sav_suitability")
+                   h2("Baseline Spawning Encounters")
+                   #leafletOutput("map_juv_blueback_habitat_results")
+                   )
+        ),
+          h2("Striped Bass Predation"),
+          tabsetPanel(
+            tabPanel("Low Predation",
+                     fluidRow(
+                       column(6, 
+                              h3("Fish Consumed"),
+                              plotOutput("plot_blueback_juvenile_sav_suitability_low")
+                       ),
+                       column(6, 
+                              h3("Spawning Encounters"),
+                              plotOutput("plot_blueback_juvenile_sav_habitat_low")
+                       )
+                     )
             ),
-            column(6, 
-                   h3("Spawning Encounters"),
-                   plotOutput("plot_blueback_juvenile_sav_habitat")
-            )
-          ),
-          h2("Moderate Predation"),
-          fluidRow(
-            column(6, 
-                   h3("Fish Consumed"),
-                   plotOutput("plot_blueback_juvenile_sav_suitability")
+            tabPanel("Moderate Predation",
+                     fluidRow(
+                       column(6, 
+                              h3("Fish Consumed"),
+                              plotOutput("plot_blueback_juvenile_sav_suitability_moderate")
+                       ),
+                       column(6, 
+                              h3("Spawning Encounters"),
+                              plotOutput("plot_blueback_juvenile_sav_habitat_moderate")
+                       )
+                     )
             ),
-            column(6, 
-                   h3("Spawning Encounters"),
-                   plotOutput("plot_blueback_juvenile_sav_habitat")
-            )
-          ),
-          h2("High Predation"),
-          fluidRow(
-            column(6, 
-                   h3("Fish Consumed"),
-                   plotOutput("plot_blueback_juvenile_sav_suitability")
-            ),
-            column(6, 
-                   h3("Spawning Encounters"),
-                   plotOutput("plot_blueback_juvenile_sav_habitat")
+            tabPanel("High Predation",
+                     fluidRow(
+                       column(6, 
+                              h3("Fish Consumed"),
+                              plotOutput("plot_blueback_juvenile_sav_suitability_high")
+                       ),
+                       column(6, 
+                              h3("Spawning Encounters"),
+                              plotOutput("plot_blueback_juvenile_sav_habitat_high")
+                       )
+                     )
             )
           ),
           fluidRow(
@@ -792,6 +945,7 @@ ui <- fluidPage(
             )
           )
         )
+        
       )
     )
   )
@@ -914,10 +1068,11 @@ server <- function(input, output, session) {
       addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
   })
   
+  #####################################################################################
   # Adult Alewife Suitability Indices
   output$adult_alewife_temp_plot <- renderPlotly({
     plot_ly(
-      data = adult_alwife_temp_suitability_data,
+      data = adult_alewife_temp_suitability_data,
       x = ~Temperature,
       y = ~SuitabilityIndex,
       type = 'scatter',
@@ -1003,8 +1158,8 @@ server <- function(input, output, session) {
     )
   })
   
-  # Egg & Larvae  Alewife Suitability Indices
-  output$egg_alewife_temp_plot <- renderPlotly({
+  #  Alewife Eggs & Larvae  Suitability Indices
+  output$eggs_alewife_temp_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_temp_suitability_data,
       x = ~Temperature,
@@ -1019,7 +1174,7 @@ server <- function(input, output, session) {
     )
   })
   
-  output$egg_alewife_depth_plot <- renderPlotly({
+  output$eggs_alewife_depth_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_depth_suitability_data,
       x = ~Depth,
@@ -1034,7 +1189,7 @@ server <- function(input, output, session) {
     )
   })
   
-  output$egg_alewife_salinity_plot <- renderPlotly({
+  output$eggs_alewife_salinity_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_salinity_suitability_data,
       x = ~Salinity,
@@ -1049,7 +1204,7 @@ server <- function(input, output, session) {
     )
   })
   
-  output$egg_alewife_velocity_plot <- renderPlotly({
+  output$eggs_alewife_velocity_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_velocity_suitability_data,
       x = ~Velocity,
@@ -1064,7 +1219,7 @@ server <- function(input, output, session) {
     )
   })
   
-  output$egg_alewife_sediment_plot <- renderPlotly({
+  output$eggs_alewife_sediment_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_substrate_suitability_data,
       x = ~Substrate,
@@ -1078,7 +1233,7 @@ server <- function(input, output, session) {
     )
   })
   
-  output$egg_alewife_SAV_plot <- renderPlotly({
+  output$eggs_alewife_SAV_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_SAV_suitability_data,
       x = ~SAV,
@@ -1092,8 +1247,362 @@ server <- function(input, output, session) {
     )
   })
   
+  # Juvenule  Alewife Suitability Indices
+  output$juv_alewife_temp_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_alewife_temp_suitability_data,
+      x = ~Temperature,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Temperature (°C)",
+      xaxis = list(title = "Temperature (°C)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
   
+  output$juv_alewife_depth_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_alewife_depth_suitability_data,
+      x = ~Depth,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Depth (meters)",
+      xaxis = list(title = "Depth (m)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_alewife_salinity_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_alewife_salinity_suitability_data,
+      x = ~Salinity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Salinity (psu)",
+      xaxis = list(title = "Salinity (psu)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_alewife_velocity_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_alewife_velocity_suitability_data,
+      x = ~Velocity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Flow Velocity (m/s)",
+      xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_alewife_sediment_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_alewife_substrate_suitability_data,
+      x = ~Substrate,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Substrate Classification",
+      xaxis = list(title = "Substrate Types"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_alewife_SAV_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_alewife_SAV_suitability_data,
+      x = ~SAV,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Sub-Aquatic Vegetation (SAV)",
+      xaxis = list(title = "Presence/Absent of SAV"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  ##############################################################################
+  # Adult Alewife Suitability Indices
+  output$adult_blueback_temp_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_adult_temp_suitability_data,
+      x = ~Temperature,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Temperature (°C)",
+      xaxis = list(title = "Temperature (°C)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$adult_blueback_depth_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_adult_depth_suitability_data,
+      x = ~Depth,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Depth (meters)",
+      xaxis = list(title = "Depth (m)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$adult_blueback_salinity_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_adult_salinity_suitability_data,
+      x = ~Salinity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Salinity (psu)",
+      xaxis = list(title = "Salinity (psu)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$adult_blueback_velocity_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_adult_velocity_suitability_data,
+      x = ~Velocity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Flow Velocity (m/s)",
+      xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$adult_blueback_sediment_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_adult_substrate_suitability_data,
+      x = ~Substrate,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Substrate Classification",
+      xaxis = list(title = "Substrate Types"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$adult_blueback_SAV_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_adult_SAV_suitability_data,
+      x = ~SAV,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Sub-Aquatic Vegetation (SAV)",
+      xaxis = list(title = "Presence/Absent of SAV"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  #  Alewife Eggs & Larvae  Suitability Indices
+  output$eggs_blueback_temp_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_eggs_temp_suitability_data,
+      x = ~Temperature,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Temperature (°C)",
+      xaxis = list(title = "Temperature (°C)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$eggs_blueback_depth_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_eggs_depth_suitability_data,
+      x = ~Depth,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Depth (meters)",
+      xaxis = list(title = "Depth (m)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$eggs_blueback_salinity_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_eggs_salinity_suitability_data,
+      x = ~Salinity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Salinity (psu)",
+      xaxis = list(title = "Salinity (psu)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$eggs_blueback_velocity_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_eggs_velocity_suitability_data,
+      x = ~Velocity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Flow Velocity (m/s)",
+      xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$eggs_blueback_sediment_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_eggs_substrate_suitability_data,
+      x = ~Substrate,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Substrate Classification",
+      xaxis = list(title = "Substrate Types"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$eggs_blueback_SAV_plot <- renderPlotly({
+    plot_ly(
+      data = blueback_eggs_SAV_suitability_data,
+      x = ~SAV,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Sub-Aquatic Vegetation (SAV)",
+      xaxis = list(title = "Presence/Absent of SAV"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  # Juvenule  Alewife Suitability Indices
+  output$juv_blueback_temp_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_blueback_temp_suitability_data,
+      x = ~Temperature,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Temperature (°C)",
+      xaxis = list(title = "Temperature (°C)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_blueback_depth_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_blueback_depth_suitability_data,
+      x = ~Depth,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Depth (meters)",
+      xaxis = list(title = "Depth (m)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_blueback_salinity_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_blueback_salinity_suitability_data,
+      x = ~Salinity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Salinity (psu)",
+      xaxis = list(title = "Salinity (psu)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_blueback_velocity_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_blueback_velocity_suitability_data,
+      x = ~Velocity,
+      y = ~SuitabilityIndex,
+      type = 'scatter',
+      mode = 'lines+markers',
+      line = list(shape = 'hv')  # 'hv' for step-like plot
+    ) %>% layout(
+      title = "Average Daily Flow Velocity (m/s)",
+      xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_blueback_sediment_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_blueback_substrate_suitability_data,
+      x = ~Substrate,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Substrate Classification",
+      xaxis = list(title = "Substrate Types"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
+  
+  output$juv_blueback_SAV_plot <- renderPlotly({
+    plot_ly(
+      data = juvenile_blueback_SAV_suitability_data,
+      x = ~SAV,
+      y = ~SuitabilityIndex,
+      type = 'bar',  # Change to 'bar' for bar graph
+      marker = list(color = 'viridis')
+    ) %>% layout(
+      title = "Sub-Aquatic Vegetation (SAV)",
+      xaxis = list(title = "Presence/Absent of SAV"),
+      yaxis = list(title = "Suitability Value", range = c(0, 1))
+    )
+  })
 }
-
 
 shinyApp(ui = ui, server = server)
