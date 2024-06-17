@@ -14,6 +14,7 @@ library(leaflet)
 library(terra)
 library(viridis)
 library(plotly)
+library(shinythemes)
 
 path.input <- '/Users/RDEL1VMM/Desktop/current projects/Aquinnah Herring Hatchery/Model_results_5_7_24/'
 
@@ -285,6 +286,45 @@ juvenile_blueback_SAV_suitability_data <- data.frame(
 )
 
 ui <- fluidPage(
+  theme = bslib::bs_theme(bootswatch = "minty"),
+  tags$head(
+    tags$style(HTML("
+      .nav-tabs > li > a {
+        background-color: #f0f8ff;
+        color: #333;
+        font-weight: bold;
+      }
+      .nav-tabs > li > a:hover, .nav-tabs > li > a:focus, .nav-tabs > li.active > a {
+        background-color: #8fbc8f !important;
+        color: white !important;
+      }
+      .tab-content {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-top: none;
+      }
+      .panel-body {
+        background-color: #e9f7ef;
+        padding: 20px;
+        border: 1px solid #ddd;
+      }
+      table {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+      }
+      th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      h2, h3, p {
+        color: #333;
+      }
+      body {
+        background-color: #f5f5f5;
+      }
+    "))
+  ),
   titlePanel("River Herring Ecological Modeling"),
   sidebarLayout(
     sidebarPanel(
