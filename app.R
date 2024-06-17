@@ -15,12 +15,20 @@ library(terra)
 library(viridis)
 library(plotly)
 library(shinythemes)
+library(ggiraph)
+library(dplyr)
+library(ggmap)
 
 path.input <- '/Users/RDEL1VMM/Desktop/current projects/Aquinnah Herring Hatchery/Model_results_5_7_24/'
-
+path.output <- '/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/raw_data_processing/'
 migration.model.input <- "/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/output"
 # Fetch corresponding raster data based on the selected parameter
 ## Preprocessing
+# Set up your Google API key
+api_key <- "AIzaSyBXMCgi4IjTws4noaeAl7XvgFkETFgH4Zw"
+
+# Register your Google API key
+register_google(key = api_key)
 
 # Load Raster of area
 A_area.rast <- terra::rast(paste0(path.input,("A_area_mask_10m.tif")))
@@ -285,6 +293,38 @@ juvenile_blueback_SAV_suitability_data <- data.frame(
   SuitabilityIndex = c(1.0, 0.5)
 )
 
+##########################################################################
+# Migration Model Results
+# Load Model Results
+adult_alewife_data <- read.csv(paste0(path.input,("adult_alewife_habitat_data.csv"))) #HSI
+adult_alewife_patch_data <- read.csv(paste0(path.output,("adult_alewife_baseline_results_with_lat_long.csv")))
+adult_alewife_patch_data_low <- read.csv(paste0(path.output,("adult_alewife_low_results_with_lat_long.csv")))
+adult_alewife_patch_data_mod <- read.csv(paste0(path.output,("adult_alewife_moderate_results_with_lat_long.csv")))
+adult_alewife_patch_data_high <- read.csv(paste0(path.output,("adult_alewife_high_results_with_lat_long.csv")))
+
+# Combine all datasets to find the global min and max for scaling
+all_data <- bind_rows(adult_alewife_data, adult_alewife_patch_data_low, adult_alewife_patch_data_mod, adult_alewife_patch_data_high)
+
+global_spawning_min <- min(all_data$spawning.events.in.patch)
+global_spawning_max <- max(all_data$spawning.events.in.patch)
+global_predation_min <- min(all_data$prey.eaten.in.patch)
+global_predation_max <- max(all_data$prey.eaten.in.patch)
+
+######################################3
+filtered_baseline_spawning_data <- adult_alewife_patch_data %>% filter(spawning.events.in.patch > 0)
+
+# Low Predation
+filtered_low_spawning_data <- adult_alewife_patch_data_low %>% filter(spawning.events.in.patch > 0)
+filtered_low_predation_data <- adult_alewife_patch_data_low %>% filter( prey.eaten.in.patch > 0)
+
+# Moderate Predation
+filtered_mod_spawning_data <- adult_alewife_patch_data_mod %>% filter(spawning.events.in.patch > 0)
+filtered_mod_predation_data <- adult_alewife_patch_data_mod %>% filter( prey.eaten.in.patch > 0)
+
+# High Predation
+filtered_high_spawning_data <- adult_alewife_patch_data_high %>% filter(spawning.events.in.patch > 0)
+filtered_high_predation_data <- adult_alewife_patch_data_high %>% filter( prey.eaten.in.patch > 0)
+
 ui <- fluidPage(
   theme = bslib::bs_theme(bootswatch = "minty"),
   tags$head(
@@ -364,6 +404,16 @@ ui <- fluidPage(
                     h2("Project Area and Background"),
                     p("This project focuses on studying the river herring populations in the designated project area."),
                     leafletOutput("map_project_area")
+                  ),
+                  tabPanel(
+                    title = tagList(icon("cog"), "Ecological Modeling"), 
+                    h2("Habitat Suitability Modeling"),
+                    tags$div(style = "text-align:center;", 
+                             tags$img(src = "Habitat_Conceptual_Model.png", style = "width: 100%; height: auto;")),
+                    p("The habitat suitability model calculation"),
+                    h2("Agent-Based Modeling"),
+                    tags$div(style = "text-align:center;", 
+                             tags$img(src = "Conceptual_Model_B_W.png", style = "width: 100%; height: auto;"))
                   ),
                   tabPanel(
                     title = tagList(icon("line-chart"), "Input Data"),
@@ -924,21 +974,29 @@ ui <- fluidPage(
           h2(""),
           fluidRow(
             column(6, 
-                   tags$img(src = "Conceptual_Model_B_W.png", height = "500px", width = "650px")
+                   h3("River Herring Migration Model"),
+                   p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
+                   p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
+                   p("By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
             ),
             column(6, 
-                   h3("River Herring Migration Model"),
+                   tags$iframe(width="600", height="600", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
+            )
+          ),
+          fluidRow(
+            column(6, 
+                   leafletOutput("baselinePlot")
+            ),
+            column(6, 
+                   h3("Baseline Spawning Encounters"),
                    p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
                    p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
                    p("By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
             )
           ),
-          fluidRow(
-            column(6, 
-                   h2("Baseline Spawning Encounters")
-                   #leafletOutput("map_juv_blueback_habitat_results")
-                   )
-        ),
+          h2(""),
+          div(style = "text-align:center", h2("Simulation Design")),
+          div(style = "text-align:center", tableOutput("predationTable")),
           h2("Striped Bass Predation"),
           tabsetPanel(
             tabPanel("Low Predation",
@@ -1643,6 +1701,35 @@ server <- function(input, output, session) {
       yaxis = list(title = "Suitability Value", range = c(0, 1))
     )
   })
+
+############## Migration Model Results ##################
+  output$baselinePlot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_baseline_spawning_data$spawning.events.in.patch))), 
+                            domain = filtered_baseline_spawning_data$spawning.events.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_baseline_spawning_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~spawning.events.in.patch,
+        color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~spawning.events.in.patch
+      )
+  })
+  
+  output$predationTable <- renderTable({
+    data.frame(
+      "Predation Level (%)" = c(0.1, 0.5, 1),
+      "Alewives Eaten" = c(0.1, 0.5, 1) * 0.01
+    )
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)
