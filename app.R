@@ -19,6 +19,7 @@ library(ggiraph)
 library(dplyr)
 library(ggmap)
 library(leaflet.extras)
+library(DT)
 
 path.input <- '/Users/RDEL1VMM/Desktop/current projects/Aquinnah Herring Hatchery/Model_results_5_7_24/'
 path.output <- '/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/raw_data_processing/'
@@ -364,6 +365,10 @@ ui <- fluidPage(
       body {
         background-color: #f5f5f5;
       }
+      table.dataTable thead th {
+      background-color: #E8F5E9;
+      color: #333;
+    }
     "))
   ),
   titlePanel("River Herring Ecological Modeling"),
@@ -970,81 +975,83 @@ ui <- fluidPage(
                    )
                  )
         ),
-        tabPanel(
-          title = tagList(icon("star"), "River Herring Migration Model"), 
-          h2(""),
-          fluidRow(
-            column(6, 
-                   h3("River Herring Migration Model"),
-                   p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
-                   p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
-                   p("By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
-            ),
-            column(6, 
-                   tags$iframe(width="600", height="600", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
-            )
-          ),
-          fluidRow(
-            column(6, 
-                   leafletOutput("baselinePlot")
-            ),
-            column(6, 
-                   h2(""),
-                   h3("Baseline Spawning Encounters"),
-                   p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
-                   p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
-                   p("By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
-            )
-          ),
-          h2(""),
-          div(style = "text-align:center", h2("Simulation Design")),
-          div(style = "text-align:center", tableOutput("predationTable")),
-          h2("Striped Bass Predation"),
-          tabsetPanel(
-            tabPanel("Low Predation",
-                     fluidRow(
-                       column(6, 
-                              h3("Fish Consumed"),
-                              leafletOutput("lowPred_Plot")
-                       ),
-                       column(6, 
-                              h3("Spawning Encounters"),
-                              leafletOutput("lowPlot")
-                       )
-                     )
-            ),
-            tabPanel("Moderate Predation",
-                     fluidRow(
-                       column(6, 
-                              h3("Fish Consumed"),
-                              leafletOutput("modPred_Plot")
-                       ),
-                       column(6, 
-                              h3("Spawning Encounters"),
-                              leafletOutput("modPlot")
-                       )
-                     )
-            ),
-            tabPanel("High Predation",
-                     fluidRow(
-                       column(6, 
-                              h3("Fish Consumed"),
-                              leafletOutput("highPred_Plot")
-                       ),
-                       column(6, 
-                              h3("Spawning Encounters"),
-                              leafletOutput("highPlot")
-                       )
-                     )
-            )
-          ),
-          fluidRow(
-            column(12,
-                   h3("Summary of Results"),
-                   p("This section provides a summary of the simulation results. It includes key findings and insights derived from the model simulations, highlighting the most significant factors affecting river herring migration success.")
-            )
-          )
-        )
+tabPanel(
+  title = tagList(icon("star"), "River Herring Migration Model"), 
+  h2(""),
+  fluidRow(
+    column(6, 
+           div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;", "River Herring Migration Model"))),
+           h2(""),
+           p("This section provides an overview of the River Herring Migration Model application to Aquinnah, MA. This section provides an overview of the River Herring Migration Model application. The Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring spawning success under different predation pressures, this model can be used to identify locations and times where predation impacts river herring migration and spawning."),
+           h2(""),
+           p("The simulation in Aquinnah, MA tested three levels of increasing predation pressure against a baseline scenario with no predation, as shown in the table below."),
+           div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Simulation Design"))),
+           div(style = "text-align:center", DTOutput("predationTable")),
+           h2("")
+    ),
+    column(6, 
+           tags$iframe(width="600", height="600", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
+    )
+  ),
+  fluidRow(
+    column(6, 
+           leafletOutput("baselinePlot")
+    ),
+    column(6, 
+           div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Baseline Spawning Encounters"))),
+           h2(""),
+           p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring. By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
+    )
+  ),
+  tabsetPanel(
+    tabPanel("Low Predation",
+             fluidRow(
+               column(6, 
+                      h3("Fish Consumed"),
+                      leafletOutput("lowPred_Plot")
+               ),
+               column(6, 
+                      h3("Spawning Encounters"),
+                      leafletOutput("lowPlot")
+               )
+             )
+    ),
+    tabPanel("Moderate Predation",
+             fluidRow(
+               column(6, 
+                      h3("Fish Consumed"),
+                      leafletOutput("modPred_Plot")
+               ),
+               column(6, 
+                      h3("Spawning Encounters"),
+                      leafletOutput("modPlot")
+               )
+             )
+    ),
+    tabPanel("High Predation",
+             fluidRow(
+               column(6, 
+                      h3("Fish Consumed"),
+                      leafletOutput("highPred_Plot")
+               ),
+               column(6, 
+                      h3("Spawning Encounters"),
+                      leafletOutput("highPlot")
+               )
+             )
+    )
+  ),
+  fluidRow(
+    column(12,
+           div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Summary of Results"))),
+           p("The model simulation is designed to test the impact of varying predation levels on migrating river herring in Aquinnah, MA. Specifically, the ABM evaluates if increased predation pressures by striped bass delay river herring migration and reduce spawning success by testing three levels of increasing predation pressure against a baseline scenario with no predation."),
+           p("Low predation is defined as when the predator population is approximately 0.1% of the prey population. Moderate predation is when the predator population is around 0.5%, and high predation is defined at approximately 1.0% of the prey population. The default model parameters for the simulations are detailed in the appendix."),
+           p("GIS-derived shape files define distinct habitat areas, including the sea, estuary, channel, and pond, guiding the spatial dynamics of the simulation. A salinity gradient, represented either by real measured data or randomized by a scaled gradient, enhances the visual portrayal of the aquatic environment. This gradient visually signifies varying salinity levels, serving an illustrative purpose without directly impacting the model’s functionality."),
+           p("The habitat suitability data, a crucial component, incorporates Habitat Suitability Index (HSI) model results from the River Herring Habitat Model Report 2024. This data defines spawning habitat quality for river herring across patches on a scale of 0-1 using real environmental conditions like depth, substrate type, average daily flow velocity, average daily temperature, salinity, and the presence/absence of sub-aquatic vegetation. If an output from a habitat suitability model is unavailable, a randomized value of 0-1 can be a placeholder, expanding the model’s utility in data-poor environments."),
+           p("Pre-processing data is essential for ensuring spatial accuracy within the model. This process involved re-projecting multiple shape files representing the project area and re-projecting them to a common coordinate reference system (CRS). The World Geodetic System 1984 (WGS 84) was utilized for its compatibility with the NetLogo environment. The habitat suitability data needed to be converted from latitude and longitude into patch coordinates compatible with the patch coordinates in the virtual system for implementation into the ABM. This involves reading the data, defining the spatial extent and CRS, and calculating the patch coordinates based on this defined extent. The data with transformed coordinates is then integrated into the virtual system.")
+    )
+  )
+)
         
       )
     )
@@ -1742,10 +1749,23 @@ server <- function(input, output, session) {
       )
   })
   
-  output$predationTable <- renderTable({
-    data.frame(
-      "Predation Level (%)" = c(0.1, 0.5, 1),
-      "Alewives Eaten" = c(0.1, 0.5, 1) * 0.01
+  output$predationTable <- renderDT({
+    datatable(
+      data.frame(
+        "Simulation" = c("Baseline", "Low", "Moderate", "High"),
+        "Initial Prey Population (River Herring)" = c(1000, 1000, 1000, 1000),
+        "Predation Level (%)" = c(0, 0.1, 0.5, 1),
+        "Initial Predator Population (Striped Bass)" = c(0, 1, 5, 10)
+      ),
+      colnames = c("Simulation", "Initial Prey Population (River Herring)", "Predation Level (%)", "Initial Predator Population (Striped Bass)"),
+      options = list(
+        pageLength = 5,
+        autoWidth = TRUE,
+        dom = 't<"clear">',
+        columnDefs = list(list(width = '200px', targets = "_all"))
+      ),
+      rownames = FALSE,
+      class = 'table table-striped table-bordered'
     )
   })
   
