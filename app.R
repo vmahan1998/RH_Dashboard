@@ -18,6 +18,7 @@ library(shinythemes)
 library(ggiraph)
 library(dplyr)
 library(ggmap)
+library(leaflet.extras)
 
 path.input <- '/Users/RDEL1VMM/Desktop/current projects/Aquinnah Herring Hatchery/Model_results_5_7_24/'
 path.output <- '/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/raw_data_processing/'
@@ -988,6 +989,7 @@ ui <- fluidPage(
                    leafletOutput("baselinePlot")
             ),
             column(6, 
+                   h2(""),
                    h3("Baseline Spawning Encounters"),
                    p("This section provides an overview of the River Herring Migration Model application. The model simulates the migration patterns of river herring under various environmental conditions and management scenarios."),
                    p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring."),
@@ -1003,11 +1005,11 @@ ui <- fluidPage(
                      fluidRow(
                        column(6, 
                               h3("Fish Consumed"),
-                              plotOutput("plot_blueback_juvenile_sav_suitability_low")
+                              leafletOutput("lowPred_Plot")
                        ),
                        column(6, 
                               h3("Spawning Encounters"),
-                              plotOutput("plot_blueback_juvenile_sav_habitat_low")
+                              leafletOutput("lowPlot")
                        )
                      )
             ),
@@ -1015,11 +1017,11 @@ ui <- fluidPage(
                      fluidRow(
                        column(6, 
                               h3("Fish Consumed"),
-                              plotOutput("plot_blueback_juvenile_sav_suitability_moderate")
+                              leafletOutput("modPred_Plot")
                        ),
                        column(6, 
                               h3("Spawning Encounters"),
-                              plotOutput("plot_blueback_juvenile_sav_habitat_moderate")
+                              leafletOutput("modPlot")
                        )
                      )
             ),
@@ -1027,11 +1029,11 @@ ui <- fluidPage(
                      fluidRow(
                        column(6, 
                               h3("Fish Consumed"),
-                              plotOutput("plot_blueback_juvenile_sav_suitability_high")
+                              leafletOutput("highPred_Plot")
                        ),
                        column(6, 
                               h3("Spawning Encounters"),
-                              plotOutput("plot_blueback_juvenile_sav_habitat_high")
+                              leafletOutput("highPlot")
                        )
                      )
             )
@@ -1063,9 +1065,25 @@ server <- function(input, output, session) {
   
   output$map_project_area <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 13) %>%
-      addMarkers(lng = -70.785763, lat = 41.330420, popup = "Herring Creek Fishery")
+      addProviderTiles("Esri.WorldTopoMap") %>%  # Change to terrain map
+      setView(lng = -70.785784, lat = 41.330439, zoom = 14) %>%
+      addAwesomeMarkers(
+        lng = -70.785784, lat = 41.330439, 
+        icon = awesomeIcons(
+          icon = 'fish',  # Font Awesome icon name
+          iconColor = 'white',
+          markerColor = 'blue',
+          library = 'fa'
+        ),
+        popup = "Herring Creek Fishery",
+        label = "Herring Creek Fishery"
+      ) %>%
+      addLegend(
+        position = "bottomright", 
+        colors = "blue", 
+        labels = "Herring Creek Fishery", 
+        title = NULL
+      )
   })
   
   observeEvent(input$parameter, {
@@ -1703,6 +1721,7 @@ server <- function(input, output, session) {
   })
 
 ############## Migration Model Results ##################
+  ############## Migration Model Results ##################
   output$baselinePlot <- renderLeaflet({
     # Calculate the mean of x and y values
     center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
@@ -1717,7 +1736,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~spawning.events.in.patch,
+        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
         color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
         label = ~spawning.events.in.patch
       )
@@ -1730,6 +1749,125 @@ server <- function(input, output, session) {
     )
   })
   
+  output$lowPlot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_baseline_spawning_data$spawning.events.in.patch))), 
+                            domain = filtered_baseline_spawning_data$spawning.events.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_low_spawning_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~spawning.events.in.patch
+      )
+  })
+  
+  output$lowPred_Plot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_high_predation_data$prey.eaten.in.patch))), 
+                            domain = filtered_high_predation_data$prey.eaten.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_low_predation_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~prey.eaten.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        color = "#FDE725FF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~prey.eaten.in.patch
+      )
+  })
+  
+  output$modPlot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_baseline_spawning_data$spawning.events.in.patch))), 
+                            domain = filtered_baseline_spawning_data$spawning.events.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_mod_spawning_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~spawning.events.in.patch
+      )
+  })
+  
+  output$modPred_Plot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_high_predation_data$prey.eaten.in.patch))), 
+                            domain = filtered_high_predation_data$prey.eaten.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_mod_predation_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~prey.eaten.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        color = "#FDE725FF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~prey.eaten.in.patch
+      )
+  })
+  
+  output$highPlot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_baseline_spawning_data$spawning.events.in.patch))), 
+                            domain = filtered_baseline_spawning_data$spawning.events.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_high_spawning_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~spawning.events.in.patch
+      )
+  })
+  
+  output$highPred_Plot <- renderLeaflet({
+    # Calculate the mean of x and y values
+    center <- c(mean(adult_alewife_data$x), mean(adult_alewife_data$y))
+    
+    # Create a color palette
+    palette <- colorNumeric(palette = viridis(length(unique(filtered_high_predation_data$prey.eaten.in.patch))), 
+                            domain = filtered_high_predation_data$prey.eaten.in.patch)
+    
+    # Create a leaflet map
+    leaflet(data = filtered_high_predation_data) %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
+      addCircleMarkers(
+        lng = ~longitude, lat = ~latitude,
+        radius = ~prey.eaten.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        color = "#FDE725FF", stroke = FALSE, fillOpacity = 0.5,
+        label = ~prey.eaten.in.patch
+      )
+  })
 }
 
 shinyApp(ui = ui, server = server)
