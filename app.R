@@ -364,6 +364,7 @@ ui <- fluidPage(
       }
       body {
         background-color: #f5f5f5;
+        font-size: 18px;
       }
       table.dataTable thead th {
       background-color: #E8F5E9;
@@ -377,10 +378,9 @@ ui <- fluidPage(
       tabsetPanel(type = "tabs", 
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
-                    h2("Welcome to the River Herring Project"),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
                     p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe and all results and data contained within this app remain property of the Tribe. Explicit permission must be granted for reuse."),
-                    p("Data and information in this app are based on the following reports:"),
-                    tags$ul(
+                    p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    tags$ul(
                       tags$li("River Herring Habitat Model Report 2024"),
                       tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
                     ),
@@ -388,16 +388,16 @@ ui <- fluidPage(
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
-                    h2("Species Information"),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Species Information"))),
                     p("Detailed information about the river herring species, including alewives and blueback herring."),
-                    h3("Alewives"),
+                    div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Alewives"))),
                     p("Alewives (Alosa pseudoharengus) are a species of anadromous fish in the herring family."),
                     tags$ul(
                       tags$li("Description"),
                       tags$li("Habitat"),
                       tags$li("Life Cycle")
                     ),
-                    h3("Blueback Herring"),
+                    div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Blueback Herring"))),
                     p("Blueback herring (Alosa aestivalis) are similar to alewives but have distinct ecological and behavioral differences."),
                     tags$ul(
                       tags$li("Description"),
@@ -407,38 +407,41 @@ ui <- fluidPage(
                   ),
                   tabPanel(
                     title = tagList(icon("user"), "Project Description"), 
-                    h2("Project Area and Background"),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Project Area and Background"))),
                     p("This project focuses on studying the river herring populations in the designated project area."),
                     leafletOutput("map_project_area")
                   ),
                   tabPanel(
                     title = tagList(icon("cog"), "Ecological Modeling"), 
-                    h2("Habitat Suitability Modeling"),
+                    div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Habitat Suitability Modeling"))),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Habitat_Conceptual_Model.png", style = "width: 100%; height: auto;")),
-                    p("The habitat suitability model calculation"),
-                    h2("Agent-Based Modeling"),
+                    p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                      "The Habitat Suitability Model incorporates data on temperature, depth, salinity, flow velocity, substrate type, and the presence of sub-aquatic vegetation (SAV). These factors are used to calculate a Habitat Suitability Index (HSI) that ranges from 0 (unsuitable) to 1 (optimal). The model helps identify key spawning habitats and understand the environmental conditions that support river herring reproduction."),
+                    div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Agent-Based Modeling"))),
                     tags$div(style = "text-align:center;", 
-                             tags$img(src = "Conceptual_Model_B_W.png", style = "width: 100%; height: auto;"))
+                             tags$img(src = "Conceptual_Model_B_W.png", style = "width: 100%; height: auto;")),
+                    p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                      "The Agent-Based Model (ABM) simulates the behavior and interactions of individual river herring and their predators, such as striped bass, within Aquinnah, MA. Each agent (fish) follows a set of rules that dictate its movement, spawning, and response to environmental conditions. The ABM allows for the exploration of how different predation pressures and habitat conditions impact spawning success of migrating river herring.")
                   ),
                   tabPanel(
                     title = tagList(icon("line-chart"), "Input Data"),
-                    h2("Input Data"),
-                    p("Description of the input data used in the project."),
-                    tableOutput("input_data_table"),
-                    selectInput("parameter", "Select Parameter:", 
-                                choices = c("Average Daily Temperature (C)",
-                                            "Depth (m)",
-                                            "Salinity (psu)",
-                                            "Average Daily Flow Velocity (m/s)",
-                                            "Substrate Classification",
-                                            "Sub-Aquatic Vegetation: Presence/Absence (1,0)")),
-                    leafletOutput("input_map"),
-                    textOutput("parameter_info")
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Input Data"))),
+                    p("Description of the input data used in the River Herring Ecological Modeling Project and Application to Aquinnah, MA."),
+                    tableOutput("input_data_table")
+                    #selectInput("parameter", "Select Parameter:", 
+                                #choices = c("Average Daily Temperature (C)",
+                                #            "Depth (m)",
+                                #            "Salinity (psu)",
+                                #            "Average Daily Flow Velocity (m/s)",
+                                #            "Substrate Classification",
+                                #            "Sub-Aquatic Vegetation: Presence/Absence (1,0)")),
+                    #leafletOutput("input_map"),
+                    #textOutput("parameter_info")
                   ),
                   tabPanel(
                     title = tagList(icon("book"), "Glossary"), 
-                    h2("Glossary of Terms"),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Glossary of Terms"))),
                     p("This section provides definitions and explanations of key terms used in the River Herring Ecological Modeling Project."),
                     tags$ul(
                       tags$li(tags$b("Agent-based Model:"), " A class of computational models for simulating the actions and interactions of autonomous agents to assess their effects on the system."),
@@ -477,18 +480,18 @@ ui <- fluidPage(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
                    fluidRow(
                      column(6, 
-                   h2("Net Habitat Suitability"),
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    leafletOutput("map_adult_alewife_habitat_results")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_temp_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_adult_temp_habitat")
                               )
                             )
@@ -496,11 +499,11 @@ ui <- fluidPage(
                    tabPanel("Depth",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_depth_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_adult_depth_habitat")
                               )
                             )
@@ -508,11 +511,11 @@ ui <- fluidPage(
                    tabPanel("Salinity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_salinity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_adult_salinity_habitat")
                               )
                             )
@@ -520,11 +523,11 @@ ui <- fluidPage(
                    tabPanel("Average Daily Flow Velocity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_velocity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_adult_velocity_habitat")
                               )
                             )
@@ -532,11 +535,11 @@ ui <- fluidPage(
                    tabPanel("Substrate",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_sediment_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("adult_alewife_substrate_plot")
                               )
                             )
@@ -544,11 +547,11 @@ ui <- fluidPage(
                    tabPanel("Sub-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_adult_sav_habitat")
                               )
                             )
@@ -561,18 +564,18 @@ ui <- fluidPage(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
                    fluidRow(
                      column(6, 
-                   h2("Net Habitat Suitability"),
-                   leafletOutput("map_egg_larvae_alewife_habitat_results")))
+                     div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
+                     leafletOutput("map_egg_larvae_alewife_habitat_results")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_temp_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_eggs_temp_habitat")
                               )
                             )
@@ -580,11 +583,11 @@ ui <- fluidPage(
                    tabPanel("Depth",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_depth_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_eggs_depth_habitat")
                               )
                             )
@@ -592,11 +595,11 @@ ui <- fluidPage(
                    tabPanel("Salinity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_salinity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_eggs_salinity_habitat")
                               )
                             )
@@ -604,11 +607,11 @@ ui <- fluidPage(
                    tabPanel("Average Daily Flow Velocity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_velocity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_eggs_velocity_habitat")
                               )
                             )
@@ -616,11 +619,11 @@ ui <- fluidPage(
                    tabPanel("Substrate",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_sediment_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_eggs_substrate_habitat")
                               )
                             )
@@ -628,11 +631,11 @@ ui <- fluidPage(
                    tabPanel("Sub-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_eggs_sav_habitat")
                               )
                             )
@@ -645,18 +648,18 @@ ui <- fluidPage(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
                    fluidRow(
                      column(6, 
-                   h2("Net Habitat Suitability"),
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    leafletOutput("map_juv_alewife_habitat_results")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_temp_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_juvenile_temp_habitat")
                               )
                             )
@@ -664,11 +667,11 @@ ui <- fluidPage(
                    tabPanel("Depth",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_depth_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_juvenile_depth_habitat")
                               )
                             )
@@ -676,11 +679,11 @@ ui <- fluidPage(
                    tabPanel("Salinity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_salinity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_juvenile_salinity_habitat")
                               )
                             )
@@ -688,11 +691,11 @@ ui <- fluidPage(
                    tabPanel("Average Daily Flow Velocity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_velocity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_juvenile_velocity_habitat")
                               )
                             )
@@ -700,11 +703,11 @@ ui <- fluidPage(
                    tabPanel("Substrate",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_sediment_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_juvenile_substrate_habitat")
                               )
                             )
@@ -712,11 +715,11 @@ ui <- fluidPage(
                    tabPanel("Sub-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_alewives_juvenile_sav_habitat")
                               )
                             )
@@ -729,18 +732,18 @@ ui <- fluidPage(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
                    fluidRow(
                      column(6, 
-                   h2("Net Habitat Suitability"),
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    leafletOutput("map_adult_blueback_habitat_results")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_temp_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_adult_temp_habitat")
                               )
                             )
@@ -748,11 +751,11 @@ ui <- fluidPage(
                    tabPanel("Depth",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_depth_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_adult_depth_habitat")
                               )
                             )
@@ -760,11 +763,11 @@ ui <- fluidPage(
                    tabPanel("Salinity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_salinity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_adult_salinity_habitat")
                               )
                             )
@@ -772,11 +775,11 @@ ui <- fluidPage(
                    tabPanel("Average Daily Flow Velocity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_velocity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_adult_velocity_habitat")
                               )
                             )
@@ -784,11 +787,11 @@ ui <- fluidPage(
                    tabPanel("Substrate",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_sediment_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_adult_substrate_habitat")
                               )
                             )
@@ -796,11 +799,11 @@ ui <- fluidPage(
                    tabPanel("Sub-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_adult_sav_habitat")
                               )
                             )
@@ -813,18 +816,18 @@ ui <- fluidPage(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
                    fluidRow(
                      column(6, 
-                   h2("Net Habitat Suitability"),
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    leafletOutput("map_egg_larvae_blueback_habitat_results")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_temp_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_eggs_temp_habitat")
                               )
                             )
@@ -832,11 +835,11 @@ ui <- fluidPage(
                    tabPanel("Depth",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_depth_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_eggs_depth_habitat")
                               )
                             )
@@ -844,11 +847,11 @@ ui <- fluidPage(
                    tabPanel("Salinity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_salinity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_eggs_salinity_habitat")
                               )
                             )
@@ -856,11 +859,11 @@ ui <- fluidPage(
                    tabPanel("Average Daily Flow Velocity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_velocity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_eggs_velocity_habitat")
                               )
                             )
@@ -868,11 +871,11 @@ ui <- fluidPage(
                    tabPanel("Substrate",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_sediment_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_eggs_substrate_habitat")
                               )
                             )
@@ -880,11 +883,11 @@ ui <- fluidPage(
                    tabPanel("Sub-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_eggs_sav_habitat")
                               )
                             )
@@ -897,18 +900,18 @@ ui <- fluidPage(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
                    fluidRow(
                      column(6, 
-                   h2("Net Habitat Suitability"),
+                     div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    leafletOutput("map_juv_blueback_habitat_results")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_temp_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color:  black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_juvenile_temp_habitat")
                               )
                             )
@@ -916,11 +919,11 @@ ui <- fluidPage(
                    tabPanel("Depth",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color:  black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_depth_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color:  black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_juvenile_depth_habitat")
                               )
                             )
@@ -928,11 +931,11 @@ ui <- fluidPage(
                    tabPanel("Salinity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_salinity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_juvenile_salinity_habitat")
                               )
                             )
@@ -940,11 +943,11 @@ ui <- fluidPage(
                    tabPanel("Average Daily Flow Velocity",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_velocity_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_juvenile_velocity_habitat")
                               )
                             )
@@ -952,11 +955,11 @@ ui <- fluidPage(
                    tabPanel("Substrate",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_sediment_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_juvenile_substrate_habitat")
                               )
                             )
@@ -964,11 +967,11 @@ ui <- fluidPage(
                    tabPanel("Sub-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
-                                     h3("Suitability Index"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     h3("Habitat Suitability"),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
                                      plotOutput("plot_blueback_juvenile_sav_habitat")
                               )
                             )
@@ -977,78 +980,102 @@ ui <- fluidPage(
         ),
 tabPanel(
   title = tagList(icon("star"), "River Herring Migration Model"), 
-  h2(""),
+  div(style = "height: 20px;"),
   fluidRow(
     column(6, 
            div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;", "River Herring Migration Model"))),
-           h2(""),
-           p("This section provides an overview of the River Herring Migration Model application to Aquinnah, MA. This section provides an overview of the River Herring Migration Model application. The Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring spawning success under different predation pressures, this model can be used to identify locations and times where predation impacts river herring migration and spawning."),
-           h2(""),
-           p("The simulation in Aquinnah, MA tested three levels of increasing predation pressure against a baseline scenario with no predation, as shown in the table below."),
-           div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Simulation Design"))),
-           div(style = "text-align:center", DTOutput("predationTable")),
-           h2("")
+           div(style = "height: 20px;"),
+           tags$div(style = "text-align:center;", 
+                    tags$img(src = "Striped_Bass_Predation.png", style = "width: 70%; height: auto;")),
+           div(style = "height: 20px;"),
+           p("This section provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring migration under different predation pressures, this model can be used to identify locations and times where predation impacts spawning behavior in river herring."),
+           div(style = "height: 10px;"),
+           p("The simulation for Aquinnah, MA tested three levels of increasing predation pressure against a baseline scenario with no predation, as shown in the table below."),
     ),
     column(6, 
-           tags$iframe(width="600", height="600", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
+           div(style = "height: 20px;"),
+           tags$iframe(width="600", height="650", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
     )
   ),
+  div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Simulation Design"))),
+  div(style = "text-align:center", DTOutput("predationTable")),
   fluidRow(
     column(6, 
            leafletOutput("baselinePlot")
     ),
-    column(6, 
-           div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Baseline Spawning Encounters"))),
-           h2(""),
-           p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring. By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions.")
-    )
+    column(6,
+           div(style = "height: 20px;"),
+           div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Baseline Spawning"))),
+           div(style = "height: 10px;"),
+           p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring. By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions."),
+           div(style = "height: 35px;"), # Add a gap between the paragraphs
+           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center; font-weight: bold;", 
+             "Compare the Spawning Activity from the Baseline Simulation to Different Predation Levels by Clicking the Tabs Below")
+           )
   ),
   tabsetPanel(
     tabPanel("Low Predation",
              fluidRow(
+               column(12, 
+                      div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Low Predation Simulation"))),
+                      p("In the low predation simulation, where predator population is approximately 0.1% of the prey population, the model reveals a shift in spawning activity, primarily concentrating near the northern entrance to Squibnocket Pond. This localized spawning indicates that even minimal predation pressure prompts river herring to seek specific areas that may offer better protection or optimal spawning conditions. Despite the relatively low predation level, the model shows a reduction in the overall number of spawning events compared to the baseline, highlighting the sensitivity of river herring to even slight increases in predation."),
+                      p("Predation behavior in the low predation scenario is characterized by a concentrated pattern of predation events at the entrance of Herring Creek and extending throughout Squibnocket Pond. This indicates that striped bass, even at low densities, effectively target key migration bottlenecks where river herring are more vulnerable, like Herring Creek Fishery. The consistent presence of predation at these critical points suggests that the predator’s efficiency in these areas impacts the river herring's migration and spawning behavior.")
+               )),
+             fluidRow(
                column(6, 
-                      h3("Fish Consumed"),
+                      div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Fish Consumed"))),
                       leafletOutput("lowPred_Plot")
                ),
                column(6, 
-                      h3("Spawning Encounters"),
+                      div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Spawning Encounters"))),
                       leafletOutput("lowPlot")
                )
              )
     ),
     tabPanel("Moderate Predation",
              fluidRow(
+               column(12, 
+                      div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Moderate Predation Simulation"))),
+                      p("In the moderate predation simulation, where the predator population is approximately 0.5% of the prey population, river herring exhibit a more restricted spawning distribution. This indicates a significant avoidance behavior as river herring seek out the safest possible locations for spawning. The number of spawning events is decreased compared to the low predation scenario, highlighting the impact of moderate predation pressure on river herring reproductive success."),
+                      p("Predation behavior under moderate predation conditions becomes even more concentrated and intense. Predation events are heavily focused at the entrance to Herring Creek and continue into Squibnocket Pond, with striped bass effectively exploiting these critical points of vulnerability. The model demonstrates that moderate predation pressure significantly disrupts river herring migration patterns, leading to increased mortality and reduced spawning success. The spatial concentration of predation events indicates that striped bass are not only more abundant but also more effective in targeting migrating river herring, exacerbating the ecological pressure on the herring population.")
+               )),
+             fluidRow(
                column(6, 
-                      h3("Fish Consumed"),
+                      div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Fish Consumed"))),
                       leafletOutput("modPred_Plot")
                ),
                column(6, 
-                      h3("Spawning Encounters"),
+                      div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Spawning Encounters"))),
                       leafletOutput("modPlot")
                )
              )
     ),
     tabPanel("High Predation",
              fluidRow(
+               column(12, 
+                      div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "High Predation Simulation"))),
+                      p("In the high predation simulation, where the predator population is approximately 1.0% of the prey population, spawning activity is drastically reduced, with minimal spawning events observed across the simulated environment. River herring, faced with extreme predation risk, are unable to find sufficiently safe habitats to spawn effectively. The few spawning events that do occur, occur in high quality habitat, but even the amount of high quality habitat available within Squin=bnocket Pond, cannot compensate for the overwhelming predation pressure."),
+                      p("Predation behavior in the high predation scenario highly concentrated. Striped bass predation is rampant at critical choke points such as the culvert within Herring Creek and extends throughout Squibnocket Pond. The model indicates that high predation levels lead to rapid depletion of the river herring population, with predation events occurring at a much higher frequency compared to the low and moderate predation scenarios. The intense predation pressure results in significant delays in river herring migration and substantial mortality, severely compromising the herring's ability to reach their spawning grounds and complete their reproductive cycle.")
+               )),
+             fluidRow(
                column(6, 
-                      h3("Fish Consumed"),
+                      div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Fish Consumed"))),
                       leafletOutput("highPred_Plot")
                ),
                column(6, 
-                      h3("Spawning Encounters"),
+                      div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Spawning Encounters"))),
                       leafletOutput("highPlot")
                )
              )
     )
   ),
   fluidRow(
+    div(style = "height: 20px;"),
     column(12,
-           div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;", "Summary of Results"))),
-           p("The model simulation is designed to test the impact of varying predation levels on migrating river herring in Aquinnah, MA. Specifically, the ABM evaluates if increased predation pressures by striped bass delay river herring migration and reduce spawning success by testing three levels of increasing predation pressure against a baseline scenario with no predation."),
-           p("Low predation is defined as when the predator population is approximately 0.1% of the prey population. Moderate predation is when the predator population is around 0.5%, and high predation is defined at approximately 1.0% of the prey population. The default model parameters for the simulations are detailed in the appendix."),
-           p("GIS-derived shape files define distinct habitat areas, including the sea, estuary, channel, and pond, guiding the spatial dynamics of the simulation. A salinity gradient, represented either by real measured data or randomized by a scaled gradient, enhances the visual portrayal of the aquatic environment. This gradient visually signifies varying salinity levels, serving an illustrative purpose without directly impacting the model’s functionality."),
-           p("The habitat suitability data, a crucial component, incorporates Habitat Suitability Index (HSI) model results from the River Herring Habitat Model Report 2024. This data defines spawning habitat quality for river herring across patches on a scale of 0-1 using real environmental conditions like depth, substrate type, average daily flow velocity, average daily temperature, salinity, and the presence/absence of sub-aquatic vegetation. If an output from a habitat suitability model is unavailable, a randomized value of 0-1 can be a placeholder, expanding the model’s utility in data-poor environments."),
-           p("Pre-processing data is essential for ensuring spatial accuracy within the model. This process involved re-projecting multiple shape files representing the project area and re-projecting them to a common coordinate reference system (CRS). The World Geodetic System 1984 (WGS 84) was utilized for its compatibility with the NetLogo environment. The habitat suitability data needed to be converted from latitude and longitude into patch coordinates compatible with the patch coordinates in the virtual system for implementation into the ABM. This involves reading the data, defining the spatial extent and CRS, and calculating the patch coordinates based on this defined extent. The data with transformed coordinates is then integrated into the virtual system.")
+           div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Summary of Results"))),
+           p("The results from the simulation in Aquinnah, MA, demonstrate that river herring are highly sensitive to predation pressures from striped bass, significantly affecting their spawning success. Even low predation levels cause river herring to seek specific safe areas, while moderate and high predation pressures drastically reduce spawning events and overall population recovery."),
+           p("For fisheries management, these findings underscore the importance of targeted conservation efforts, such as protecting high-quality spawning habitats and improving fish passage at critical bottlenecks like the Herring Creek culvert. Adaptive management strategies informed by the model can help regulate predator populations and implement dynamic protection measures based on real-time data."),
+           p("Furthermore, the model's insights can guide policy decisions and stakeholder engagement, fostering collaborative conservation efforts. By maintaining ecological balance and protecting biodiversity, the sustainable recovery of river herring populations can be supported, ensuring the health of Aquinnah's aquatic ecosystems. The model also lays the groundwork for ongoing research and monitoring, essential for addressing the multifaceted challenges faced by river herring.")
     )
   )
 )
@@ -1060,10 +1087,16 @@ tabPanel(
 
 server <- function(input, output, session) {
   
-  # Sample input data
   input_data <- data.frame(
-    Variable = c("Date", "Population Alewives Adult", "Population Alewives Eggs", "Population Alewives Juvenile", "Population Blueback Adult", "Population Blueback Eggs", "Population Blueback Juvenile"),
-    Description = c("Date of observation", "Number of spawning adult alewives", "Number of alewife eggs and larvae", "Number of non-migratory juvenile alewives", "Number of spawning adult blueback herring", "Number of blueback herring eggs and larvae", "Number of non-migratory juvenile blueback herring")
+    Variable = c("Temperature", "Bathymetry", "Salinity", "Flow Velocity", "Substrate", "Sub-Aquatic Vegetation"),
+    Description = c(
+      "Collected by Richard Loyd and his team in August 2023 using strategically deployed tilt meters to capture water velocity and temperature variations over a full tide cycle.",
+      "Menemsha Pond data collected by Richard Lloyd using bathymetric surveying techniques in August 2023. Squibnocket Pond data obtained from a substrate analysis conducted by Brian Yellen, Molly Autery, and Asha Ajmani in 2022.",
+      "Collected as part of the Wampanoag Tribe's long-term water quality monitoring initiative using standard water quality monitoring equipment deployed at various locations within the study area. Supplementary data sourced from the Wampanoag Water Quality Studies hosted on the EPA water quality database.",
+      "Collected by Richard Loyd and his team in August 2023 using tilt meters to capture water velocity variations over a full tide cycle.",
+      "Obtained from the substrate analysis by Brian Yellen, Molly Autery, and Asha Ajmani in 2022. Substrate types determined through direct observation and analysis of sediment samples collected from Squibnocket Pond.",
+      "Collected by Richard Loyd and his team in August 2023 through visual surveys conducted using underwater surveying equipment and techniques."
+    )
   )
   
   output$input_data_table <- renderTable({
@@ -1200,7 +1233,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Temperature (°C)",
       xaxis = list(title = "Temperature (°C)"),
@@ -1215,7 +1249,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Depth (meters)",
       xaxis = list(title = "Depth (m)"),
@@ -1230,7 +1265,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Salinity (psu)",
       xaxis = list(title = "Salinity (psu)"),
@@ -1245,7 +1281,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Flow Velocity (m/s)",
       xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
@@ -1259,7 +1296,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1273,7 +1310,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1281,7 +1318,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #  Alewife Eggs & Larvae  Suitability Indices
+  # Alewife Eggs & Larvae Suitability Indices
   output$eggs_alewife_temp_plot <- renderPlotly({
     plot_ly(
       data = alewife_eggs_temp_suitability_data,
@@ -1289,7 +1326,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Temperature (°C)",
       xaxis = list(title = "Temperature (°C)"),
@@ -1304,7 +1342,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Depth (meters)",
       xaxis = list(title = "Depth (m)"),
@@ -1319,7 +1358,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Salinity (psu)",
       xaxis = list(title = "Salinity (psu)"),
@@ -1334,7 +1374,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Flow Velocity (m/s)",
       xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
@@ -1348,7 +1389,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1362,7 +1403,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1370,7 +1411,7 @@ server <- function(input, output, session) {
     )
   })
   
-  # Juvenule  Alewife Suitability Indices
+  # Juvenile Alewife Suitability Indices
   output$juv_alewife_temp_plot <- renderPlotly({
     plot_ly(
       data = juvenile_alewife_temp_suitability_data,
@@ -1378,7 +1419,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Temperature (°C)",
       xaxis = list(title = "Temperature (°C)"),
@@ -1393,7 +1435,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Depth (meters)",
       xaxis = list(title = "Depth (m)"),
@@ -1408,7 +1451,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Salinity (psu)",
       xaxis = list(title = "Salinity (psu)"),
@@ -1423,7 +1467,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Flow Velocity (m/s)",
       xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
@@ -1437,7 +1482,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1451,7 +1496,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1460,7 +1505,7 @@ server <- function(input, output, session) {
   })
   
   ##############################################################################
-  # Adult Alewife Suitability Indices
+  # Blueback Herring Plots
   output$adult_blueback_temp_plot <- renderPlotly({
     plot_ly(
       data = blueback_adult_temp_suitability_data,
@@ -1468,7 +1513,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Temperature (°C)",
       xaxis = list(title = "Temperature (°C)"),
@@ -1483,7 +1529,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Depth (meters)",
       xaxis = list(title = "Depth (m)"),
@@ -1498,7 +1545,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Salinity (psu)",
       xaxis = list(title = "Salinity (psu)"),
@@ -1513,7 +1561,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Flow Velocity (m/s)",
       xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
@@ -1527,7 +1576,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1541,7 +1590,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1549,7 +1598,7 @@ server <- function(input, output, session) {
     )
   })
   
-  #  Alewife Eggs & Larvae  Suitability Indices
+  # Alewife Eggs & Larvae Suitability Indices
   output$eggs_blueback_temp_plot <- renderPlotly({
     plot_ly(
       data = blueback_eggs_temp_suitability_data,
@@ -1557,7 +1606,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Temperature (°C)",
       xaxis = list(title = "Temperature (°C)"),
@@ -1572,7 +1622,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Depth (meters)",
       xaxis = list(title = "Depth (m)"),
@@ -1587,7 +1638,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Salinity (psu)",
       xaxis = list(title = "Salinity (psu)"),
@@ -1602,7 +1654,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Flow Velocity (m/s)",
       xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
@@ -1616,7 +1669,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1630,7 +1683,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1638,7 +1691,7 @@ server <- function(input, output, session) {
     )
   })
   
-  # Juvenule  Alewife Suitability Indices
+  # Juvenile Blueback Suitability Indices
   output$juv_blueback_temp_plot <- renderPlotly({
     plot_ly(
       data = juvenile_blueback_temp_suitability_data,
@@ -1646,7 +1699,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Temperature (°C)",
       xaxis = list(title = "Temperature (°C)"),
@@ -1661,7 +1715,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Depth (meters)",
       xaxis = list(title = "Depth (m)"),
@@ -1676,7 +1731,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Salinity (psu)",
       xaxis = list(title = "Salinity (psu)"),
@@ -1691,7 +1747,8 @@ server <- function(input, output, session) {
       y = ~SuitabilityIndex,
       type = 'scatter',
       mode = 'lines+markers',
-      line = list(shape = 'hv')  # 'hv' for step-like plot
+      line = list(shape = 'hv', color = '#8fbc8f', smoothing = 1.3),  # Set line color to green
+      marker = list(color = '#8fbc8f')  # Set marker color to green
     ) %>% layout(
       title = "Average Daily Flow Velocity (m/s)",
       xaxis = list(title = "Average Daily Flow Velocity (m/s)"),
@@ -1705,7 +1762,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1719,7 +1776,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = 'viridis')
+      marker = list(color = '#8fbc8f')  # Set bar color to green
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
