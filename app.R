@@ -379,7 +379,7 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
-                    p(style = "color: black; text-align: left;", "To the River Herring Ecological Modeling Project! Dive into the fascinating world of river herring populations in Aquinnah, MA with our interactive maps and graphs. This app transforms ecological data into an accessible, engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions by highlighting critical habitats and species behaviors. It also educates users about river herring, promoting conservation efforts and community involvement, and deepening our understanding of the ecological challenges impacting river herring management in Aquinnah."),
+                    p(style = "color: black; text-align: left;", "To the River Herring Ecological Modeling Project! This application transforms ecological data into an accessible, engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions on river herring. It also educates users about river herring, promoting conservation efforts and community involvement, and deepening our understanding of the ecological challenges impacting river herring management in Aquinnah."),
                     p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
                     tags$ul(
                       tags$li("River Herring Habitat Model Report 2024"),
@@ -424,7 +424,7 @@ ui <- fluidPage(
                     div(style = "height: 20px;"),
                     div(style = "text-align:center", h5(tags$b(style = "color: #8fbc8f;","Habitat Suitability Model"))),
                     p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                      "The Habitat Suitability Model uses data on temperature, depth, salinity, flow velocity, substrate type, and the presence of sub-aquatic vegetation (SAV) to calculate a Habitat Suitability Index (HSI), which ranges from 0 (unsuitable) to 1 (optimal). The overall habitat suitability is determined by combining the individual suitability values for each parameter using a geometric mean. This model helps identify key spawning habitats and understand the environmental conditions that support river herring reproduction."),
+                      "The Habitat Suitability Model uses data on temperature, depth (referenced at Mean Lower Low Water(MLLW)), salinity, flow velocity, substrate type, and the presence of sub-aquatic vegetation (SAV) to calculate a Habitat Suitability Index (HSI), which ranges from 0 (unsuitable) to 1 (optimal). The overall habitat suitability is determined by combining the individual suitability values for each parameter using a geometric mean. This model helps identify key spawning habitats and understand the environmental conditions that support river herring reproduction."),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Conceptual_Model_B_W.png", style = "width: 100%; height: auto;")),
                     div(style = "height: 20px;"),
@@ -435,7 +435,7 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("line-chart"), "Input Data"),
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Input Data"))),
-                    p("Description of the input data used in the River Herring Ecological Modeling Project and Application to Aquinnah, MA."),
+                    p("Description of the input data utilized for the application of river herring habitat models and ABM in Aquinnah, MA."),
                     tableOutput("input_data_table")
                     #selectInput("parameter", "Select Parameter:", 
                                 #choices = c("Average Daily Temperature (C)",
@@ -457,14 +457,14 @@ ui <- fluidPage(
                       tags$li(tags$b("Alewives:"), " A species of anadromous fish (Alosa pseudoharengus) that migrates from the ocean to freshwater rivers and streams to spawn."),
                       tags$li(tags$b("Anadromous Fish:"), " Fish that migrate from the sea to freshwater rivers and streams to spawn."),
                       tags$li(tags$b("Blueback Herring:"), " A species of anadromous fish (Alosa aestivalis) similar to alewives but with distinct ecological and behavioral differences."),
-                      tags$li(tags$b("Diadromous Fish:"), " Fish that migrate between freshwater and saltwater during their life cycle, which includes anadromous and catadromous fish."),
+                      tags$li(tags$b("Diadromous Fish:"), " Fish that migrate between freshwater and saltwater during their life cycle, which includes anadromous fish."),
                       tags$li(tags$b("Ecological Modeling:"), " The use of mathematical and computational techniques to represent and study the interactions within ecosystems."),
                       tags$li(tags$b("Flow Velocity:"), " The speed of water movement in a river or stream, usually measured in meters per second (m/s)."),
                       tags$li(tags$b("Habitat Quality:"), " An assessment of the overall condition of a habitat, including its ability to support the species of interest."),
                       tags$li(tags$b("Habitat Suitability:"), " An assessment of the suitability of a specific area for supporting a particular species based on environmental variables."),
                       tags$li(tags$b("Habitat Suitability Model:"), " A model used to evaluate the appropriateness of habitat conditions for a particular species based on environmental factors."),
                       tags$li(tags$b("Hard Substrates:"), " Firm and stable bottom materials in a river or stream, such as rocks or gravel."),
-                      tags$li(tags$b("MLLW (Mean Lower Low Water):"), " The average of the lower low water height of each tidal day observed over the National Tidal Datum Epoch."),
+                      tags$li(tags$b("Mean Lower Low Water (MLLW):"), " The average of the lower low water height of each tidal day observed over the National Tidal Datum Epoch."),
                       tags$li(tags$b("Patches:"), " Discrete areas within a model's environment where agents interact and experience different conditions."),
                       tags$li(tags$b("Peat:"), " A type of substrate made up of partially decomposed plant material, commonly found in wetlands."),
                       tags$li(tags$b("Predation:"), " The act of one organism hunting and consuming another organism for food."),
@@ -472,10 +472,11 @@ ui <- fluidPage(
                       tags$li(tags$b("Soft Substrates:"), " Unconsolidated bottom materials in a river or stream, such as sand or silt."),
                       tags$li(tags$b("Spawning:"), " The process by which fish release eggs and sperm into the water for fertilization."),
                       tags$li(tags$b("Striped Bass:"), " A species of anadromous fish (Morone saxatilis) known for migrating between freshwater and saltwater, commonly found along the Atlantic coast."),
-                      tags$li(tags$b("Sub-Aquatic Vegetation:"), " Aquatic plants that grow below the water's surface, providing habitat and food for various aquatic species."),
+                      tags$li(tags$b("Sub-Aquatic Vegetation (SAV):"), " Aquatic plants that grow below the water's surface, providing habitat and food for various aquatic species."),
                       tags$li(tags$b("Substrate:"), " The type of bottom material in a river or stream, such as sand, gravel, or rock."),
                       tags$li(tags$b("Suitability Index:"), " A numerical scale used to evaluate the appropriateness of habitat conditions for a particular species."),
-                      tags$li(tags$b("Temperature:"), " The warmth or coldness of water, usually measured in degrees Celsius (°C).")
+                      tags$li(tags$b("Temperature:"), " The warmth or coldness of water, usually measured in degrees Celsius (°C)."),
+                      tags$li(tags$b("Traditional Ecological Knowledge:"), " The cumulative body of knowledge, practices, and beliefs held by indigenous communities about their environment, developed over generations through direct contact with nature.")
                     )
                   )
       )
@@ -1026,7 +1027,7 @@ tabPanel(
            tags$div(style = "text-align:center;", 
                     tags$img(src = "Striped_Bass_Predation.png", style = "width: 70%; height: auto;")),
            div(style = "height: 20px;"),
-           p("This section provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring migration under different predation pressures, this model can be used to identify locations and times where predation impacts spawning behavior in river herring."),
+           p("This page provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring migration under different predation pressures, this model can be used to identify locations and times where predation impacts spawning behavior in river herring."),
            div(style = "height: 10px;"),
            p("The simulation for Aquinnah, MA tested three levels of increasing predation pressure against a baseline scenario with no predation, as shown in the table below."),
     ),
