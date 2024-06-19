@@ -372,15 +372,16 @@ ui <- fluidPage(
     }
     "))
   ),
-  titlePanel("River Herring Ecological Modeling"),
+  titlePanel("Welcome!"),
   sidebarLayout(
     sidebarPanel(
       tabsetPanel(type = "tabs", 
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
-                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
-                    p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe and all results and data contained within this app remain property of the Tribe. Explicit permission must be granted for reuse."),
-                    p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    tags$ul(
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "River Herring Ecological Modeling"))),
+                    p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe."),
+                    p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
+                    tags$ul(
                       tags$li("River Herring Habitat Model Report 2024"),
                       tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
                     ),
@@ -417,7 +418,7 @@ ui <- fluidPage(
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Habitat_Conceptual_Model.png", style = "width: 100%; height: auto;")),
                     p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                      "The Habitat Suitability Model incorporates data on temperature, depth, salinity, flow velocity, substrate type, and the presence of sub-aquatic vegetation (SAV). These factors are used to calculate a Habitat Suitability Index (HSI) that ranges from 0 (unsuitable) to 1 (optimal). The model helps identify key spawning habitats and understand the environmental conditions that support river herring reproduction."),
+                      "The Habitat Suitability Model uses data on temperature, depth, salinity, flow velocity, substrate type, and the presence of sub-aquatic vegetation (SAV) to calculate a Habitat Suitability Index (HSI), which ranges from 0 (unsuitable) to 1 (optimal). The overall habitat suitability is determined by combining the individual suitability values for each parameter using a geometric mean. This model helps identify key spawning habitats and understand the environmental conditions that support river herring reproduction."),
                     div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Agent-Based Modeling"))),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Conceptual_Model_B_W.png", style = "width: 100%; height: auto;")),
@@ -475,13 +476,18 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(
         tabPanel("Spawning Adult Alewives",
-                 h2(""),
+                 div(style = "height: 20px;"),
                  tabPanel(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    fluidRow(
                      column(6, 
-                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
-                   leafletOutput("map_adult_alewife_habitat_results")))
+                   leafletOutput("map_adult_alewife_habitat_results")
+                   ),
+                   column(6,
+                          div(style = "height: 20px;"),
+                          p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                            "The highest quality spawning habitat for adult alewives is located in the southwest area of Squibnocket Pond, while the lowest quality habitat is centralized in Menemsha Pond. Squibnocket Pond also features a smaller section of high-quality habitat near the south end of Herring Creek, indicating another potential spawning site. Overall, Squibnocket Pond contains both high and moderate-quality habitats, Menemsha Pond exhibits mainly moderate and low-quality habitats, and Herring Creek is characterized entirely by moderate-quality habitat. Squibnocket Pond accounts for the largest portion and the highest quality habitat, emphasizing its critical role in supporting spawning adult alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -491,8 +497,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_alewife_temp_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_adult_temp_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Temperature Suitability"))),
+                                     leafletOutput("adult_alewife_temp_map")
                               )
                             )
                    ),
@@ -503,8 +509,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_alewife_depth_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_adult_depth_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Depth Suitability"))),
+                                     leafletOutput("adult_alewife_depth_map")
                               )
                             )
                    ),
@@ -515,8 +521,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_alewife_salinity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_adult_salinity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Salinity Suitability"))),
+                                     leafletOutput("adult_alewife_salinity_map")
                               )
                             )
                    ),
@@ -527,8 +533,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_alewife_velocity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_adult_velocity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Flow Velocity Suitability"))),
+                                     leafletOutput("adult_alewife_velocity_map")
                               )
                             )
                    ),
@@ -539,8 +545,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_alewife_sediment_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("adult_alewife_substrate_plot")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Substrate Suitability"))),
+                                     leafletOutput("adult_alewife_substrate_map")
                               )
                             )
                    ),
@@ -551,21 +557,26 @@ ui <- fluidPage(
                                      plotlyOutput("adult_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_adult_sav_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     leafletOutput("adult_alewife_SAV_map")
                               )
                             )
                    )
                  )
         ),
         tabPanel("Alewife Eggs & Larvae",
-                 h2(""),
+                 div(style = "height: 20px;"),
                  tabPanel(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    fluidRow(
                      column(6, 
-                     div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
-                     leafletOutput("map_egg_larvae_alewife_habitat_results")))
+                     leafletOutput("map_egg_larvae_alewife_habitat_results")
+                     ),
+                     column(6,
+                            div(style = "height: 20px;"),
+                            p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                              "The highest quality habitat for the development of alewife eggs and larvae is located throughout Squibnocket Pond and Herring Creek, providing optimal conditions for their growth. Squibnocket Pond features extensive high-quality habitat, particularly in the southwest area, and near the south end of Herring Creek, making it a crucial area for alewife development. Herring Creek itself is dominated by high-quality habitat, serving as a corridor for larval passage between Squibnocket and Menemsha Ponds. Menemsha Pond is characterized by moderate quality habitat, with smaller areas of high and low-quality habitats. Overall, highest quality habitats for alewife eggs and larvae are found in Squibnocket Pond and Herring Creek, highlighting their importance in supporting the suitable development of alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -575,8 +586,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_alewife_temp_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_eggs_temp_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Temperature Suitability"))),
+                                     leafletOutput("egg_alewife_temp_map")
                               )
                             )
                    ),
@@ -587,8 +598,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_alewife_depth_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_eggs_depth_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Depth Suitability"))),
+                                     leafletOutput("egg_alewife_depth_map")
                               )
                             )
                    ),
@@ -599,8 +610,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_alewife_salinity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_eggs_salinity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Salinity Suitability"))),
+                                     leafletOutput("egg_alewife_salinity_map")
                               )
                             )
                    ),
@@ -611,8 +622,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_alewife_velocity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_eggs_velocity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Flow Velocity Suitability"))),
+                                     leafletOutput("egg_alewife_velocity_map")
                               )
                             )
                    ),
@@ -623,8 +634,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_alewife_sediment_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_eggs_substrate_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Substrate Suitability"))),
+                                     leafletOutput("egg_alewife_substrate_map")
                               )
                             )
                    ),
@@ -635,21 +646,26 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_eggs_sav_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     leafletOutput("egg_alewife_SAV_map")
                               )
                             )
                    )
                  )
         ),
         tabPanel("Non-Migratory Juvenile Alewives",
-                 h2(""),
+                 div(style = "height: 20px;"),
                  tabPanel(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    fluidRow(
                      column(6, 
-                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
-                   leafletOutput("map_juv_alewife_habitat_results")))
+                   leafletOutput("map_juv_alewife_habitat_results")
+                     ),
+                   column(6,
+                          div(style = "height: 20px;"),
+                          p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                            "The highest quality habitat for the development of juvenile alewives is found in Herring Creek, offering optimal conditions for their growth. Squibnocket Pond also features significant high-quality habitat, particularly along its northern borders, making it a crucial area for juvenile alewife development. Menemsha Pond is characterized by moderate quality habitat, with smaller areas of high and low-quality habitat contained throuhgout. Overall, the highest quality habitats for juvenile alewives are located in Herring Creek and Squibnocket Pond, showcasing their importance in supporting the suitable development of alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -659,8 +675,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_alewife_temp_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_juvenile_temp_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Temperature Suitability"))),
+                                     leafletOutput("juv_alewife_temp_map")
                               )
                             )
                    ),
@@ -671,8 +687,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_alewife_depth_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_juvenile_depth_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Depth Suitability"))),
+                                     leafletOutput("juv_alewife_depth_map")
                               )
                             )
                    ),
@@ -683,8 +699,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_alewife_salinity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_juvenile_salinity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Salinity Suitability"))),
+                                     leafletOutput("juv_alewife_salinity_map")
                               )
                             )
                    ),
@@ -695,8 +711,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_alewife_velocity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_juvenile_velocity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Flow Velocity Suitability"))),
+                                     leafletOutput("juv_alewife_velocity_map")
                               )
                             )
                    ),
@@ -707,8 +723,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_alewife_sediment_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_juvenile_substrate_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Substrate Suitability"))),
+                                     leafletOutput("juv_alewife_substrate_map")
                               )
                             )
                    ),
@@ -719,21 +735,26 @@ ui <- fluidPage(
                                      plotlyOutput("juv_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_alewives_juvenile_sav_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     leafletOutput("juv_alewife_SAV_map")
                               )
                             )
                    )
                  )
         ),
         tabPanel("Spawning Adult Blueback Herring",
-                 h2(""),
+                 div(style = "height: 20px;"),
                  tabPanel(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    fluidRow(
                      column(6, 
-                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
-                   leafletOutput("map_adult_blueback_habitat_results")))
+                   leafletOutput("map_adult_blueback_habitat_results")
+                     ),
+                   column(6,
+                          div(style = "height: 20px;"),
+                          p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                            "The habitat results for spawning blueback herring reveals moderate to low-quality habitat across the study area, with Squibnocket Pond showing a nearly equal distribution of moderate and low-use habitats. The higher quality habitat is concentrated in the western region of Squibnocket Pond, indicating limited availability of optimal spawning conditions. Menemsha Pond is largely dominated by low-quality habitat, suggesting it may not provide the necessary conditions for blueback herring spawning. Herring Creek similarly lacks high-quality habitat, being composed mainly of low-quality areas. Overall, the scarcity of high-quality habitat across the study area suggests limited suitable conditions for blueback herring spawning compared to alewives.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -743,8 +764,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_blueback_temp_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_adult_temp_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Temperature Suitability"))),
+                                     leafletOutput("adult_blueback_temp_map")
                               )
                             )
                    ),
@@ -755,8 +776,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_blueback_depth_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_adult_depth_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Depth Suitability"))),
+                                     leafletOutput("adult_blueback_depth_map")
                               )
                             )
                    ),
@@ -767,8 +788,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_blueback_salinity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_adult_salinity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Salinity Suitability"))),
+                                     leafletOutput("adult_blueback_salinity_map")
                               )
                             )
                    ),
@@ -779,8 +800,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_blueback_velocity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_adult_velocity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Flow Velocity Suitability"))),
+                                     leafletOutput("adult_blueback_velocity_map")
                               )
                             )
                    ),
@@ -791,8 +812,8 @@ ui <- fluidPage(
                                      plotlyOutput("adult_blueback_sediment_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_adult_substrate_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Substrate Suitability"))),
+                                     leafletOutput("adult_blueback_substrate_map")
                               )
                             )
                    ),
@@ -803,21 +824,26 @@ ui <- fluidPage(
                                      plotlyOutput("adult_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_adult_sav_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     leafletOutput("adult_blueback_SAV_map")
                               )
                             )
                    )
                  )
         ),
         tabPanel("Blueback Herring Eggs & Larvae",
-                 h2(""),
+                 div(style = "height: 20px;"),
                  tabPanel(
                    title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    fluidRow(
                      column(6, 
-                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
-                   leafletOutput("map_egg_larvae_blueback_habitat_results")))
+                   leafletOutput("map_egg_larvae_blueback_habitat_results")
+                     ),
+                   column(6,
+                          div(style = "height: 20px;"),
+                          p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                            "The habitat results for blueback herring eggs and larvae indicate that the pond system is characterized by moderate-quality habitat. In Squibnocket Pond, the highest quality habitat is concentrated in the western region, offering some suitable conditions for blueback herring development. Menemsha Pond is primarily composed of low-quality habitat, which may not provide optimal conditions for the development of blueback herring eggs and larvae. Herring Creek is characterized as low-quality habitat, which could limit the connectivity between Squibnocket and Menemsha Ponds and impact the distribution and survival of blueback herring offspring. Overall, Squibnocket Pond provides the most favorable conditions among the study locations for the development of blueback herring eggs and larvae.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -827,8 +853,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_blueback_temp_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_eggs_temp_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Temperature Suitability"))),
+                                     leafletOutput("egg_blueback_temp_map")
                               )
                             )
                    ),
@@ -839,8 +865,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_blueback_depth_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_eggs_depth_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Depth Suitability"))),
+                                     leafletOutput("egg_blueback_depth_map")
                               )
                             )
                    ),
@@ -851,8 +877,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_blueback_salinity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_eggs_salinity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Salinity Suitability"))),
+                                     leafletOutput("egg_blueback_salinity_map")
                               )
                             )
                    ),
@@ -863,8 +889,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_blueback_velocity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_eggs_velocity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Flow Velocity Suitability"))),
+                                     leafletOutput("egg_blueback_velocity_map")
                               )
                             )
                    ),
@@ -875,8 +901,8 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_blueback_sediment_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_eggs_substrate_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Substrate Suitability"))),
+                                     leafletOutput("egg_blueback_substrate_map")
                               )
                             )
                    ),
@@ -887,21 +913,26 @@ ui <- fluidPage(
                                      plotlyOutput("eggs_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_eggs_sav_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     leafletOutput("egg_blueback_SAV_map")
                               )
                             )
                    )
                  )
         ),
         tabPanel("Non-Migratory Juvenile Blueback Herring",
-                 h2(""),
+                 div(style = "height: 20px;"),
                  tabPanel(
-                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"), 
+                   title = tagList(icon("map-marker-alt"), "Habitat Model Results"),
+                   div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
                    fluidRow(
                      column(6, 
-                     div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;","Net Habitat Suitability"))),
-                   leafletOutput("map_juv_blueback_habitat_results")))
+                   leafletOutput("map_juv_blueback_habitat_results")
+                     ),
+                   column(6,
+                          div(style = "height: 20px;"),
+                          p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
+                            "The highest quality spawning habitat for adult alewives is located in the southwest area of Squibnocket Pond, while the lowest quality habitat is centralized in Menemsha Pond. Squibnocket Pond also features a smaller section of high-quality habitat near the south end of Herring Creek, indicating another potential spawning site. Overall, Squibnocket Pond contains both high and moderate-quality habitats, Menemsha Pond exhibits mainly moderate and low-quality habitats, and Herring Creek is characterized entirely by moderate-quality habitat. Squibnocket Pond accounts for the largest portion and the highest quality habitat, emphasizing its critical role in supporting spawning adult alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -911,8 +942,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_blueback_temp_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color:  black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_juvenile_temp_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Temperature Suitability"))),
+                                     leafletOutput("juv_blueback_temp_map")
                               )
                             )
                    ),
@@ -923,8 +954,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_blueback_depth_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color:  black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_juvenile_depth_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Depth Suitability"))),
+                                     leafletOutput("juv_blueback_depth_map")
                               )
                             )
                    ),
@@ -935,8 +966,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_blueback_salinity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_juvenile_salinity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Salinity Suitability"))),
+                                     leafletOutput("juv_blueback_salinity_map")
                               )
                             )
                    ),
@@ -947,8 +978,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_blueback_velocity_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_juvenile_velocity_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Flow Velocity Suitability"))),
+                                     leafletOutput("juv_blueback_velocity_map")
                               )
                             )
                    ),
@@ -959,8 +990,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_blueback_sediment_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_juvenile_substrate_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Substrate Suitability"))),
+                                     leafletOutput("juv_blueback_substrate_map")
                               )
                             )
                    ),
@@ -971,8 +1002,8 @@ ui <- fluidPage(
                                      plotlyOutput("juv_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Habitat Suitability"))),
-                                     plotOutput("plot_blueback_juvenile_sav_habitat")
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     leafletOutput("juv_blueback_SAV_map")
                               )
                             )
                    )
@@ -1092,7 +1123,7 @@ server <- function(input, output, session) {
     Description = c(
       "Collected by Richard Loyd and his team in August 2023 using strategically deployed tilt meters to capture water velocity and temperature variations over a full tide cycle.",
       "Menemsha Pond data collected by Richard Lloyd using bathymetric surveying techniques in August 2023. Squibnocket Pond data obtained from a substrate analysis conducted by Brian Yellen, Molly Autery, and Asha Ajmani in 2022.",
-      "Collected as part of the Wampanoag Tribe's long-term water quality monitoring initiative using standard water quality monitoring equipment deployed at various locations within the study area. Supplementary data sourced from the Wampanoag Water Quality Studies hosted on the EPA water quality database.",
+      "Collected as part of the Wampanoag Tribe's long-term water quality monitoring initiative using standard water quality monitoring equipment deployed at various locations within the study area.",
       "Collected by Richard Loyd and his team in August 2023 using tilt meters to capture water velocity variations over a full tide cycle.",
       "Obtained from the substrate analysis by Brian Yellen, Molly Autery, and Asha Ajmani in 2022. Substrate types determined through direct observation and analysis of sediment samples collected from Squibnocket Pond.",
       "Collected by Richard Loyd and his team in August 2023 through visual surveys conducted using underwater surveying equipment and techniques."
@@ -1224,6 +1255,450 @@ server <- function(input, output, session) {
       addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
   })
   
+  ###################################################################################
+  # individual HSI Map: Adult Alewife
+  temp_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Temp_data.tif"))
+  depth_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Depth_data.tif"))
+  salinity_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Salinity_data.tif"))
+  velocity_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Velocity_data.tif"))
+  substrate_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Substrate_data.tif"))
+  SAV_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_SAV_data.tif"))
+  
+  output$adult_alewife_temp_map <- renderLeaflet({
+    min_value <- min(values(temp_adult_alewife), na.rm = TRUE)
+    max_value <- max(values(temp_adult_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(temp_adult_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+  })
+  
+  output$adult_alewife_depth_map <- renderLeaflet({
+    min_value <- min(values(depth_adult_alewife), na.rm = TRUE)
+    max_value <- max(values(depth_adult_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(depth_adult_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+  })
+  
+  output$adult_alewife_salinity_map <- renderLeaflet({
+    min_value <- min(values(salinity_adult_alewife), na.rm = TRUE)
+    max_value <- max(values(salinity_adult_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(salinity_adult_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+  })
+  
+  output$adult_alewife_velocity_map <- renderLeaflet({
+    min_value <- min(values(velocity_adult_alewife), na.rm = TRUE)
+    max_value <- max(values(velocity_adult_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(velocity_adult_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+  })
+  
+  output$adult_alewife_substrate_map <- renderLeaflet({
+    min_value <- min(values(substrate_adult_alewife), na.rm = TRUE)
+    max_value <- max(values(substrate_adult_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(substrate_adult_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+  })
+  
+  output$adult_alewife_SAV_map <- renderLeaflet({
+    min_value <- min(values(SAV_adult_alewife), na.rm = TRUE)
+    max_value <- max(values(SAV_adult_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(SAV_adult_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+  })
+  #####################################################################################
+  # individual HSI Map: egg Alewife
+  temp_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Temp_data.tif"))
+  depth_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Depth_data.tif"))
+  salinity_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Salinity_data.tif"))
+  velocity_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Velocity_data.tif"))
+  substrate_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Substrate_data.tif"))
+  SAV_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_SAV_data.tif"))
+  
+  output$egg_alewife_temp_map <- renderLeaflet({
+    min_value <- min(values(temp_egg_alewife), na.rm = TRUE)
+    max_value <- max(values(temp_egg_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(temp_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+  })
+  
+  output$egg_alewife_depth_map <- renderLeaflet({
+    min_value <- min(values(depth_egg_alewife), na.rm = TRUE)
+    max_value <- max(values(depth_egg_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(depth_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+  })
+  
+  output$egg_alewife_salinity_map <- renderLeaflet({
+    min_value <- min(values(salinity_egg_alewife), na.rm = TRUE)
+    max_value <- max(values(salinity_egg_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(salinity_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+  })
+  
+  output$egg_alewife_velocity_map <- renderLeaflet({
+    min_value <- min(values(velocity_egg_alewife), na.rm = TRUE)
+    max_value <- max(values(velocity_egg_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(velocity_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+  })
+  
+  output$egg_alewife_substrate_map <- renderLeaflet({
+    min_value <- min(values(substrate_egg_alewife), na.rm = TRUE)
+    max_value <- max(values(substrate_egg_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(substrate_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+  })
+  
+  output$egg_alewife_SAV_map <- renderLeaflet({
+    min_value <- min(values(SAV_egg_alewife), na.rm = TRUE)
+    max_value <- max(values(SAV_egg_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(SAV_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+  })
+  #####################################################################################
+  # individual HSI Map: egg Alewife
+  temp_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Temp_data.tif"))
+  depth_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Depth_data.tif"))
+  salinity_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Salinity_data.tif"))
+  velocity_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Velocity_data.tif"))
+  substrate_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Substrate_data.tif"))
+  SAV_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_SAV_data.tif"))
+  
+  output$juv_alewife_temp_map <- renderLeaflet({
+    min_value <- min(values(temp_juv_alewife), na.rm = TRUE)
+    max_value <- max(values(temp_juv_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(temp_juv_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+  })
+  
+  output$juv_alewife_depth_map <- renderLeaflet({
+    min_value <- min(values(depth_juv_alewife), na.rm = TRUE)
+    max_value <- max(values(depth_juv_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(depth_juv_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+  })
+  
+  output$juv_alewife_salinity_map <- renderLeaflet({
+    min_value <- min(values(salinity_juv_alewife), na.rm = TRUE)
+    max_value <- max(values(salinity_juv_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(salinity_juv_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+  })
+  
+  output$juv_alewife_velocity_map <- renderLeaflet({
+    min_value <- min(values(velocity_juv_alewife), na.rm = TRUE)
+    max_value <- max(values(velocity_juv_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(velocity_juv_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+  })
+  
+  output$juv_alewife_substrate_map <- renderLeaflet({
+    min_value <- min(values(substrate_juv_alewife), na.rm = TRUE)
+    max_value <- max(values(substrate_juv_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(substrate_egg_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+  })
+  
+  output$juv_alewife_SAV_map <- renderLeaflet({
+    min_value <- min(values(SAV_juv_alewife), na.rm = TRUE)
+    max_value <- max(values(SAV_juv_alewife), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(SAV_juv_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+  })
+  #####################################################################################
+  # individual HSI Map: Adult blueback
+  temp_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Temp_data.tif"))
+  depth_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Depth_data.tif"))
+  salinity_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Salinity_data.tif"))
+  velocity_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Velocity_data.tif"))
+  substrate_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Substrate_data.tif"))
+  SAV_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_SAV_data.tif"))
+  
+  output$adult_blueback_temp_map <- renderLeaflet({
+    min_value <- min(values(temp_adult_blueback), na.rm = TRUE)
+    max_value <- max(values(temp_adult_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(temp_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+  })
+  
+  output$adult_blueback_depth_map <- renderLeaflet({
+    min_value <- min(values(depth_adult_blueback), na.rm = TRUE)
+    max_value <- max(values(depth_adult_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(depth_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+  })
+  
+  output$adult_blueback_salinity_map <- renderLeaflet({
+    min_value <- min(values(salinity_adult_blueback), na.rm = TRUE)
+    max_value <- max(values(salinity_adult_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(salinity_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+  })
+  
+  output$adult_blueback_velocity_map <- renderLeaflet({
+    min_value <- min(values(velocity_adult_blueback), na.rm = TRUE)
+    max_value <- max(values(velocity_adult_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(velocity_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+  })
+  
+  output$adult_blueback_substrate_map <- renderLeaflet({
+    min_value <- min(values(substrate_adult_blueback), na.rm = TRUE)
+    max_value <- max(values(substrate_adult_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(substrate_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+  })
+  
+  output$adult_blueback_SAV_map <- renderLeaflet({
+    min_value <- min(values(SAV_adult_blueback), na.rm = TRUE)
+    max_value <- max(values(SAV_adult_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(SAV_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+  })
+  #####################################################################################
+  # individual HSI Map: egg blueback
+  temp_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Temp_data.tif"))
+  depth_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Depth_data.tif"))
+  salinity_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Salinity_data.tif"))
+  velocity_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Velocity_data.tif"))
+  substrate_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Substrate_data.tif"))
+  SAV_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_SAV_data.tif"))
+  
+  output$egg_blueback_temp_map <- renderLeaflet({
+    min_value <- min(values(temp_egg_blueback), na.rm = TRUE)
+    max_value <- max(values(temp_egg_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(temp_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+  })
+  
+  output$egg_blueback_depth_map <- renderLeaflet({
+    min_value <- min(values(depth_egg_blueback), na.rm = TRUE)
+    max_value <- max(values(depth_egg_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(depth_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+  })
+  
+  output$egg_blueback_salinity_map <- renderLeaflet({
+    min_value <- min(values(salinity_egg_blueback), na.rm = TRUE)
+    max_value <- max(values(salinity_egg_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(salinity_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+  })
+  
+  output$egg_blueback_velocity_map <- renderLeaflet({
+    min_value <- min(values(velocity_egg_blueback), na.rm = TRUE)
+    max_value <- max(values(velocity_egg_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(velocity_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+  })
+  
+  output$egg_blueback_substrate_map <- renderLeaflet({
+    min_value <- min(values(substrate_egg_blueback), na.rm = TRUE)
+    max_value <- max(values(substrate_egg_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(substrate_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+  })
+  
+  output$egg_blueback_SAV_map <- renderLeaflet({
+    min_value <- min(values(SAV_egg_blueback), na.rm = TRUE)
+    max_value <- max(values(SAV_egg_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(SAV_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+  })
+  #####################################################################################
+  # individual HSI Map: egg blueback
+  temp_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Temp_data.tif"))
+  depth_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Depth_data.tif"))
+  salinity_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Salinity_data.tif"))
+  velocity_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Velocity_data.tif"))
+  substrate_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Substrate_data.tif"))
+  SAV_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_SAV_data.tif"))
+  
+  output$juv_blueback_temp_map <- renderLeaflet({
+    min_value <- min(values(temp_juv_blueback), na.rm = TRUE)
+    max_value <- max(values(temp_juv_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(temp_juv_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+  })
+  
+  output$juv_blueback_depth_map <- renderLeaflet({
+    min_value <- min(values(depth_juv_blueback), na.rm = TRUE)
+    max_value <- max(values(depth_juv_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(depth_juv_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+  })
+  
+  output$juv_blueback_salinity_map <- renderLeaflet({
+    min_value <- min(values(salinity_juv_blueback), na.rm = TRUE)
+    max_value <- max(values(salinity_juv_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(salinity_juv_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+  })
+  
+  output$juv_blueback_velocity_map <- renderLeaflet({
+    min_value <- min(values(velocity_juv_blueback), na.rm = TRUE)
+    max_value <- max(values(velocity_juv_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(velocity_juv_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+  })
+  
+  output$juv_blueback_substrate_map <- renderLeaflet({
+    min_value <- min(values(substrate_juv_blueback), na.rm = TRUE)
+    max_value <- max(values(substrate_juv_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(substrate_egg_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+  })
+  
+  output$juv_blueback_SAV_map <- renderLeaflet({
+    min_value <- min(values(SAV_juv_blueback), na.rm = TRUE)
+    max_value <- max(values(SAV_juv_blueback), na.rm = TRUE)
+    
+    leaflet() %>%
+      addProviderTiles("Esri.WorldImagery") %>%
+      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+      addRasterImage(SAV_juv_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+  })
   #####################################################################################
   # Adult Alewife Suitability Indices
   output$adult_alewife_temp_plot <- renderPlotly({
