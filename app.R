@@ -372,20 +372,21 @@ ui <- fluidPage(
     }
     "))
   ),
-  titlePanel("Welcome!"),
+  titlePanel("River Herring Ecological Modeling"),
   sidebarLayout(
     sidebarPanel(
       tabsetPanel(type = "tabs", 
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
-                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "River Herring Ecological Modeling"))),
-                    p("This app is designed to visualize and analyze data on river herring populations in Aquinnah, MA. This project was completed in collaboration with the Wampanoag Tribe."),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
+                    p(style = "color: black; text-align: left;", "To the River Herring Ecological Modeling Project! Dive into the fascinating world of river herring populations in Aquinnah, MA with our interactive maps and graphs. This app transforms complex ecological data into an accessible, engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions by highlighting critical habitats and species behaviors. It also educates users about river herring, promoting conservation efforts and community involvement, and deepening our understanding of the ecological challenges impacting river herring management in Aquinnah."),
                     p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
                     tags$ul(
                       tags$li("River Herring Habitat Model Report 2024"),
                       tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
                     ),
-                    p("River herring are anadromous fish species, including alewives and blueback herring, that migrate from the ocean to freshwater rivers and streams to spawn.")
+                    p(style = "color: black ; padding: 10px; text-align: center; font-weight: bold;",
+                      "All input data and results presented in this application are the exclusive property of the Wampanoag Tribe. Any use or reuse of this data requires written permission.")
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
@@ -408,20 +409,26 @@ ui <- fluidPage(
                   ),
                   tabPanel(
                     title = tagList(icon("user"), "Project Description"), 
-                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Project Area and Background"))),
-                    p("This project focuses on studying the river herring populations in the designated project area."),
-                    leafletOutput("map_project_area")
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Project Description"))),
+                    leafletOutput("map_project_area"),
+                    div(style = "height: 20px;"),
+                    div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Herring Creek Fishery"))),
+                    div(style = "height: 20px;"),
+                    p("The Herring Creek Fishery in Aquinnah, Massachusetts, managed by the Wampanoag Tribe, is a critical site for the study and preservation of river herring. Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects traditional ecological knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
                   ),
                   tabPanel(
                     title = tagList(icon("cog"), "Ecological Modeling"), 
-                    div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Habitat Suitability Modeling"))),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Ecological Modeling"))),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Habitat_Conceptual_Model.png", style = "width: 100%; height: auto;")),
+                    div(style = "height: 20px;"),
+                    div(style = "text-align:center", h5(tags$b(style = "color: #8fbc8f;","Habitat Suitability Model"))),
                     p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
                       "The Habitat Suitability Model uses data on temperature, depth, salinity, flow velocity, substrate type, and the presence of sub-aquatic vegetation (SAV) to calculate a Habitat Suitability Index (HSI), which ranges from 0 (unsuitable) to 1 (optimal). The overall habitat suitability is determined by combining the individual suitability values for each parameter using a geometric mean. This model helps identify key spawning habitats and understand the environmental conditions that support river herring reproduction."),
-                    div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Agent-Based Modeling"))),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Conceptual_Model_B_W.png", style = "width: 100%; height: auto;")),
+                    div(style = "height: 20px;"),
+                    div(style = "text-align:center", h5(tags$b(style = "color: #8fbc8f;","Agent-Based Model"))),
                     p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
                       "The Agent-Based Model (ABM) simulates the behavior and interactions of individual river herring and their predators, such as striped bass, within Aquinnah, MA. Each agent (fish) follows a set of rules that dictate its movement, spawning, and response to environmental conditions. The ABM allows for the exploration of how different predation pressures and habitat conditions impact spawning success of migrating river herring.")
                   ),
@@ -1148,12 +1155,6 @@ server <- function(input, output, session) {
         ),
         popup = "Herring Creek Fishery",
         label = "Herring Creek Fishery"
-      ) %>%
-      addLegend(
-        position = "bottomright", 
-        colors = "blue", 
-        labels = "Herring Creek Fishery", 
-        title = NULL
       )
   })
   
