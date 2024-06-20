@@ -379,7 +379,7 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
-                    p(style = "color: black; text-align: left;", "To the River Herring Ecological Modeling Project! This application transforms ecological data into an accessible, engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions on river herring. It also educates users about river herring, promoting conservation efforts and community involvement, and deepening our understanding of the ecological challenges impacting river herring management in Aquinnah."),
+                    p(style = "color: black; text-align: left;", "This application transforms ecological data into an accessible, engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions on river herring. It also educates users about river herring, promoting conservation efforts and community involvement, and deepening the user's understanding of the ecological challenges impacting river herring management in Aquinnah."),
                     p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
                     tags$ul(
                       tags$li("River Herring Habitat Model Report 2024"),
@@ -393,18 +393,28 @@ ui <- fluidPage(
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Species Information"))),
                     p("Detailed information about the river herring species, including alewives and blueback herring."),
                     div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Alewives"))),
-                    p("Alewives (Alosa pseudoharengus) are a species of anadromous fish in the herring family."),
+                    p("Alewives (Alosa pseudoharengus) are a species of diadromous fish in the herring family."),
+                    tags$div(style = "text-align:center;", 
+                             tags$img(src = "Alewife.png", style = "width: 50%; height: auto;")),
+                    div(style = "height: 20px;"),
                     tags$ul(
-                      tags$li("Description"),
-                      tags$li("Habitat"),
-                      tags$li("Life Cycle")
+                      tags$li(tags$b("Description:"), " Alewives are found from the coast of Labrador and Newfoundland, south to Georgia in the United States. They thrive in river systems and estuaries along the Atlantic coast. Despite their historical significance, alewife populations have declined due to factors such as deteriorating water quality, habitat loss, overfishing, increased predation, and dam construction."),
+                      div(style = "height: 20px;"),
+                      tags$li(tags$b("Habitat:"), " Alewives prefer river systems and estuaries for their habitat. They exhibit seasonal migration patterns from south to north, typically occurring from March in southern regions to May in northern areas. They spawn in brackish or freshwater habitats with suitable conditions of temperature, depth, salinity, flow velocity, and substrate."),
+                      div(style = "height: 20px;"),
+                      tags$li(tags$b("Life Cycle:"), " Alewives have an anadromous life cycle with stages including spawning, larval development, juvenile maturation, and adult migration. Spawning is triggered by rising water temperatures and increasing day length. Eggs hatch into yolk-sac larvae, which grow in freshwater before migrating downstream to brackish areas as juveniles. Juveniles mature in these nurseries before moving to the sea, with significant mortality rates observed during this migration.")
                     ),
                     div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Blueback Herring"))),
                     p("Blueback herring (Alosa aestivalis) are similar to alewives but have distinct ecological and behavioral differences."),
+                    tags$div(style = "text-align:center;", 
+                             tags$img(src = "Blueback_Herring.png", style = "width: 50%; height: auto;")),
+                    div(style = "height: 20px;"),
                     tags$ul(
-                      tags$li("Description"),
-                      tags$li("Habitat"),
-                      tags$li("Life Cycle")
+                      tags$li(tags$b("Description:"), " Blueback herring are found from New Brunswick to the St. Johns River in Florida, thriving in freshwater rivers and estuaries along the Atlantic coast. Known for their extensive migrations to freshwater tidal systems for spawning, they face similar environmental challenges as alewives, including deteriorating water quality, habitat loss, bycatch, overfishing, increased predation, and dam construction."),
+                      div(style = "height: 20px;"),
+                      tags$li(tags$b("Habitat:"), " Blueback herring prefer spawning habitats such as small tributaries upstream from tidal zones, flooded low-lying areas, cypress swamps, and oxbows. They do not migrate as far upstream as alewives and spawn in higher salinity, faster-moving waters. Their habitat selection is influenced by factors such as temperature, depth, salinity, flow velocity, and substrate."),
+                      div(style = "height: 20px;"),
+                      tags$li(tags$b("Life Cycle:"), " Blueback herring have an anadromous life cycle with stages including spawning, larval development, juvenile maturation, and adult migration. They migrate inland to spawn in warmer temperatures and return to the sea afterward. Eggs incubate for 3-6 days before hatching into yolk-sac larvae, which rely on their yolk sac for nutrients for the first few days before transitioning to external feeding. Larvae remain in nursery habitats before migrating towards brackish areas to mature into juveniles.")
                     )
                   ),
                   tabPanel(
@@ -462,21 +472,22 @@ ui <- fluidPage(
                       tags$li(tags$b("Flow Velocity:"), " The speed of water movement in a river or stream, usually measured in meters per second (m/s)."),
                       tags$li(tags$b("Habitat Quality:"), " An assessment of the overall condition of a habitat, including its ability to support the species of interest."),
                       tags$li(tags$b("Habitat Suitability:"), " An assessment of the suitability of a specific area for supporting a particular species based on environmental variables."),
-                      tags$li(tags$b("Habitat Suitability Model:"), " A model used to evaluate the appropriateness of habitat conditions for a particular species based on environmental factors."),
+                      tags$li(tags$b("Habitat Suitability Model:"), " A model used to evaluate the appropriateness of habitat conditions for a particular species based on environmental factors, typically containing multiple suitability indices."),
                       tags$li(tags$b("Hard Substrates:"), " Firm and stable bottom materials in a river or stream, such as rocks or gravel."),
                       tags$li(tags$b("Mean Lower Low Water (MLLW):"), " The average of the lower low water height of each tidal day observed over the National Tidal Datum Epoch."),
                       tags$li(tags$b("Patches:"), " Discrete areas within a model's environment where agents interact and experience different conditions."),
                       tags$li(tags$b("Peat:"), " A type of substrate made up of partially decomposed plant material, commonly found in wetlands."),
                       tags$li(tags$b("Predation:"), " The act of one organism hunting and consuming another organism for food."),
+                      tags$li(tags$b("River Herring:"), " A common name Alewives (Alosa pseudoharengus) and Blueback Herring (Alosa aestivalis), known for their migration from the ocean to freshwater rivers and streams to spawn."),
                       tags$li(tags$b("Salinity:"), " The concentration of salt in water, usually measured in practical salinity units (psu)."),
                       tags$li(tags$b("Soft Substrates:"), " Unconsolidated bottom materials in a river or stream, such as sand or silt."),
                       tags$li(tags$b("Spawning:"), " The process by which fish release eggs and sperm into the water for fertilization."),
                       tags$li(tags$b("Striped Bass:"), " A species of anadromous fish (Morone saxatilis) known for migrating between freshwater and saltwater, commonly found along the Atlantic coast."),
                       tags$li(tags$b("Sub-Aquatic Vegetation (SAV):"), " Aquatic plants that grow below the water's surface, providing habitat and food for various aquatic species."),
                       tags$li(tags$b("Substrate:"), " The type of bottom material in a river or stream, such as sand, gravel, or rock."),
-                      tags$li(tags$b("Suitability Index:"), " A numerical scale used to evaluate the appropriateness of habitat conditions for a particular species."),
+                      tags$li(tags$b("Suitability Index:"), " A numerical scale used to evaluate the appropriateness of habitat conditions for a particular species from 0 to 1."),
                       tags$li(tags$b("Temperature:"), " The warmth or coldness of water, usually measured in degrees Celsius (°C)."),
-                      tags$li(tags$b("Traditional Ecological Knowledge:"), " The cumulative body of knowledge, practices, and beliefs held by indigenous communities about their environment, developed over generations through direct contact with nature.")
+                      tags$li(tags$b("Traditional Ecological Knowledge (TEK):"), " The cumulative body of knowledge, practices, and beliefs held by indigenous communities about their environment, developed over generations through direct contact with nature.")
                     )
                   )
       )
@@ -495,7 +506,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "The highest quality spawning habitat for adult alewives is located in the southwest area of Squibnocket Pond, while the lowest quality habitat is centralized in Menemsha Pond. Squibnocket Pond also features a smaller section of high-quality habitat near the south end of Herring Creek, indicating another potential spawning site. Overall, Squibnocket Pond contains both high and moderate-quality habitats, Menemsha Pond exhibits mainly moderate and low-quality habitats, and Herring Creek is characterized entirely by moderate-quality habitat. Squibnocket Pond accounts for the largest portion and the highest quality habitat, emphasizing its critical role in supporting spawning adult alewives in Aquinnah, MA.")))
+                            "The highest quality spawning habitat for adult alewives is located in the southwest area of Squibnocket Pond, while the lowest quality habitat is centralized in Menemsha Pond. Squibnocket Pond also features a smaller section of high quality habitat near the south end of Herring Creek, indicating another potential spawning site. Overall, Squibnocket Pond contains both high and moderate quality habitats, Menemsha Pond exhibits mainly moderate and low quality habitats, and Herring Creek is characterized entirely by moderate quality habitat. Squibnocket Pond accounts for the largest portion and the highest quality habitat, emphasizing its critical role in supporting spawning adult alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -584,7 +595,7 @@ ui <- fluidPage(
                      column(6,
                             div(style = "height: 20px;"),
                             p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                              "The highest quality habitat for the development of alewife eggs and larvae is located throughout Squibnocket Pond and Herring Creek, providing optimal conditions for their growth. Squibnocket Pond features extensive high-quality habitat, particularly in the southwest area, and near the south end of Herring Creek, making it a crucial area for alewife development. Herring Creek itself is dominated by high-quality habitat, serving as a corridor for larval passage between Squibnocket and Menemsha Ponds. Menemsha Pond is characterized by moderate quality habitat, with smaller areas of high and low-quality habitats. Overall, highest quality habitats for alewife eggs and larvae are found in Squibnocket Pond and Herring Creek, highlighting their importance in supporting the suitable development of alewives in Aquinnah, MA.")))
+                              "The highest quality habitat for the development of alewife eggs and larvae is located throughout Squibnocket Pond and Herring Creek, providing optimal conditions for their growth. Squibnocket Pond features extensive high quality habitat, particularly in the southwest area, and near the south end of Herring Creek, making it a crucial area for alewife development. Herring Creek itself is dominated by high quality habitat, serving as a corridor for larval passage between Squibnocket and Menemsha Ponds. Menemsha Pond is characterized by moderate quality habitat, with smaller areas of high and low quality habitats. Overall, highest quality habitats for alewife eggs and larvae are found in Squibnocket Pond and Herring Creek, highlighting their importance in supporting the suitable development of alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -673,7 +684,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "The highest quality habitat for the development of juvenile alewives is found in Herring Creek, offering optimal conditions for their growth. Squibnocket Pond also features significant high-quality habitat, particularly along its northern borders, making it a crucial area for juvenile alewife development. Menemsha Pond is characterized by moderate quality habitat, with smaller areas of high and low-quality habitat contained throuhgout. Overall, the highest quality habitats for juvenile alewives are located in Herring Creek and Squibnocket Pond, showcasing their importance in supporting the suitable development of alewives in Aquinnah, MA.")))
+                            "The highest quality habitat for the development of juvenile alewives is found in Herring Creek, offering optimal conditions for their growth. Squibnocket Pond also features significant high quality habitat, particularly along its northern borders, making it a crucial area for juvenile alewife development. Menemsha Pond is characterized by moderate quality habitat, with smaller areas of high and low quality habitat contained throuhgout. Overall, the highest quality habitats for juvenile alewives are located in Herring Creek and Squibnocket Pond, showcasing their importance in supporting the suitable development of alewives in Aquinnah, MA.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -762,7 +773,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "The habitat results for spawning blueback herring reveals moderate to low-quality habitat across the study area, with Squibnocket Pond showing a nearly equal distribution of moderate and low-use habitats. The higher quality habitat is concentrated in the western region of Squibnocket Pond, indicating limited availability of optimal spawning conditions. Menemsha Pond is largely dominated by low-quality habitat, suggesting it may not provide the necessary conditions for blueback herring spawning. Herring Creek similarly lacks high-quality habitat, being composed mainly of low-quality areas. Overall, the scarcity of high-quality habitat across the study area suggests limited suitable conditions for blueback herring spawning compared to alewives.")))
+                            "The habitat results for spawning blueback herring reveals moderate to low quality habitat across the study area, with Squibnocket Pond showing a nearly equal distribution of moderate and low quality habitats. The higher quality habitat is concentrated in the western region of Squibnocket Pond, indicating limited availability of optimal spawning conditions. Menemsha Pond is largely dominated by low quality habitat, suggesting it may not provide the necessary conditions for blueback herring spawning. Herring Creek similarly lacks high quality habitat, being composed mainly of low quality areas. Overall, the scarcity of high quality habitat across the study area suggests limited suitable conditions for blueback herring spawning compared to alewives.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -851,7 +862,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "The habitat results for blueback herring eggs and larvae indicate that the pond system is characterized by moderate-quality habitat. In Squibnocket Pond, the highest quality habitat is concentrated in the western region, offering some suitable conditions for blueback herring development. Menemsha Pond is primarily composed of low-quality habitat, which may not provide optimal conditions for the development of blueback herring eggs and larvae. Herring Creek is characterized as low-quality habitat, which could limit the connectivity between Squibnocket and Menemsha Ponds and impact the distribution and survival of blueback herring offspring. Overall, Squibnocket Pond provides the most favorable conditions among the study locations for the development of blueback herring eggs and larvae.")))
+                            "The habitat results for blueback herring eggs and larvae indicate that the pond system is characterized by moderate quality habitat. In Squibnocket Pond, the highest quality habitat is concentrated in the western region, offering some suitable conditions for blueback herring development. Menemsha Pond is primarily composed of low quality habitat, which may not provide optimal conditions for the development of blueback herring eggs and larvae. Herring Creek is characterized as low quality habitat, which could limit the connectivity between Squibnocket and Menemsha Ponds and impact the distribution and survival of blueback herring offspring. Overall, Squibnocket Pond provides the most favorable conditions among the study locations for the development of blueback herring eggs and larvae.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -940,7 +951,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "The highest quality spawning habitat for adult alewives is located in the southwest area of Squibnocket Pond, while the lowest quality habitat is centralized in Menemsha Pond. Squibnocket Pond also features a smaller section of high-quality habitat near the south end of Herring Creek, indicating another potential spawning site. Overall, Squibnocket Pond contains both high and moderate-quality habitats, Menemsha Pond exhibits mainly moderate and low-quality habitats, and Herring Creek is characterized entirely by moderate-quality habitat. Squibnocket Pond accounts for the largest portion and the highest quality habitat, emphasizing its critical role in supporting spawning adult alewives in Aquinnah, MA.")))
+                            "The highest quality habitat for non-migratory juvenile blueback herring is located in Herring Creek, where the entire area is classified as high quality. Menemsha Pond also provides a significant portion of high quality habitat, with no low quality areas, making it another key location for juvenile development. Squibnocket Pond features a balanced distribution of high and moderate quality habitats, with only a minimal area of low quality. Overall, Herring Creek and Menemsha Pond are characterized by high quality habitats, while Squibnocket Pond contains both high and moderate quality areas.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -1025,7 +1036,7 @@ tabPanel(
            div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;", "River Herring Migration Model"))),
            div(style = "height: 20px;"),
            tags$div(style = "text-align:center;", 
-                    tags$img(src = "Striped_Bass_Predation.png", style = "width: 70%; height: auto;")),
+                    tags$img(src = "Striped_Bass_Predation.png", style = "width: 60%; height: auto;")),
            div(style = "height: 20px;"),
            p("This page provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring migration under different predation pressures, this model can be used to identify locations and times where predation impacts spawning behavior in river herring."),
            div(style = "height: 10px;"),
@@ -1036,6 +1047,7 @@ tabPanel(
            tags$iframe(width="600", height="650", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
     )
   ),
+  div(style = "height: 20px;"),
   div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Simulation Design"))),
   div(style = "text-align:center", DTOutput("predationTable")),
   fluidRow(
