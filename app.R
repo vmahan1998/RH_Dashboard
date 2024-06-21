@@ -6,7 +6,7 @@
 #
 #    http://shiny.rstudio.com/
 #
-rm(list=ls(all=TRUE))
+#rm(list=ls(all=TRUE))
 # Load packages
 library(shiny)
 library(shinydashboard)
@@ -21,108 +21,39 @@ library(ggmap)
 library(leaflet.extras)
 library(DT)
 
-path.input <- '/Users/RDEL1VMM/Desktop/current projects/Aquinnah Herring Hatchery/Model_results_5_7_24/'
-path.output <- '/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/raw_data_processing/'
-migration.model.input <- "/Users/RDEL1VMM/Documents/Netlogo/Herring_Squibnocket/AquinnahHerringMigrationModel/output"
-# Fetch corresponding raster data based on the selected parameter
-## Preprocessing
 # Set up your Google API key
 api_key <- "AIzaSyBXMCgi4IjTws4noaeAl7XvgFkETFgH4Zw"
 
 # Register your Google API key
 register_google(key = api_key)
 
-# Load Raster of area
-A_area.rast <- terra::rast(paste0(path.input,("A_area_mask_10m.tif")))
-A_area.rast <- terra::project(A_area.rast, "EPSG:4269")
-
-# Load Shapefile of area
-A_area.shp <- terra::vect(paste0(path.input,("Aquinnah_Proje_ExportFeature.shp")))
-A_area.shp <- terra::project(A_area.shp, "EPSG:4269")
-
-# Load Shapefile of squibnocket
-S_area.shp <- terra::vect(paste0(path.input,("Squibnocket_pond_only.shp")))
-S_area.shp <- terra::project(S_area.shp, "EPSG:4269")
-
-# Set Resolution
-res <- res(A_area.rast) # comment this out if you change the resolution
-r <- rast(resolution=res,crs= "EPSG:4269",extent=ext(A_area.rast))
-
-#################### LOAD FIELD DATA ###############################
-# Load Sediment Raster
-# Load Sediment Raster
-sed_rast <- terra::rast(paste0(path.input,("Idw_Sediment.tif")))
-sed_rast <- terra::project(sed_rast, "EPSG:4269")
-
-# crop to squibnocket because data only covers squibnocket
-sed_rast_cropped <- terra::mask(sed_rast, S_area.shp)
-
-# Bathymetry
-bath_rast <- terra::rast(paste0(path.input,('Idw_Aquinnah3.tif')))
-bath_rast <- terra::project(bath_rast, "EPSG:4269")
-bath_rast <- terra::mask(bath_rast, A_area.shp)
-
-# Salinity
-salinity_rast <- terra::rast(paste0(path.input, "Idw_Salinity_4.tif"))
-salinity_rast <- terra::project(salinity_rast, "EPSG:4269")
-salinity_rast <- terra::mask(salinity_rast, A_area.shp)
-
-# Velocity
-velocity_rast <- terra::rast(paste0(path.input, "Idw_FlowTest_1.tif"))
-velocity_rast <- terra::project(velocity_rast, "EPSG:4269")
-velocity_rast <- terra::mask(velocity_rast, A_area.shp)
-
-# Temperature
-temperature_rast <- terra::rast(paste0(path.input, "Idw_TempTest.tif"))
-temperature_rast <- terra::project(temperature_rast, "EPSG:4269")
-temperature_rast <- terra::mask(temperature_rast, A_area.shp)
-
-# SAV
-SAV_rast <- terra::rast(paste0(path.input, "Reclass_10p32_1.tif"))
-SAV_rast <- terra::project(SAV_rast, "EPSG:4269")
-SAV_rast <- terra::mask(SAV_rast, A_area.shp)
-
-####################################################################
-# Resample rasters to match the resolution of raster_mask without interpolation
-
-# Sediment
-sed_rast_resampled <- resample(sed_rast_cropped, r)
-
-# Bathymetry
-bath_rast_resampled <- resample(bath_rast,r)
-
-# Salinity
-salinity_rast_resampled <- resample(salinity_rast, r)
-
-# Velocity
-velocity_rast_resampled <- resample(velocity_rast, r)
-# convert cm/s to m/s
-velocity_rast_resampled <- abs(velocity_rast_resampled / 100)
-
-# Temperature
-temperature_rast_resampled <- resample(temperature_rast, r)
-
-# Sub-Aquatic Vegetation
-SAV_rast_resampled <- resample(SAV_rast, r)
-
-# Reclassify values
-# Define the classification matrix
-classification_matrix <- matrix(c(0, Inf, 1), ncol = 3)
-
-# Reclassify values
-SAV_rast_reclassified <- classify(SAV_rast_resampled, classification_matrix)
-
-# If you want to include values less than 0.5 as 0, you can add an 'others' argument
-SAV_rast_reclassified <- classify(SAV_rast_resampled, classification_matrix, others = 0)
+# Function to ensure rasters are 2D
+drop_z <- function(r) {
+  if (terra::nlyr(r) == 1) {
+    return(r)
+  } else {
+    return(r[[1]])
+  }
+}
 
 # Load Habitat Model Results
-adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_data.tif"))
-egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_data.tif"))
-juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_data.tif"))
+adult_alewife <- terra::rast("www/adult_alewife_habitat_data.tif")
+adult_alewife <- drop_z(adult_alewife)
 
-adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_data.tif"))
-egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_data.tif"))
-juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_data.tif"))
+egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_data.tif")
+egg_alewife <- drop_z(egg_alewife)
+
+juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_data.tif")
+juv_alewife <- drop_z(juv_alewife)
+
+adult_blueback <- terra::rast( "www/adult_blueback_habitat_data.tif")
+adult_blueback <- drop_z(adult_blueback)
+
+egg_blueback <- terra::rast("www/egg_larvae_blueback_habitat_data.tif")
+egg_blueback <- drop_z(egg_blueback)
+
+juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_data.tif")
+juv_blueback <- drop_z(juv_blueback)
 
 # Suitability Indices
 # Adult Alewife
@@ -298,11 +229,11 @@ juvenile_blueback_SAV_suitability_data <- data.frame(
 ##########################################################################
 # Migration Model Results
 # Load Model Results
-adult_alewife_data <- read.csv(paste0(path.input,("adult_alewife_habitat_data.csv"))) #HSI
-adult_alewife_patch_data <- read.csv(paste0(path.output,("adult_alewife_baseline_results_with_lat_long.csv")))
-adult_alewife_patch_data_low <- read.csv(paste0(path.output,("adult_alewife_low_results_with_lat_long.csv")))
-adult_alewife_patch_data_mod <- read.csv(paste0(path.output,("adult_alewife_moderate_results_with_lat_long.csv")))
-adult_alewife_patch_data_high <- read.csv(paste0(path.output,("adult_alewife_high_results_with_lat_long.csv")))
+adult_alewife_data <- read.csv("www/adult_alewife_habitat_data.csv") #HSI
+adult_alewife_patch_data <- read.csv("www/adult_alewife_baseline_results_with_lat_long.csv")
+adult_alewife_patch_data_low <- read.csv("www/adult_alewife_low_results_with_lat_long.csv")
+adult_alewife_patch_data_mod <- read.csv("www/adult_alewife_moderate_results_with_lat_long.csv")
+adult_alewife_patch_data_high <- read.csv("www/adult_alewife_high_results_with_lat_long.csv")
 
 # Combine all datasets to find the global min and max for scaling
 all_data <- bind_rows(adult_alewife_data, adult_alewife_patch_data_low, adult_alewife_patch_data_mod, adult_alewife_patch_data_high)
@@ -407,7 +338,7 @@ ui <- fluidPage(
                     div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Blueback Herring"))),
                     p("Blueback herring (Alosa aestivalis) are similar to alewives but have distinct ecological and behavioral differences."),
                     tags$div(style = "text-align:center;", 
-                             tags$img(src = "Blueback_Herring.png", style = "width: 50%; height: auto;")),
+                             tags$img(src = "Blueback_Herring1.png", style = "width: 50%; height: auto;")),
                     div(style = "height: 20px;"),
                     tags$ul(
                       tags$li(tags$b("Description:"), " Blueback herring are found from New Brunswick to the St. Johns River in Florida, thriving in freshwater rivers and estuaries along the Atlantic coast. Known for their extensive migrations to freshwater tidal systems for spawning, they face similar environmental challenges as alewives, including deteriorating water quality, habitat loss, bycatch, overfishing, increased predation, and dam construction."),
@@ -1036,7 +967,7 @@ tabPanel(
            div(style = "text-align:center", h2(tags$b(style = "color: #8fbc8f;", "River Herring Migration Model"))),
            div(style = "height: 20px;"),
            tags$div(style = "text-align:center;", 
-                    tags$img(src = "Striped_Bass_Predation.png", style = "width: 60%; height: auto;")),
+                    tags$img(src = "Striped_Bass_Predation1.png", style = "width: 60%; height: auto;")),
            div(style = "height: 20px;"),
            p("This page provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring migration under different predation pressures, this model can be used to identify locations and times where predation impacts spawning behavior in river herring."),
            div(style = "height: 10px;"),
@@ -1171,37 +1102,37 @@ server <- function(input, output, session) {
       )
   })
   
-  observeEvent(input$parameter, {
+  #observeEvent(input$parameter, {
 
     # Get the selected parameter
-    selected_parameter <- input$parameter
+    #selected_parameter <- input$parameter
     
     # Fetch corresponding raster data based on the selected parameter
-    raster_layer <- switch(selected_parameter,
-                           "Average Daily Temperature (C)" = temperature_rast_resampled,
-                           "Depth (m)" = bath_rast_resampled,
-                           "Salinity (psu)" = salinity_rast_resampled,
-                           "Average Daily Flow Velocity (m/s)" = velocity_rast_resampled,
-                           "Substrate Classification" = sed_rast_resampled,
-                           "Sub-Aquatic Vegetation: Presence/Absence (1,0)" = SAV_rast_reclassified)
+    #raster_layer <- switch(selected_parameter,
+                           #"Average Daily Temperature (C)" = temperature_rast_resampled,
+                           #"Depth (m)" = bath_rast_resampled,
+                           #"Salinity (psu)" = salinity_rast_resampled,
+                           #"Average Daily Flow Velocity (m/s)" = velocity_rast_resampled,
+                           #3"Substrate Classification" = sed_rast_resampled,
+                           #"Sub-Aquatic Vegetation: Presence/Absence (1,0)" = SAV_rast_reclassified)
     
     # Calculate the minimum and maximum values of the raster data
-    min_value <- min(values(raster_layer), na.rm = TRUE)
-    max_value <- max(values(raster_layer), na.rm = TRUE)
+    #min_value <- min(values(raster_layer), na.rm = TRUE)
+    #max_value <- max(values(raster_layer), na.rm = TRUE)
     
     # Add the raster layer to the map on the "Input Data" tab
-    output$input_map <- renderLeaflet({
-      leaflet() %>%
-        addProviderTiles("Esri.WorldImagery") %>%
-        setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-        addRasterImage(raster_layer, colors = viridis(10)) #%>%
-        #addLegend("bottomright", colors = viridis(10), labels = seq(min_value, max_value, length.out = 10))
-    })
-    
-    output$parameter_info <- renderText({
-      paste("You selected:", selected_parameter)
-    })
-  })
+  #  output$input_map <- renderLeaflet({
+  #    leaflet() %>%
+   #     addProviderTiles("Esri.WorldImagery") %>%
+  #      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+  #      addRasterImage(raster_layer, colors = viridis(10)) #%>%
+  #      #addLegend("bottomright", colors = viridis(10), labels = seq(min_value, max_value, length.out = 10))
+  #  })
+  #  
+  #  output$parameter_info <- renderText({
+  #    paste("You selected:", selected_parameter)
+  #  })
+  #})
   ## Habitat Results
   output$map_adult_alewife_habitat_results <- renderLeaflet({
     min_value <- min(values(adult_alewife), na.rm = TRUE)
@@ -1271,12 +1202,25 @@ server <- function(input, output, session) {
   
   ###################################################################################
   # individual HSI Map: Adult Alewife
-  temp_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Temp_data.tif"))
-  depth_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Depth_data.tif"))
-  salinity_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Salinity_data.tif"))
-  velocity_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Velocity_data.tif"))
-  substrate_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_Substrate_data.tif"))
-  SAV_adult_alewife <- terra::rast(paste0(path.input,"adult_alewife_habitat_SAV_data.tif"))
+  # Load rasters for adult alewife
+  temp_adult_alewife <- terra::rast("www/adult_alewife_habitat_Temp_data.tif")
+  temp_adult_alewife <- drop_z(temp_adult_alewife)
+  
+  depth_adult_alewife <- terra::rast("www/adult_alewife_habitat_Depth_data.tif")
+  depth_adult_alewife <- drop_z(depth_adult_alewife)
+  
+  salinity_adult_alewife <- terra::rast("www/adult_alewife_habitat_Salinity_data.tif")
+  salinity_adult_alewife <- drop_z(salinity_adult_alewife)
+  
+  velocity_adult_alewife <- terra::rast("www/adult_alewife_habitat_Velocity_data.tif")
+  velocity_adult_alewife <- drop_z(velocity_adult_alewife)
+  
+  substrate_adult_alewife <- terra::rast("www/adult_alewife_habitat_Substrate_data.tif")
+  substrate_adult_alewife <- drop_z(substrate_adult_alewife)
+  
+  SAV_adult_alewife <- terra::rast("www/adult_alewife_habitat_SAV_data.tif")
+  SAV_adult_alewife <- drop_z(SAV_adult_alewife)
+  
   
   output$adult_alewife_temp_map <- renderLeaflet({
     min_value <- min(values(temp_adult_alewife), na.rm = TRUE)
@@ -1345,12 +1289,23 @@ server <- function(input, output, session) {
   })
   #####################################################################################
   # individual HSI Map: egg Alewife
-  temp_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Temp_data.tif"))
-  depth_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Depth_data.tif"))
-  salinity_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Salinity_data.tif"))
-  velocity_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Velocity_data.tif"))
-  substrate_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_Substrate_data.tif"))
-  SAV_egg_alewife <- terra::rast(paste0(path.input,"egg_larvae_alewife_habitat_SAV_data.tif"))
+  temp_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_Temp_data.tif")
+  temp_egg_alewife <- drop_z(temp_egg_alewife)
+  
+  depth_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_Depth_data.tif")
+  depth_egg_alewife <- drop_z(depth_egg_alewife)
+  
+  salinity_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_Salinity_data.tif")
+  salinity_egg_alewife <- drop_z(salinity_egg_alewife)
+  
+  velocity_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_Velocity_data.tif")
+  velocity_egg_alewife <- drop_z(velocity_egg_alewife)
+  
+  substrate_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_Substrate_data.tif")
+  substrate_egg_alewife <- drop_z(substrate_egg_alewife)
+  
+  SAV_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_SAV_data.tif")
+  SAV_egg_alewife <- drop_z(SAV_egg_alewife)
   
   output$egg_alewife_temp_map <- renderLeaflet({
     min_value <- min(values(temp_egg_alewife), na.rm = TRUE)
@@ -1419,12 +1374,23 @@ server <- function(input, output, session) {
   })
   #####################################################################################
   # individual HSI Map: egg Alewife
-  temp_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Temp_data.tif"))
-  depth_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Depth_data.tif"))
-  salinity_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Salinity_data.tif"))
-  velocity_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Velocity_data.tif"))
-  substrate_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_Substrate_data.tif"))
-  SAV_juv_alewife <- terra::rast(paste0(path.input,"nonmigratory_juvenile_alewife_habitat_SAV_data.tif"))
+  temp_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_Temp_data.tif")
+  temp_juv_alewife <- drop_z(temp_juv_alewife)
+  
+  depth_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_Depth_data.tif")
+  depth_juv_alewife <- drop_z(depth_juv_alewife)
+  
+  salinity_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_Salinity_data.tif")
+  salinity_juv_alewife <- drop_z(salinity_juv_alewife)
+  
+  velocity_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_Velocity_data.tif")
+  velocity_juv_alewife <- drop_z(velocity_juv_alewife)
+  
+  substrate_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_Substrate_data.tif")
+  substrate_juv_alewife <- drop_z(substrate_juv_alewife)
+  
+  SAV_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_SAV_data.tif")
+  SAV_juv_alewife <- drop_z(SAV_juv_alewife)
   
   output$juv_alewife_temp_map <- renderLeaflet({
     min_value <- min(values(temp_juv_alewife), na.rm = TRUE)
@@ -1493,12 +1459,23 @@ server <- function(input, output, session) {
   })
   #####################################################################################
   # individual HSI Map: Adult blueback
-  temp_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Temp_data.tif"))
-  depth_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Depth_data.tif"))
-  salinity_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Salinity_data.tif"))
-  velocity_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Velocity_data.tif"))
-  substrate_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_Substrate_data.tif"))
-  SAV_adult_blueback <- terra::rast(paste0(path.input,"adult_blueback_habitat_SAV_data.tif"))
+  temp_adult_blueback <- terra::rast("www/adult_blueback_habitat_Temp_data.tif")
+  temp_adult_blueback <- drop_z(temp_adult_blueback)
+  
+  depth_adult_blueback <- terra::rast("www/adult_blueback_habitat_Depth_data.tif")
+  depth_adult_blueback <- drop_z(depth_adult_blueback)
+  
+  salinity_adult_blueback <- terra::rast("www/adult_blueback_habitat_Salinity_data.tif")
+  salinity_adult_blueback <- drop_z(salinity_adult_blueback)
+  
+  velocity_adult_blueback <- terra::rast("www/adult_blueback_habitat_Velocity_data.tif")
+  velocity_adult_blueback <- drop_z(velocity_adult_blueback)
+  
+  substrate_adult_blueback <- terra::rast("www/adult_blueback_habitat_Substrate_data.tif")
+  substrate_adult_blueback <- drop_z(substrate_adult_blueback)
+  
+  SAV_adult_blueback <- terra::rast("www/adult_blueback_habitat_SAV_data.tif")
+  SAV_adult_blueback <- drop_z(SAV_adult_blueback)
   
   output$adult_blueback_temp_map <- renderLeaflet({
     min_value <- min(values(temp_adult_blueback), na.rm = TRUE)
@@ -1567,12 +1544,23 @@ server <- function(input, output, session) {
   })
   #####################################################################################
   # individual HSI Map: egg blueback
-  temp_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Temp_data.tif"))
-  depth_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Depth_data.tif"))
-  salinity_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Salinity_data.tif"))
-  velocity_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Velocity_data.tif"))
-  substrate_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_Substrate_data.tif"))
-  SAV_egg_blueback <- terra::rast(paste0(path.input,"egg_larvae_blueback_habitat_SAV_data.tif"))
+  temp_egg_blueback <- terra::rast("www/egg_larvae_blueback_habitat_Temp_data.tif")
+  temp_egg_blueback <- drop_z(temp_egg_blueback)
+  
+  depth_egg_blueback <- terra::rast("www/egg_larvae_blueback_habitat_Depth_data.tif")
+  depth_egg_blueback <- drop_z(depth_egg_blueback)
+  
+  salinity_egg_blueback <- terra::rast("www/egg_larvae_blueback_habitat_Salinity_data.tif")
+  salinity_egg_blueback <- drop_z(salinity_egg_blueback)
+  
+  velocity_egg_blueback <- terra::rast("www/egg_larvae_blueback_habitat_Velocity_data.tif")
+  velocity_egg_blueback <- drop_z(velocity_egg_blueback)
+  
+  substrate_egg_blueback <- terra::rast("www/egg_larvae_blueback_habitat_Substrate_data.tif")
+  substrate_egg_blueback <- drop_z(substrate_egg_blueback)
+  
+  SAV_egg_blueback <- terra::rast( "www/egg_larvae_blueback_habitat_SAV_data.tif")
+  SAV_egg_blueback <- drop_z(SAV_egg_blueback)
   
   output$egg_blueback_temp_map <- renderLeaflet({
     min_value <- min(values(temp_egg_blueback), na.rm = TRUE)
@@ -1641,12 +1629,23 @@ server <- function(input, output, session) {
   })
   #####################################################################################
   # individual HSI Map: egg blueback
-  temp_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Temp_data.tif"))
-  depth_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Depth_data.tif"))
-  salinity_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Salinity_data.tif"))
-  velocity_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Velocity_data.tif"))
-  substrate_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_Substrate_data.tif"))
-  SAV_juv_blueback <- terra::rast(paste0(path.input,"nonmigratory_juvenile_blueback_habitat_SAV_data.tif"))
+  temp_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_Temp_data.tif")
+  temp_juv_blueback <- drop_z(temp_juv_blueback)
+  
+  depth_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_Depth_data.tif")
+  depth_juv_blueback <- drop_z(depth_juv_blueback)
+  
+  salinity_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_Salinity_data.tif")
+  salinity_juv_blueback <- drop_z(salinity_juv_blueback)
+  
+  velocity_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_Velocity_data.tif")
+  velocity_juv_blueback <- drop_z(velocity_juv_blueback)
+  
+  substrate_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_Substrate_data.tif")
+  substrate_juv_blueback <- drop_z(substrate_juv_blueback)
+  
+  SAV_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_SAV_data.tif")
+  SAV_juv_blueback <- drop_z(SAV_juv_blueback)
   
   output$juv_blueback_temp_map <- renderLeaflet({
     min_value <- min(values(temp_juv_blueback), na.rm = TRUE)
