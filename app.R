@@ -975,8 +975,13 @@ tabPanel(
     ),
     column(6, 
            div(style = "height: 20px;"),
-           tags$iframe(width="600", height="650", src="Model_Demo_w_Bass.gif", frameborder="0", allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture", allowfullscreen= TRUE)
-    )
+           tags$iframe(
+             style = "width: 100%; height: 650px;",
+             src = "Model_Demo_w_Bass.gif",
+             frameborder = "0",
+             allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+             allowfullscreen = TRUE
+           )    )
   ),
   div(style = "height: 20px;"),
   div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Simulation Design"))),
@@ -2305,9 +2310,14 @@ server <- function(input, output, session) {
       colnames = c("Simulation", "Initial Prey Population (River Herring)", "Predation Level (%)", "Initial Predator Population (Striped Bass)"),
       options = list(
         pageLength = 5,
-        autoWidth = TRUE,
+        autoWidth = FALSE,
         dom = 't<"clear">',
-        columnDefs = list(list(width = '200px', targets = "_all"))
+        columnDefs = list(
+          list(width = '50px', targets = 0),
+          list(width = '100px', targets = 1),
+          list(width = '100px', targets = 2),
+          list(width = '100px', targets = 3)
+        )
       ),
       rownames = FALSE,
       class = 'table table-striped table-bordered'
