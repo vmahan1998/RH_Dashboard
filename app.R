@@ -310,23 +310,25 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
-                    p(style = "color: black; text-align: left;", "This application transforms ecological data into an accessible, engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions on river herring. It also educates users about river herring, promoting conservation efforts and community involvement, and deepening the user's understanding of the ecological challenges impacting river herring management in Aquinnah."),
-                    p(style = "color: #8fbc8f; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
+                    p(style = "color: black; text-align: left;", "This application transforms ecological data into an accessible and engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions about river herring. The purpose of this app is to educate users about river herring, promote conservation efforts and community involvement, and deepen the user's understanding of the ecological challenges impacting river herring management in Aquinnah, Massachusetts."),
+                    p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
                     tags$ul(
                       tags$li("River Herring Habitat Model Report 2024"),
                       tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
                     ),
-                    p(style = "color: black ; padding: 10px; text-align: center; font-weight: bold;",
+                    p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
                       "All input data and results presented in this application are the exclusive property of the Wampanoag Tribe. Any use or reuse of this data requires written permission.")
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Species Information"))),
                     p("Detailed information about the river herring species, including alewives and blueback herring."),
+                    div(style = "height: 20px;"),
                     div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Alewives"))),
                     p("Alewives (Alosa pseudoharengus) are a species of diadromous fish in the herring family."),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Alewife.png", style = "width: 50%; height: auto;")),
+                    #div(style = "text-align:right", h6(tags$i(style = "color: black;","Alewife"))),
                     div(style = "height: 20px;"),
                     tags$ul(
                       tags$li(tags$b("Description:"), " Alewives are found from the coast of Labrador and Newfoundland, south to Georgia in the United States. They thrive in river systems and estuaries along the Atlantic coast. Despite their historical significance, alewife populations have declined due to factors such as deteriorating water quality, habitat loss, overfishing, increased predation, and dam construction."),
@@ -335,10 +337,12 @@ ui <- fluidPage(
                       div(style = "height: 20px;"),
                       tags$li(tags$b("Life Cycle:"), " Alewives have an anadromous life cycle with stages including spawning, larval development, juvenile maturation, and adult migration. Spawning is triggered by rising water temperatures and increasing day length. Eggs hatch into yolk-sac larvae, which grow in freshwater before migrating downstream to brackish areas as juveniles. Juveniles mature in these nurseries before moving to the sea, with significant mortality rates observed during this migration.")
                     ),
+                    div(style = "height: 20px;"),
                     div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Blueback Herring"))),
                     p("Blueback herring (Alosa aestivalis) are similar to alewives but have distinct ecological and behavioral differences."),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Blueback_Herring1.png", style = "width: 50%; height: auto;")),
+                    #div(style = "text-align:right", h6(tags$i(style = "color: black;","Blueback Herring"))),
                     div(style = "height: 20px;"),
                     tags$ul(
                       tags$li(tags$b("Description:"), " Blueback herring are found from New Brunswick to the St. Johns River in Florida, thriving in freshwater rivers and estuaries along the Atlantic coast. Known for their extensive migrations to freshwater tidal systems for spawning, they face similar environmental challenges as alewives, including deteriorating water quality, habitat loss, bycatch, overfishing, increased predation, and dam construction."),
@@ -354,8 +358,9 @@ ui <- fluidPage(
                     leafletOutput("map_project_area"),
                     div(style = "height: 20px;"),
                     div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Herring Creek Fishery"))),
-                    div(style = "height: 20px;"),
-                    p("The Herring Creek Fishery in Aquinnah, Massachusetts, managed by the Wampanoag Tribe, is a critical site for the study and preservation of river herring. Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects traditional ecological knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
+                    p("The Herring Creek Fishery in Aquinnah, Massachusetts, managed by the Wampanoag Tribe, is a critical site for the study and preservation of river herring."),
+                    div(style = "height: 10px;"),
+                    p("Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects traditional ecological knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
                   ),
                   tabPanel(
                     title = tagList(icon("cog"), "Ecological Modeling"), 
@@ -2303,11 +2308,11 @@ server <- function(input, output, session) {
     datatable(
       data.frame(
         "Simulation" = c("Baseline", "Low", "Moderate", "High"),
-        "Initial Prey Population (River Herring)" = c(1000, 1000, 1000, 1000),
+        "Initial Prey Population (river herring)" = c(1000, 1000, 1000, 1000),
         "Predation Level (%)" = c(0, 0.1, 0.5, 1),
         "Initial Predator Population (Striped Bass)" = c(0, 1, 5, 10)
       ),
-      colnames = c("Simulation", "Initial Prey Population (River Herring)", "Predation Level (%)", "Initial Predator Population (Striped Bass)"),
+      colnames = c("Simulation", "Initial Prey Population (river herring)", "Predation Level (%)", "Initial Predator Population (striped bass)"),
       options = list(
         pageLength = 5,
         autoWidth = FALSE,
