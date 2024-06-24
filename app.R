@@ -109,7 +109,7 @@ alewife_eggs_velocity_suitability_data <- data.frame(
 
 alewife_eggs_substrate_suitability_data <- data.frame(
   Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
-  SuitabilityIndex = c(1.0, 0.3, 0.0)
+  SuitabilityIndex = c(0.5, 1.0, 0.0)
 )
 
 alewife_eggs_SAV_suitability_data <- data.frame(
@@ -1146,8 +1146,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
+      addRasterImage(adult_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$map_egg_larvae_alewife_habitat_results <- renderLeaflet({
@@ -1158,7 +1158,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$map_juv_alewife_habitat_results <- renderLeaflet({
@@ -1169,7 +1169,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(juv_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$map_adult_blueback_habitat_results <- renderLeaflet({
@@ -1180,7 +1180,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$map_egg_larvae_blueback_habitat_results <- renderLeaflet({
@@ -1191,7 +1191,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$map_juv_blueback_habitat_results <- renderLeaflet({
@@ -1202,7 +1202,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(juv_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Habitat Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   ###################################################################################
@@ -1235,7 +1235,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(temp_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_alewife_depth_map <- renderLeaflet({
@@ -1246,7 +1246,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(depth_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_alewife_salinity_map <- renderLeaflet({
@@ -1257,7 +1257,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(salinity_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_alewife_velocity_map <- renderLeaflet({
@@ -1268,7 +1268,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(velocity_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_alewife_substrate_map <- renderLeaflet({
@@ -1279,7 +1279,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(substrate_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_alewife_SAV_map <- renderLeaflet({
@@ -1290,7 +1290,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(SAV_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: egg Alewife
@@ -1320,7 +1320,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(temp_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_alewife_depth_map <- renderLeaflet({
@@ -1331,7 +1331,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(depth_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_alewife_salinity_map <- renderLeaflet({
@@ -1342,7 +1342,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(salinity_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_alewife_velocity_map <- renderLeaflet({
@@ -1353,7 +1353,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(velocity_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_alewife_substrate_map <- renderLeaflet({
@@ -1364,7 +1364,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(substrate_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_alewife_SAV_map <- renderLeaflet({
@@ -1375,7 +1375,7 @@ server <- function(input, output, session) {
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(SAV_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: egg Alewife
@@ -1404,8 +1404,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(temp_juv_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+      addRasterImage(temp_juv_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_alewife_depth_map <- renderLeaflet({
@@ -1415,8 +1415,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(depth_juv_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+      addRasterImage(depth_juv_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_alewife_salinity_map <- renderLeaflet({
@@ -1426,8 +1426,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(salinity_juv_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+      addRasterImage(salinity_juv_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_alewife_velocity_map <- renderLeaflet({
@@ -1437,8 +1437,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(velocity_juv_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+      addRasterImage(velocity_juv_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_alewife_substrate_map <- renderLeaflet({
@@ -1448,8 +1448,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+      addRasterImage(substrate_egg_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_alewife_SAV_map <- renderLeaflet({
@@ -1459,8 +1459,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_juv_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+      addRasterImage(SAV_juv_alewife, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: Adult blueback
@@ -1489,8 +1489,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(temp_adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+      addRasterImage(temp_adult_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_blueback_depth_map <- renderLeaflet({
@@ -1500,8 +1500,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(depth_adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+      addRasterImage(depth_adult_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_blueback_salinity_map <- renderLeaflet({
@@ -1511,8 +1511,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(salinity_adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+      addRasterImage(salinity_adult_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_blueback_velocity_map <- renderLeaflet({
@@ -1522,8 +1522,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(velocity_adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+      addRasterImage(velocity_adult_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_blueback_substrate_map <- renderLeaflet({
@@ -1533,8 +1533,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+      addRasterImage(substrate_adult_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_blueback_SAV_map <- renderLeaflet({
@@ -1544,8 +1544,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_adult_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+      addRasterImage(SAV_adult_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: egg blueback
@@ -1574,8 +1574,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(temp_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+      addRasterImage(temp_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_blueback_depth_map <- renderLeaflet({
@@ -1585,8 +1585,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(depth_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+      addRasterImage(depth_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_blueback_salinity_map <- renderLeaflet({
@@ -1596,8 +1596,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(salinity_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+      addRasterImage(salinity_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_blueback_velocity_map <- renderLeaflet({
@@ -1607,8 +1607,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(velocity_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+      addRasterImage(velocity_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_blueback_substrate_map <- renderLeaflet({
@@ -1618,8 +1618,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+      addRasterImage(substrate_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_blueback_SAV_map <- renderLeaflet({
@@ -1629,8 +1629,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+      addRasterImage(SAV_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: egg blueback
@@ -1659,8 +1659,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(temp_juv_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability")
+      addRasterImage(temp_juv_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Temperature Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_blueback_depth_map <- renderLeaflet({
@@ -1670,8 +1670,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(depth_juv_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability")
+      addRasterImage(depth_juv_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Depth Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_blueback_salinity_map <- renderLeaflet({
@@ -1681,8 +1681,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(salinity_juv_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability")
+      addRasterImage(salinity_juv_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Salinity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_blueback_velocity_map <- renderLeaflet({
@@ -1692,8 +1692,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(velocity_juv_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability")
+      addRasterImage(velocity_juv_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Velocity Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_blueback_substrate_map <- renderLeaflet({
@@ -1703,8 +1703,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_egg_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability")
+      addRasterImage(substrate_egg_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$juv_blueback_SAV_map <- renderLeaflet({
@@ -1714,8 +1714,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_juv_blueback, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(viridis(10), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability")
+      addRasterImage(SAV_juv_blueback, colors = rev(viridis(10))) %>%
+      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # Adult Alewife Suitability Indices
@@ -1788,8 +1788,8 @@ server <- function(input, output, session) {
       data = adult_alewife_substrate_suitability_data,
       x = ~Substrate,
       y = ~SuitabilityIndex,
-      type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      type = 'bar',
+      marker = list(color = c("#440154FF", "#FDE725FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1803,7 +1803,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF","#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1882,7 +1882,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#440154FF","#FDE725FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1896,7 +1896,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF", "#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -1975,7 +1975,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF", "#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1989,7 +1989,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF", "#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -2069,7 +2069,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF","#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2083,7 +2083,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF", "#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -2162,7 +2162,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#440154FF","#FDE725FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2176,7 +2176,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF","#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
@@ -2255,7 +2255,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF","#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2269,7 +2269,7 @@ server <- function(input, output, session) {
       x = ~SAV,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = '#8fbc8f')  # Set bar color to green
+      marker = list(color = c("#FDE725FF", "#440154FF"))  # Set bar colors
     ) %>% layout(
       title = "Sub-Aquatic Vegetation (SAV)",
       xaxis = list(title = "Presence/Absent of SAV"),
