@@ -310,14 +310,12 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
-                    p(style = "color: black; text-align: left;", "This application transforms ecological data into an accessible and engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions about river herring. The purpose of this app is to educate users about river herring, promote conservation efforts and community involvement, and deepen the user's understanding of the ecological challenges impacting river herring management in Aquinnah, Massachusetts."),
-                    p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
-                    tags$ul(
-                      tags$li("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., & Jacobs, A. (2024). *River Herring Habitat in the United States*. [Manuscript in preparation October 6, 2024.]"),
-                      tags$li("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). *Weaving Traditional Ecological Knowledge into Ecological Modeling*. [Manuscript in preparation October 6, 2024.]")
-                    ),
+                    p(style = "color: black; text-align: left;", "This app transforms ecological data into an accessible tool for researchers, fisheries managers, and the Wampanoag community, promoting informed decisions, conservation, and understanding of river herring challenges in Aquinnah, Massachusetts."),
+                    p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),
+                    p("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., & Jacobs, A. (2024). River Herring Habitat in the United States. [Manuscript in preparation.]"),
+                    p("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
-                      "This research was conducted on the traditional and ancestral lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any use or reuse of this data requires written permission.")
+                      "This research was conducted on the Traditional and Ancestral lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
@@ -396,33 +394,31 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("bookmark"), "References"),
                     h3("Key References"),
-                    tags$ul(
-                             tags$li("Able, K.W., Grothues, T.M., Shaw, M.J., VanMorter, S.M., Sullivan, M.C., & Ambrose, D.D. (2020). *Alewife (*Alosa pseudoharengus*) spawning and nursery areas in a sentinel estuary: Spatial and temporal patterns*. Environmental Biology of Fishes, 103(11), 1419–1436. https://doi.org/10.1007/s10641-020-01032-0"),
+                             p("Able, K.W., Grothues, T.M., Shaw, M.J., VanMorter, S.M., Sullivan, M.C., & Ambrose, D.D. (2020). *Alewife (*Alosa pseudoharengus*) spawning and nursery areas in a sentinel estuary: Spatial and temporal patterns*. Environmental Biology of Fishes, 103(11), 1419–1436. https://doi.org/10.1007/s10641-020-01032-0"),
                              
-                             tags$li("ASMFC. (2017). *River herring stock assessment update*. Atlantic States Marine Fisheries Commission."),
+                             p("ASMFC. (2017). *River herring stock assessment update*. Atlantic States Marine Fisheries Commission."),
                              
-                             tags$li("Bethoney, N.D., Stokesbury, K.D.E., & Cadrin, S.X. (2014). *Environmental links to alosine at-sea distribution and bycatch in the Northwest Atlantic midwater trawl fishery*. ICES Journal of Marine Science, 71(5), 1246–1255. https://doi.org/10.1093/icesjms/fst013"),
+                             p("Bethoney, N.D., Stokesbury, K.D.E., & Cadrin, S.X. (2014). *Environmental links to alosine at-sea distribution and bycatch in the Northwest Atlantic midwater trawl fishery*. ICES Journal of Marine Science, 71(5), 1246–1255. https://doi.org/10.1093/icesjms/fst013"),
                              
-                             tags$li("DiMaggio, M.A., Pine, H.J., Kenter, L.W., & Berlinsky, D.L. (2015). *Spawning, larviculture, and salinity tolerance of Alewives and Blueback Herring in captivity*."),
+                             p("DiMaggio, M.A., Pine, H.J., Kenter, L.W., & Berlinsky, D.L. (2015). *Spawning, larviculture, and salinity tolerance of Alewives and Blueback Herring in captivity*."),
                              
-                             tags$li("Greene, K.E., Zimmerman, J.L., Laney, R.W., & Thomas-Blate, J.C. (2009). *Atlantic coast diadromous fish habitat: A review of utilization, threats, recommendations for conservation, and research needs*. Atlantic States Marine Fisheries Commission Habitat Management Series No. 9."),
+                             p("Greene, K.E., Zimmerman, J.L., Laney, R.W., & Thomas-Blate, J.C. (2009). *Atlantic coast diadromous fish habitat: A review of utilization, threats, recommendations for conservation, and research needs*. Atlantic States Marine Fisheries Commission Habitat Management Series No. 9."),
                              
-                             tags$li("Kocovsky, P.M., & Pritt, J.J. (2008). *Linking conservation status with threats: A case study of Alewife in the US*. Transactions of the American Fisheries Society, 137(2), 564-571. https://doi.org/10.1577/T07-053.1"),
+                             p("Kocovsky, P.M., & Pritt, J.J. (2008). *Linking conservation status with threats: A case study of Alewife in the US*. Transactions of the American Fisheries Society, 137(2), 564-571. https://doi.org/10.1577/T07-053.1"),
                              
-                             tags$li("Kocovsky, P.M., Pritt, J.J., & Bilkovic, D.M. (2009). *Prioritizing conservation efforts for anadromous fish*."),
+                             p("Kocovsky, P.M., Pritt, J.J., & Bilkovic, D.M. (2009). *Prioritizing conservation efforts for anadromous fish*."),
                              
-                             tags$li("Loesch, J.G. (1977). *Contribution to the life history of the blueback herring (*Alosa aestivalis*)*. Transactions of the American Fisheries Society, 106(6), 583-589."),
+                             p("Loesch, J.G. (1977). *Contribution to the life history of the blueback herring (*Alosa aestivalis*)*. Transactions of the American Fisheries Society, 106(6), 583-589."),
                              
-                             tags$li("Mullen, J.W., Fay, C.W., Moring, J.R., & Hoar, J.J. (1986). *Species profiles: Life histories and environmental requirements of coastal fishes and invertebrates (North Atlantic)—Alewife and blueback herring*. U.S. Fish and Wildlife Service Biological Report 82."),
+                             p("Mullen, J.W., Fay, C.W., Moring, J.R., & Hoar, J.J. (1986). *Species profiles: Life histories and environmental requirements of coastal fishes and invertebrates (North Atlantic)—Alewife and blueback herring*. U.S. Fish and Wildlife Service Biological Report 82."),
                              
-                             tags$li("NMFS. (2013). *Endangered Species Act status review of Alewife and Blueback Herring*. National Marine Fisheries Service."),
+                             p("NMFS. (2013). *Endangered Species Act status review of Alewife and Blueback Herring*. National Marine Fisheries Service."),
                              
-                             tags$li("Pardue, G.B. (1983). *Habitat suitability index models: Alewife and blueback herring*. U.S. Fish and Wildlife Service FWS/OBS-82/10.58."),
+                             p("Pardue, G.B. (1983). *Habitat suitability index models: Alewife and blueback herring*. U.S. Fish and Wildlife Service FWS/OBS-82/10.58."),
                              
-                             tags$li("Waldman, J.R. (2022). *North American diadromous fishes and their decline*. BioScience, 72(4), 300-311. https://doi.org/10.1093/biosci/biac022"),
+                             p("Waldman, J.R. (2022). *North American diadromous fishes and their decline*. BioScience, 72(4), 300-311. https://doi.org/10.1093/biosci/biac022"),
                              
-                             tags$li("Waters, E.B., Perry, R.W., & Hightower, J.E. (2007). *Effect of water temperature on herring spawning activity*. Environmental Biology of Fishes, 78(3), 273–284.")
-                           )
+                             p("Waters, E.B., Perry, R.W., & Hightower, J.E. (2007). *Effect of water temperature on herring spawning activity*. Environmental Biology of Fishes, 78(3), 273–284.")
                   ),
                   tabPanel(
                     title = tagList(icon("book"), "Glossary"), 
@@ -1011,13 +1007,13 @@ tabPanel(
     ),
     column(6, 
            div(style = "height: 20px;"),
-           tags$iframe(
-             style = "width: 100%; height: 650px;",
-             src = "Model_Demo_w_Bass.gif",
-             frameborder = "0",
-             allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
-             allowfullscreen = TRUE
-           )    )
+          tags$iframe(
+            style = "width: 100%; height: 650px;",
+            src = "Model_Demo_w_Bass.gif?loop=1",
+            frameborder = "0",
+            allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+            allowfullscreen = TRUE
+          )    )
   ),
   div(style = "height: 20px;"),
   div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Simulation Design"))),
