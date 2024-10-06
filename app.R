@@ -313,11 +313,11 @@ ui <- fluidPage(
                     p(style = "color: black; text-align: left;", "This application transforms ecological data into an accessible and engaging experience, empowering researchers, fisheries managers, and the Wampanoag community to make informed decisions about river herring. The purpose of this app is to educate users about river herring, promote conservation efforts and community involvement, and deepen the user's understanding of the ecological challenges impacting river herring management in Aquinnah, Massachusetts."),
                     p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),                    
                     tags$ul(
-                      tags$li("River Herring Habitat Model Report 2024"),
-                      tags$li("Incorporating Traditional Ecological Knowledge (TEK) into Ecological Modeling")
+                      tags$li("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., & Jacobs, A. (2024). *River Herring Habitat in the United States*. [Manuscript in preparation October 6, 2024.]"),
+                      tags$li("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). *Weaving Traditional Ecological Knowledge into Ecological Modeling*. [Manuscript in preparation October 6, 2024.]")
                     ),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
-                      "All input data and results presented in this application are the exclusive property of the Wampanoag Tribe. Any use or reuse of this data requires written permission.")
+                      "This research was conducted on the traditional and ancestral lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any use or reuse of this data requires written permission.")
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
@@ -325,7 +325,7 @@ ui <- fluidPage(
                     p("Detailed information about the river herring species, including alewives and blueback herring."),
                     div(style = "height: 20px;"),
                     div(style = "text-align:left", h4(tags$b(style = "color: #8fbc8f;","Alewives"))),
-                    p("Alewives (Alosa pseudoharengus) are a species of diadromous fish in the herring family."),
+                    p("Alewives (Alosa pseudoharengus) are a species of anadromous fish."),
                     tags$div(style = "text-align:center;", 
                              tags$img(src = "Alewife.png", style = "width: 50%; height: auto;")),
                     #div(style = "text-align:right", h6(tags$i(style = "color: black;","Alewife"))),
@@ -349,7 +349,7 @@ ui <- fluidPage(
                       div(style = "height: 20px;"),
                       tags$li(tags$b("Habitat:"), " Blueback herring prefer spawning habitats such as small tributaries upstream from tidal zones, flooded low-lying areas, cypress swamps, and oxbows. They do not migrate as far upstream as alewives and spawn in higher salinity, faster-moving waters. Their habitat selection is influenced by factors such as temperature, depth, salinity, flow velocity, and substrate."),
                       div(style = "height: 20px;"),
-                      tags$li(tags$b("Life Cycle:"), " Blueback herring have an anadromous life cycle with stages including spawning, larval development, juvenile maturation, and adult migration. They migrate inland to spawn in warmer temperatures and return to the sea afterward. Eggs incubate for 3-6 days before hatching into yolk-sac larvae, which rely on their yolk sac for nutrients for the first few days before transitioning to external feeding. Larvae remain in nursery habitats before migrating towards brackish areas to mature into juveniles.")
+                      tags$li(tags$b("Life Cycle:"), " Blueback herring, like alewives, have an anadromous life cycle with stages including spawning, larval development, juvenile maturation, and adult migration. They migrate inland to spawn in warmer temperatures and return to the sea afterward. Eggs incubate for 3-6 days before hatching into yolk-sac larvae, which rely on their yolk sac for nutrients for the first few days before transitioning to external feeding. Larvae remain in nursery habitats before migrating toward brackish areas to mature into juveniles, eventually heading to the sea.")
                     )
                   ),
                   tabPanel(
@@ -358,9 +358,9 @@ ui <- fluidPage(
                     leafletOutput("map_project_area"),
                     div(style = "height: 20px;"),
                     div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Herring Creek Fishery"))),
-                    p("The Herring Creek Fishery in Aquinnah, Massachusetts, managed by the Wampanoag Tribe, is a critical site for the study and preservation of river herring."),
+                    p("The Herring Creek Fishery in Aquinnah, Massachusetts, managed by the Wampanoag Tribe of Gayhead (Aquinnah), is a critical site for the study and preservation of river herring."),
                     div(style = "height: 10px;"),
-                    p("Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects traditional ecological knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
+                    p("Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects traditional ecological knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe of Gayhead (Aquinnah) in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
                   ),
                   tabPanel(
                     title = tagList(icon("cog"), "Ecological Modeling"), 
@@ -394,11 +394,42 @@ ui <- fluidPage(
                     #textOutput("parameter_info")
                   ),
                   tabPanel(
+                    title = tagList(icon("bookmark"), "References"),
+                    h3("Key References"),
+                    tags$ul(
+                             tags$li("Able, K.W., Grothues, T.M., Shaw, M.J., VanMorter, S.M., Sullivan, M.C., & Ambrose, D.D. (2020). *Alewife (*Alosa pseudoharengus*) spawning and nursery areas in a sentinel estuary: Spatial and temporal patterns*. Environmental Biology of Fishes, 103(11), 1419–1436. https://doi.org/10.1007/s10641-020-01032-0"),
+                             
+                             tags$li("ASMFC. (2017). *River herring stock assessment update*. Atlantic States Marine Fisheries Commission."),
+                             
+                             tags$li("Bethoney, N.D., Stokesbury, K.D.E., & Cadrin, S.X. (2014). *Environmental links to alosine at-sea distribution and bycatch in the Northwest Atlantic midwater trawl fishery*. ICES Journal of Marine Science, 71(5), 1246–1255. https://doi.org/10.1093/icesjms/fst013"),
+                             
+                             tags$li("DiMaggio, M.A., Pine, H.J., Kenter, L.W., & Berlinsky, D.L. (2015). *Spawning, larviculture, and salinity tolerance of Alewives and Blueback Herring in captivity*."),
+                             
+                             tags$li("Greene, K.E., Zimmerman, J.L., Laney, R.W., & Thomas-Blate, J.C. (2009). *Atlantic coast diadromous fish habitat: A review of utilization, threats, recommendations for conservation, and research needs*. Atlantic States Marine Fisheries Commission Habitat Management Series No. 9."),
+                             
+                             tags$li("Kocovsky, P.M., & Pritt, J.J. (2008). *Linking conservation status with threats: A case study of Alewife in the US*. Transactions of the American Fisheries Society, 137(2), 564-571. https://doi.org/10.1577/T07-053.1"),
+                             
+                             tags$li("Kocovsky, P.M., Pritt, J.J., & Bilkovic, D.M. (2009). *Prioritizing conservation efforts for anadromous fish*."),
+                             
+                             tags$li("Loesch, J.G. (1977). *Contribution to the life history of the blueback herring (*Alosa aestivalis*)*. Transactions of the American Fisheries Society, 106(6), 583-589."),
+                             
+                             tags$li("Mullen, J.W., Fay, C.W., Moring, J.R., & Hoar, J.J. (1986). *Species profiles: Life histories and environmental requirements of coastal fishes and invertebrates (North Atlantic)—Alewife and blueback herring*. U.S. Fish and Wildlife Service Biological Report 82."),
+                             
+                             tags$li("NMFS. (2013). *Endangered Species Act status review of Alewife and Blueback Herring*. National Marine Fisheries Service."),
+                             
+                             tags$li("Pardue, G.B. (1983). *Habitat suitability index models: Alewife and blueback herring*. U.S. Fish and Wildlife Service FWS/OBS-82/10.58."),
+                             
+                             tags$li("Waldman, J.R. (2022). *North American diadromous fishes and their decline*. BioScience, 72(4), 300-311. https://doi.org/10.1093/biosci/biac022"),
+                             
+                             tags$li("Waters, E.B., Perry, R.W., & Hightower, J.E. (2007). *Effect of water temperature on herring spawning activity*. Environmental Biology of Fishes, 78(3), 273–284.")
+                           )
+                  ),
+                  tabPanel(
                     title = tagList(icon("book"), "Glossary"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;","Glossary of Terms"))),
                     p("This section provides definitions and explanations of key terms used in the River Herring Ecological Modeling Project."),
                     tags$ul(
-                      tags$li(tags$b("Agent-based Model:"), " A class of computational models for simulating the actions and interactions of autonomous agents to assess their effects on the system."),
+                      tags$li(tags$b("Agent-based Model (ABM):"), " A class of computational models for simulating the actions and interactions of autonomous agents to assess their effects on the system."),
                       tags$li(tags$b("Agents:"), " Individual entities within an agent-based model that interact with each other and their environment according to predefined rules."),
                       tags$li(tags$b("Alewives:"), " A species of anadromous fish (Alosa pseudoharengus) that migrates from the ocean to freshwater rivers and streams to spawn."),
                       tags$li(tags$b("Anadromous Fish:"), " Fish that migrate from the sea to freshwater rivers and streams to spawn."),
@@ -974,9 +1005,9 @@ tabPanel(
            tags$div(style = "text-align:center;", 
                     tags$img(src = "Striped_Bass_Predation1.png", style = "width: 60%; height: auto;")),
            div(style = "height: 20px;"),
-           p("This page provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the spatial and temporal dynamics of river herring migration under different predation pressures, this model can be used to identify locations and times where predation impacts spawning behavior in river herring."),
+           p("This page provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the dynamics of river herring migration under different predation pressures, this model can be used to identify locations where predation impacts spawning behavior in river herring."),
            div(style = "height: 10px;"),
-           p("The simulation for Aquinnah, MA tested three levels of increasing predation pressure against a baseline scenario with no predation, as shown in the table below."),
+           p("The Aquinnah, MA simulation used the most recent herring count data from 2024, provided by the Wampanoag Tribe of Gayhead (Aquinnah), to test three predation levels against a no-predation baseline, as shown in the table below."),
     ),
     column(6, 
            div(style = "height: 20px;"),
@@ -1011,7 +1042,7 @@ tabPanel(
                column(12, 
                       div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Low Predation Simulation"))),
                       p("In the low predation simulation, where predator population is approximately 0.1% of the prey population, the model reveals a shift in spawning activity, primarily concentrating near the northern entrance to Squibnocket Pond. This localized spawning indicates that even minimal predation pressure prompts river herring to seek specific areas that may offer better protection or optimal spawning conditions. Despite the relatively low predation level, the model shows a reduction in the overall number of spawning events compared to the baseline, highlighting the sensitivity of river herring to even slight increases in predation."),
-                      p("Predation behavior in the low predation scenario is characterized by a concentrated pattern of predation events at the entrance of Herring Creek and extending throughout Squibnocket Pond. This indicates that striped bass, even at low densities, effectively target key migration bottlenecks where river herring are more vulnerable, like Herring Creek Fishery. The consistent presence of predation at these critical points suggests that the predator’s efficiency in these areas impacts the river herring's migration and spawning behavior.")
+                      p("Mortality in the low predation scenario is characterized by a concentrated pattern of predation events at the entrance of Herring Creek and extending throughout Squibnocket Pond. This indicates that striped bass, even at low densities, effectively target key migration bottlenecks where river herring are more vulnerable, like Herring Creek Fishery. The consistent presence of predation at these critical points suggests that the predator’s efficiency in these areas impacts the river herring's migration and spawning behavior.")
                )),
              fluidRow(
                column(6, 
@@ -1029,7 +1060,7 @@ tabPanel(
                column(12, 
                       div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Moderate Predation Simulation"))),
                       p("In the moderate predation simulation, where the predator population is approximately 0.5% of the prey population, river herring exhibit a more restricted spawning distribution. This indicates a significant avoidance behavior as river herring seek out the safest possible locations for spawning. The number of spawning events is decreased compared to the low predation scenario, highlighting the impact of moderate predation pressure on river herring reproductive success."),
-                      p("Predation behavior under moderate predation conditions becomes even more concentrated and intense. Predation events are heavily focused at the entrance to Herring Creek and continue into Squibnocket Pond, with striped bass effectively exploiting these critical points of vulnerability. The model demonstrates that moderate predation pressure significantly disrupts river herring migration patterns, leading to increased mortality and reduced spawning success. The spatial concentration of predation events indicates that striped bass are not only more abundant but also more effective in targeting migrating river herring, exacerbating the ecological pressure on the herring population.")
+                      p("Mortality under moderate predation conditions becomes even more concentrated and intense. Predation events are heavily focused at the entrance to Herring Creek and continue into Squibnocket Pond, with striped bass effectively exploiting these critical points of vulnerability. The model demonstrates that moderate predation pressure significantly disrupts river herring migration patterns, leading to increased mortality and reduced spawning success. The spatial concentration of predation events indicates that striped bass are not only more abundant but also more effective in targeting migrating river herring, exacerbating the ecological pressure on the herring population.")
                )),
              fluidRow(
                column(6, 
@@ -1046,8 +1077,8 @@ tabPanel(
              fluidRow(
                column(12, 
                       div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "High Predation Simulation"))),
-                      p("In the high predation simulation, where the predator population is approximately 1.0% of the prey population, spawning activity is drastically reduced, with minimal spawning events observed across the simulated environment. River herring, faced with extreme predation risk, are unable to find sufficiently safe habitats to spawn effectively. The few spawning events that do occur, occur in high quality habitat, but even the amount of high quality habitat available within Squin=bnocket Pond, cannot compensate for the overwhelming predation pressure."),
-                      p("Predation behavior in the high predation scenario highly concentrated. Striped bass predation is rampant at critical choke points such as the culvert within Herring Creek and extends throughout Squibnocket Pond. The model indicates that high predation levels lead to rapid depletion of the river herring population, with predation events occurring at a much higher frequency compared to the low and moderate predation scenarios. The intense predation pressure results in significant delays in river herring migration and substantial mortality, severely compromising the herring's ability to reach their spawning grounds and complete their reproductive cycle.")
+                      p("In the high predation simulation, where the predator population is approximately 1.0% of the prey population, spawning activity is drastically reduced, with minimal spawning events observed across the simulated environment. River herring, faced with extreme predation risk, are unable to find sufficiently safe habitats to spawn effectively. The few spawning events that do occur, occur in high quality habitat, but even the amount of high quality habitat available within Squibnocket Pond, cannot compensate for the overwhelming predation pressure."),
+                      p("Mortality in the high predation scenario is highly concentrated. Striped bass predation is rampant at critical choke points such as the culvert within Herring Creek and extends throughout Squibnocket Pond. The model indicates that high predation levels lead to rapid depletion of the river herring population, with predation events occurring at a much higher frequency compared to the low and moderate predation scenarios. The intense predation pressure results in significant delays in river herring migration and substantial mortality, severely compromising the herring's ability to reach their spawning grounds and complete their reproductive cycle.")
                )),
              fluidRow(
                column(6, 
@@ -1065,9 +1096,9 @@ tabPanel(
     div(style = "height: 20px;"),
     column(12,
            div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Summary of Results"))),
-           p("The results from the simulation in Aquinnah, MA, demonstrate that river herring are highly sensitive to predation pressures from striped bass, significantly affecting their spawning success. Even low predation levels cause river herring to seek specific safe areas, while moderate and high predation pressures drastically reduce spawning events and overall population recovery."),
-           p("For fisheries management, these findings underscore the importance of targeted conservation efforts, such as protecting high-quality spawning habitats and improving fish passage at critical bottlenecks like the Herring Creek culvert. Adaptive management strategies informed by the model can help regulate predator populations and implement dynamic protection measures based on real-time data."),
-           p("Furthermore, the model's insights can guide policy decisions and stakeholder engagement, fostering collaborative conservation efforts. By maintaining ecological balance and protecting biodiversity, the sustainable recovery of river herring populations can be supported, ensuring the health of Aquinnah's aquatic ecosystems. The model also lays the groundwork for ongoing research and monitoring, essential for addressing the multifaceted challenges faced by river herring.")
+           p("The simulation results reveal that river herring are highly vulnerable to predation by striped bass, with even low predation levels forcing them into safer areas. Moderate to high predation drastically reduces spawning success and increases migration mortality."),
+           p("For fisheries management, this showcases the need for conservation strategies, such as protecting key spawning habitats and improving fish passage at critical bottlenecks like the Herring Creek culvert. Adaptive management, informed by the migration model, can help regulate predator populations and implement timely protection measures based on real-time data."),
+           p("These findings can guide policy decisions and foster collaboration among communities, promoting the conservation of river herring and supporting Aquinnah's ecosystem. This model also paves the way for ongoing research and monitoring to tackle the complex challenges faced by river herring populations.")
     )
   )
 )
@@ -1084,7 +1115,7 @@ server <- function(input, output, session) {
     Description = c(
       "Collected by Richard Loyd and his team in August 2023 using strategically deployed tilt meters to capture water velocity and temperature variations over a full tide cycle.",
       "Menemsha Pond data collected by Richard Lloyd using bathymetric surveying techniques in August 2023. Squibnocket Pond data obtained from a substrate analysis conducted by Brian Yellen, Molly Autery, and Asha Ajmani in 2022.",
-      "Collected as part of the Wampanoag Tribe's long-term water quality monitoring initiative using standard water quality monitoring equipment deployed at various locations within the study area.",
+      "Collected as part of the Wampanoag Tribe of Gayhead (Aquinnah)'s long-term water quality monitoring initiative using standard water quality monitoring equipment deployed at various locations within the study area.",
       "Collected by Richard Loyd and his team in August 2023 using tilt meters to capture water velocity variations over a full tide cycle.",
       "Obtained from the substrate analysis by Brian Yellen, Molly Autery, and Asha Ajmani in 2022. Substrate types determined through direct observation and analysis of sediment samples collected from Squibnocket Pond.",
       "Collected by Richard Loyd and his team in August 2023 through visual surveys conducted using underwater surveying equipment and techniques."
@@ -2308,9 +2339,9 @@ server <- function(input, output, session) {
     datatable(
       data.frame(
         "Simulation" = c("Baseline", "Low", "Moderate", "High"),
-        "Initial Prey Population (river herring)" = c(1000, 1000, 1000, 1000),
+        "Initial Prey Population (river herring)" = c(11543, 11543, 11543, 11543),
         "Predation Level (%)" = c(0, 0.1, 0.5, 1),
-        "Initial Predator Population (Striped Bass)" = c(0, 1, 5, 10)
+        "Initial Predator Population (Striped Bass)" = c(0, 12, 58, 115)
       ),
       colnames = c("Simulation", "Initial Prey Population (river herring)", "Predation Level (%)", "Initial Predator Population (striped bass)"),
       options = list(
