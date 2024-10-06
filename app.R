@@ -315,7 +315,7 @@ ui <- fluidPage(
                     p("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., & Jacobs, A. (2024). River Herring Habitat in the United States. [Manuscript in preparation.]"),
                     p("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
-                      "This research was conducted on the Traditional and Ancestral lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
+                      "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
