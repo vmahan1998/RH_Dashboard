@@ -231,9 +231,9 @@ juvenile_blueback_SAV_suitability_data <- data.frame(
 # Load Model Results
 adult_alewife_data <- read.csv("www/adult_alewife_habitat_data.csv") #HSI
 adult_alewife_patch_data <- read.csv("www/adult_alewife_baseline_results_with_lat_long.csv")
-adult_alewife_patch_data_low <- read.csv("www/adult_alewife_low_results_with_lat_long.csv")
-adult_alewife_patch_data_mod <- read.csv("www/adult_alewife_moderate_results_with_lat_long.csv")
-adult_alewife_patch_data_high <- read.csv("www/adult_alewife_high_results_with_lat_long.csv")
+adult_alewife_patch_data_low <- read.csv("www/adult_alewife_low_results_with_lat_long_herring_counts24.csv")
+adult_alewife_patch_data_mod <- read.csv("www/adult_alewife_moderate_results_with_lat_long_herring_counts24.csv")
+adult_alewife_patch_data_high <- read.csv("www/adult_alewife_high_results_with_lat_long_herring_counts24.csv")
 
 # Combine all datasets to find the global min and max for scaling
 all_data <- bind_rows(adult_alewife_data, adult_alewife_patch_data_low, adult_alewife_patch_data_mod, adult_alewife_patch_data_high)
@@ -312,7 +312,7 @@ ui <- fluidPage(
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
                     p(style = "color: black; text-align: left;", "This app transforms ecological data into an accessible tool for researchers, fisheries managers, and the Wampanoag community, promoting informed decisions, conservation, and understanding of river herring challenges in Aquinnah, Massachusetts."),
                     p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),
-                    p("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., & Jacobs, A. (2024). River Herring Habitat in the United States. [Manuscript in preparation.]"),
+                    p("Quintana, V., Huguenard, K., Stevens, J., Galaitsi, S., Jacobs, A. & McKay, K. (2024). River Herring Habitat in the United States. [Manuscript in preparation.]"),
                     p("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
                       "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
@@ -392,14 +392,16 @@ ui <- fluidPage(
                     #textOutput("parameter_info")
                   ),
                   tabPanel(
-                    title = tagList(icon("bookmark"), "References"),
-                    h3("Key References"),
+                    title = tagList(icon("bookmark"), "Key References"),
+                    div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Key References"))),
                              p("Able, K.W., Grothues, T.M., Shaw, M.J., VanMorter, S.M., Sullivan, M.C., & Ambrose, D.D. (2020). *Alewife (*Alosa pseudoharengus*) spawning and nursery areas in a sentinel estuary: Spatial and temporal patterns*. Environmental Biology of Fishes, 103(11), 1419–1436. https://doi.org/10.1007/s10641-020-01032-0"),
                              
                              p("ASMFC. (2017). *River herring stock assessment update*. Atlantic States Marine Fisheries Commission."),
                              
                              p("Bethoney, N.D., Stokesbury, K.D.E., & Cadrin, S.X. (2014). *Environmental links to alosine at-sea distribution and bycatch in the Northwest Atlantic midwater trawl fishery*. ICES Journal of Marine Science, 71(5), 1246–1255. https://doi.org/10.1093/icesjms/fst013"),
                              
+                             p("Bourne, D. (1990). *Appendix 1: Review of the biology of alewives and blueback herring (*Alosa pseudoharengus* and *A. aestivalis*) and the fisheries, with reference to Squibnocket Pond, Martha's Vineyard*. Woods Hole, Massachusetts. 54 pp."),
+                    
                              p("DiMaggio, M.A., Pine, H.J., Kenter, L.W., & Berlinsky, D.L. (2015). *Spawning, larviculture, and salinity tolerance of Alewives and Blueback Herring in captivity*."),
                              
                              p("Greene, K.E., Zimmerman, J.L., Laney, R.W., & Thomas-Blate, J.C. (2009). *Atlantic coast diadromous fish habitat: A review of utilization, threats, recommendations for conservation, and research needs*. Atlantic States Marine Fisheries Commission Habitat Management Series No. 9."),
@@ -2370,7 +2372,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        radius = ~spawning.events.in.patch * 0.05,  # Scale down radius by a factor of 0.5
         color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
         label = ~spawning.events.in.patch
       )
@@ -2390,7 +2392,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~prey.eaten.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        radius = ~prey.eaten.in.patch * 0.05,  # Scale down radius by a factor of 0.5
         color = "#FDE725FF", stroke = FALSE, fillOpacity = 0.5,
         label = ~prey.eaten.in.patch
       )
@@ -2410,7 +2412,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        radius = ~spawning.events.in.patch * 0.05,  # Scale down radius by a factor of 0.5
         color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
         label = ~spawning.events.in.patch
       )
@@ -2430,7 +2432,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~prey.eaten.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        radius = ~prey.eaten.in.patch * 0.05,  # Scale down radius by a factor of 0.5
         color = "#FDE725FF", stroke = FALSE, fillOpacity = 0.5,
         label = ~prey.eaten.in.patch
       )
@@ -2450,7 +2452,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~spawning.events.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        radius = ~spawning.events.in.patch * 0.05,  # Scale down radius by a factor of 0.5
         color = "#21908CFF", stroke = FALSE, fillOpacity = 0.5,
         label = ~spawning.events.in.patch
       )
@@ -2470,7 +2472,7 @@ server <- function(input, output, session) {
       setView(lng = mean(center[1]), lat = mean(center[2]), zoom = 13) %>%
       addCircleMarkers(
         lng = ~longitude, lat = ~latitude,
-        radius = ~prey.eaten.in.patch * 0.5,  # Scale down radius by a factor of 0.5
+        radius = ~prey.eaten.in.patch * 0.05,  # Scale down radius by a factor of 0.5
         color = "#FDE725FF", stroke = FALSE, fillOpacity = 0.5,
         label = ~prey.eaten.in.patch
       )
