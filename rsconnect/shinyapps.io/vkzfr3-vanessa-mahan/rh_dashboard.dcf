@@ -1,0 +1,12 @@
+name: rh_dashboard
+title: RH_Dashboard
+username: vkzfr3-vanessa-mahan
+account: vkzfr3-vanessa-mahan
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12213439
+bundleId: 9226323
+url: https://vkzfr3-vanessa-mahan.shinyapps.io/rh_dashboard/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
