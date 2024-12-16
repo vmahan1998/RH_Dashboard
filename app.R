@@ -58,27 +58,27 @@ juv_blueback <- drop_z(juv_blueback)
 # Suitability Indices
 # Adult Alewife
 adult_alewife_temp_suitability_data <- data.frame(
-  Temperature = c(0, 3, 7, 11, 16, 28, 30, 35),  # Add a higher value for plotting purposes
-  SuitabilityIndex = c(0.0, 0.1, 0.3, 0.5, 1.0, 0.1, 0.0, 0.0)  # Ensure the length matches Temperature
+  Temperature = c(0, 3, 5, 8, 10.5, 12, 16, 22, 27, 30),  # Add a higher value for plotting purposes
+  SuitabilityIndex = c(0.0, 0.1, 0.5, 0.7, 0.8, 1.0, 0.8, 0.5, 0.0, 0.0)  # Ensure the length matches Temperature
 )
 adult_alewife_depth_suitability_data <- data.frame(
-  Depth = c(-3, 0, 2, 5, 10, 15),
-  SuitabilityIndex = c(0.8, 1.0, 0.8, 0.1, 0.0, 0.0)
+  Depth = c(-3, 0, 2, 5, 10, 15, 20, 25),
+  SuitabilityIndex = c(1.0, 1.0, 0.8, 0.5, 0.3, 0.1, 0.0, 0.0)
 )
 
 adult_alewife_salinity_suitability_data <- data.frame(
-  Salinity = c(0, 0.5, 12.0, 15.0, 20.0, 25.0),
-  SuitabilityIndex = c(0.8, 1.0, 0.75, 0.7, 0.65, 0.65)
+  Salinity = c(0, 8, 15.0, 20.0, 25.0),
+  SuitabilityIndex = c(1.0, 0.5, 0.3, 0.0, 0.0)
 )
 
 adult_alewife_velocity_suitability_data <- data.frame(
-  Velocity = c(0, 0.03, 0.12, 0.3, 3.5, 4.5, 5.0),
-  SuitabilityIndex = c(0.7, 1.0, 0.5, 0.3, 0.1, 0.0, 0.0)
+  Velocity = c(0, 0.3, 1.7, 3.5, 4.5, 5.0),
+  SuitabilityIndex = c(1.0, 0.8, 0.5, 0.3, 0.0, 0.0)
 )
 
 adult_alewife_substrate_suitability_data <- data.frame(
   Substrate = c("Hard Substrate", "Soft Substrate", "Peat Substrate"),
-  SuitabilityIndex = c(0.5, 1.0, 0.0)
+  SuitabilityIndex = c(0.3, 1.0, 0.0)
 )
 
 adult_alewife_SAV_suitability_data <- data.frame(
@@ -88,23 +88,23 @@ adult_alewife_SAV_suitability_data <- data.frame(
 
 # Alewife Eggs & Larvae
 alewife_eggs_temp_suitability_data <- data.frame(
-  Temperature = c(0, 3, 7, 11, 20, 23, 28, 30),  # Add a higher value for plotting purposes
-  SuitabilityIndex = c(0.0, 0.1, 0.5, 0.8, 1.0, 0.5, 0.1, 0.1)  # Ensure the length matches Temperature
+  Temperature = c(0, 3, 7, 11, 16, 28, 30, 35),  # Add a higher value for plotting purposes
+  SuitabilityIndex = c(0.0, 0.1, 0.3, 0.5, 1.0, 0.1, 0.0, 0.0)  # Ensure the length matches Temperature
 )
 
 alewife_eggs_depth_suitability_data <- data.frame(
-  Depth = c(-3, 0, 5.0, 10.0, 20.0, 25.0),
-  SuitabilityIndex = c(0.5, 1.0, 0.7, 0.5, 0.0, 0.0)
+  Depth = c(-3, 0, 2.0, 5.0, 10.0, 15.0),
+  SuitabilityIndex = c(0.8, 1.0, 0.8, 0.1, 0.0, 0.0)
 )
 
 alewife_eggs_salinity_suitability_data <- data.frame(
-  Salinity = c(0, 0.5, 10.0, 25.0, 30.0),
-  SuitabilityIndex = c(0.0, 0.5, 1.0, 0.8, 0.8)
+  Salinity = c(0, 0.5, 12.0, 15.0, 20.0, 25.0),
+  SuitabilityIndex = c(0.8, 1.0, 0.75, 0.7, 0.65, 0.65)
 )
 
 alewife_eggs_velocity_suitability_data <- data.frame(
-  Velocity = c(0, 0.1, 0.17, 0.3, 3.5, 4.5, 5.0),
-  SuitabilityIndex = c(1.0, 0.7, 0.5, 0.3, 0.1, 0.0, 0.0)
+  Velocity = c(0, 0.03, 0.12, 0.3, 3.5, 4.5, 5),
+  SuitabilityIndex = c(0.7, 1.0, 0.5, 0.3, 0.1, 0.0, 0.0)
 )
 
 alewife_eggs_substrate_suitability_data <- data.frame(
@@ -120,21 +120,21 @@ alewife_eggs_SAV_suitability_data <- data.frame(
 # Juvenile ALewives
 juvenile_alewife_temp_suitability_data <- data.frame(
   Temperature = c(0, 3, 7, 11, 20, 23, 28, 30),  # Add a higher value for plotting purposes
-  SuitabilityIndex = c(0.0, 0.1, 0.5, 0.8, 1.0, 0.5, 0.1, 0.1)  # Ensure the length matches Temperature
+  SuitabilityIndex = c(0.0, 0.1, 0.5, 0.8, 1.0, 0.5, 0.1, 0.0)  # Ensure the length matches Temperature
 )
 
 juvenile_alewife_depth_suitability_data <- data.frame(
-  Depth = c(-3, 0, 5.0, 10.0, 20.0, 25.0),
+  Depth = c(-3, 0, 5.0, 10.0, 20.0, 25),
   SuitabilityIndex = c(0.5, 1.0, 0.7, 0.5, 0.0, 0.0)
 )
 
 juvenile_alewife_salinity_suitability_data <- data.frame(
-  Salinity = c(0, 0.5, 10.0, 25.0, 30.0),
-  SuitabilityIndex = c(0.0, 0.5, 1.0, 0.8, 0.8)
+  Salinity = c(0, 0.5, 10.0, 25.0, 30),
+  SuitabilityIndex = c(0.0, 0.5, 1.0, 0.8, 0.0)
 )
 
 juvenile_alewife_velocity_suitability_data <- data.frame(
-  Velocity = c(0, 0.1, 0.17, 0.3, 3.5, 4.5, 5.0),
+  Velocity = c(0, 0.1, 0.17, 0.3, 3.5, 4.5, 5),
   SuitabilityIndex = c(1.0, 0.7, 0.5, 0.3, 0.1, 0.0, 0.0)
 )
 
@@ -176,7 +176,7 @@ blueback_adult_SAV_suitability_data <- data.frame(
 )
 # Suitability Indices for Blueback Herring Eggs and Larvae
 blueback_eggs_temp_suitability_data <- data.frame(
-  Temperature = c(0, 3, 10, 13, 19, 24, 26, 34, 35),  # Add a higher value for plotting purposes
+  Temperature = c(0, 3, 10, 13, 19, 24, 26, 34, 38),  # Add a higher value for plotting purposes
   SuitabilityIndex = c(0.0, 0.3, 0.5, 1.0, 0.7, 0.5, 0.1, 0.0, 0.0)  # Ensure the length matches Temperature
 )
 blueback_eggs_depth_suitability_data <- data.frame(
@@ -310,9 +310,9 @@ ui <- fluidPage(
                   tabPanel(
                     title = tagList(icon("home"), "Homepage"), 
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
-                    p(style = "color: black; text-align: left;", "This app transforms ecological data into an accessible tool for researchers, fisheries managers, and the Wampanoag community, promoting informed decisions, conservation, and understanding of river herring challenges in Aquinnah, Massachusetts."),
+                    p(style = "color: black; text-align: left;", "This app transforms ecological data into an accessible tool for the Wampanoag Tribe of Gayhead (Aquinnah), promoting informed decisions, conservation, and understanding of river herring challenges in Aquinnah, Massachusetts."),
                     p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),
-                    p("Quintana, V., Huguenard, K., Stevens, J., Galaitsi, S., Jacobs, A. & McKay, K. (2024). River Herring Habitat in the United States. [Manuscript in preparation.]"),
+                    p("Quintana, V., Huguenard, K., Stevens, J., Galaitsi, S., Jacobs, A. & McKay, K. (2024). River Herring Habitat in the Northeastern United States. [Manuscript in preparation.]"),
                     p("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
                       "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
@@ -1093,7 +1093,7 @@ tabPanel(
   fluidRow(
     div(style = "height: 20px;"),
     column(12,
-           div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Summary of Results"))),
+           div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Summary"))),
            p("The simulation results reveal that river herring are highly vulnerable to predation by striped bass, with even low predation levels forcing them into safer areas. Moderate to high predation drastically reduces spawning success and increases migration mortality."),
            p("For fisheries management, this showcases the need for conservation strategies, such as protecting key spawning habitats and improving fish passage at critical bottlenecks like the Herring Creek culvert. Adaptive management, informed by the migration model, can help regulate predator populations and implement timely protection measures based on real-time data."),
            p("These findings can guide policy decisions and foster collaboration among communities, promoting the conservation of river herring and supporting Aquinnah's ecosystem. This model also paves the way for ongoing research and monitoring to tackle the complex challenges faced by river herring populations.")
@@ -1262,8 +1262,8 @@ server <- function(input, output, session) {
   
   
   output$adult_alewife_temp_map <- renderLeaflet({
-    min_value <- min(values(temp_adult_alewife), na.rm = TRUE)
-    max_value <- max(values(temp_adult_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1273,8 +1273,8 @@ server <- function(input, output, session) {
   })
   
   output$adult_alewife_depth_map <- renderLeaflet({
-    min_value <- min(values(depth_adult_alewife), na.rm = TRUE)
-    max_value <- max(values(depth_adult_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1284,8 +1284,8 @@ server <- function(input, output, session) {
   })
   
   output$adult_alewife_salinity_map <- renderLeaflet({
-    min_value <- min(values(salinity_adult_alewife), na.rm = TRUE)
-    max_value <- max(values(salinity_adult_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1295,8 +1295,8 @@ server <- function(input, output, session) {
   })
   
   output$adult_alewife_velocity_map <- renderLeaflet({
-    min_value <- min(values(velocity_adult_alewife), na.rm = TRUE)
-    max_value <- max(values(velocity_adult_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1306,26 +1306,33 @@ server <- function(input, output, session) {
   })
   
   output$adult_alewife_substrate_map <- renderLeaflet({
-    min_value <- min(values(substrate_adult_alewife), na.rm = TRUE)
-    max_value <- max(values(substrate_adult_alewife), na.rm = TRUE)
-    
+    # Define a color palette for categorical values
+    pal <- colorFactor(
+      palette = c("#FDE725FF","#365C8DFF","#440154FF"), # Purple for 0.5, Yellow for 1 [1] 
+      domain = c(0.0,0.3, 1.0)                    # Only 0.5 and 1 values
+    )
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(substrate_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+      addLegend("bottomright", pal = pal, values = c(0.0,0.3, 1.0), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$adult_alewife_SAV_map <- renderLeaflet({
-    min_value <- min(values(SAV_adult_alewife), na.rm = TRUE)
-    max_value <- max(values(SAV_adult_alewife), na.rm = TRUE)
+    
+    # Define a color palette for categorical values
+    pal <- colorFactor(
+      palette = c("#FDE725FF","#440154FF"), # Purple for 0.5, Yellow for 1
+      domain = c(0.5, 1)                    # Only 0.5 and 1 values
+    )
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(SAV_adult_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+      addLegend("bottomright", pal = pal, values = c(0.5, 1), title = "SAV Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
+  
   #####################################################################################
   # individual HSI Map: egg Alewife
   temp_egg_alewife <- terra::rast("www/egg_larvae_alewife_habitat_Temp_data.tif")
@@ -1347,8 +1354,8 @@ server <- function(input, output, session) {
   SAV_egg_alewife <- drop_z(SAV_egg_alewife)
   
   output$egg_alewife_temp_map <- renderLeaflet({
-    min_value <- min(values(temp_egg_alewife), na.rm = TRUE)
-    max_value <- max(values(temp_egg_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1358,8 +1365,8 @@ server <- function(input, output, session) {
   })
   
   output$egg_alewife_depth_map <- renderLeaflet({
-    min_value <- min(values(depth_egg_alewife), na.rm = TRUE)
-    max_value <- max(values(depth_egg_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1369,8 +1376,8 @@ server <- function(input, output, session) {
   })
   
   output$egg_alewife_salinity_map <- renderLeaflet({
-    min_value <- min(values(salinity_egg_alewife), na.rm = TRUE)
-    max_value <- max(values(salinity_egg_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1380,8 +1387,8 @@ server <- function(input, output, session) {
   })
   
   output$egg_alewife_velocity_map <- renderLeaflet({
-    min_value <- min(values(velocity_egg_alewife), na.rm = TRUE)
-    max_value <- max(values(velocity_egg_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1391,26 +1398,31 @@ server <- function(input, output, session) {
   })
   
   output$egg_alewife_substrate_map <- renderLeaflet({
-    min_value <- min(values(substrate_egg_alewife), na.rm = TRUE)
-    max_value <- max(values(substrate_egg_alewife), na.rm = TRUE)
-    
+    # Define a color palette for categorical values
+    pal <- colorFactor(
+      palette = c("#FDE725FF","#365C8DFF","#440154FF"), # Purple for 0.5, Yellow for 1 [1] 
+      domain = c(0.0,0.3, 1.0)                    # Only 0.5 and 1 values
+    )
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
       addRasterImage(substrate_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+      addLegend("bottomright", pal = pal, values = c(0.0,0.3, 1.0), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   
   output$egg_alewife_SAV_map <- renderLeaflet({
-    min_value <- min(values(SAV_egg_alewife), na.rm = TRUE)
-    max_value <- max(values(SAV_egg_alewife), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_egg_alewife, colors = viridis(10)) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#440154FF"), # Purple for 0.5, Yellow for 1
+    domain = c(0.5, 1)                    # Only 0.5 and 1 values
+  )
+  
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(SAV_egg_alewife, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.5, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   #####################################################################################
   # individual HSI Map: egg Alewife
   temp_juv_alewife <- terra::rast("www/nonmigratory_juvenile_alewife_habitat_Temp_data.tif")
@@ -1432,8 +1444,8 @@ server <- function(input, output, session) {
   SAV_juv_alewife <- drop_z(SAV_juv_alewife)
   
   output$juv_alewife_temp_map <- renderLeaflet({
-    min_value <- min(values(temp_juv_alewife), na.rm = TRUE)
-    max_value <- max(values(temp_juv_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1443,8 +1455,8 @@ server <- function(input, output, session) {
   })
   
   output$juv_alewife_depth_map <- renderLeaflet({
-    min_value <- min(values(depth_juv_alewife), na.rm = TRUE)
-    max_value <- max(values(depth_juv_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1454,8 +1466,8 @@ server <- function(input, output, session) {
   })
   
   output$juv_alewife_salinity_map <- renderLeaflet({
-    min_value <- min(values(salinity_juv_alewife), na.rm = TRUE)
-    max_value <- max(values(salinity_juv_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1465,8 +1477,8 @@ server <- function(input, output, session) {
   })
   
   output$juv_alewife_velocity_map <- renderLeaflet({
-    min_value <- min(values(velocity_juv_alewife), na.rm = TRUE)
-    max_value <- max(values(velocity_juv_alewife), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1476,25 +1488,29 @@ server <- function(input, output, session) {
   })
   
   output$juv_alewife_substrate_map <- renderLeaflet({
-    min_value <- min(values(substrate_juv_alewife), na.rm = TRUE)
-    max_value <- max(values(substrate_juv_alewife), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_egg_alewife, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
-  
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#365C8DFF","#440154FF"), # Purple for 0.5, Yellow for 1 [1] 
+    domain = c(0.0,0.3, 1.0)                    # Only 0.5 and 1 values
+  )
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(substrate_juv_alewife, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.0,0.3, 1.0), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   output$juv_alewife_SAV_map <- renderLeaflet({
-    min_value <- min(values(SAV_juv_alewife), na.rm = TRUE)
-    max_value <- max(values(SAV_juv_alewife), na.rm = TRUE)
+    # Define a color palette for categorical values
+    pal <- colorFactor(
+      palette = c("#FDE725FF","#440154FF"), # Purple for 0.5, Yellow for 1
+      domain = c(0.5, 1)                    # Only 0.5 and 1 values
+    )
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_juv_alewife, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+      addRasterImage(SAV_juv_alewife, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = pal, values = c(0.5, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: Adult blueback
@@ -1517,8 +1533,8 @@ server <- function(input, output, session) {
   SAV_adult_blueback <- drop_z(SAV_adult_blueback)
   
   output$adult_blueback_temp_map <- renderLeaflet({
-    min_value <- min(values(temp_adult_blueback), na.rm = TRUE)
-    max_value <- max(values(temp_adult_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1528,8 +1544,8 @@ server <- function(input, output, session) {
   })
   
   output$adult_blueback_depth_map <- renderLeaflet({
-    min_value <- min(values(depth_adult_blueback), na.rm = TRUE)
-    max_value <- max(values(depth_adult_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1539,8 +1555,8 @@ server <- function(input, output, session) {
   })
   
   output$adult_blueback_salinity_map <- renderLeaflet({
-    min_value <- min(values(salinity_adult_blueback), na.rm = TRUE)
-    max_value <- max(values(salinity_adult_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1550,8 +1566,8 @@ server <- function(input, output, session) {
   })
   
   output$adult_blueback_velocity_map <- renderLeaflet({
-    min_value <- min(values(velocity_adult_blueback), na.rm = TRUE)
-    max_value <- max(values(velocity_adult_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1561,25 +1577,30 @@ server <- function(input, output, session) {
   })
   
   output$adult_blueback_substrate_map <- renderLeaflet({
-    min_value <- min(values(substrate_adult_blueback), na.rm = TRUE)
-    max_value <- max(values(substrate_adult_blueback), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_adult_blueback, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#482878FF","#440154FF"), # Purple for 0.5, Yellow for 1 [1] 
+    domain = c(0.0,0.1, 1.0)                    # Only 0.5 and 1 values
+  )
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(substrate_adult_blueback, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.0,0.1, 1.0), title = "Substrate Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   
   output$adult_blueback_SAV_map <- renderLeaflet({
-    min_value <- min(values(SAV_adult_blueback), na.rm = TRUE)
-    max_value <- max(values(SAV_adult_blueback), na.rm = TRUE)
+    # Define a color palette for categorical values
+    pal <- colorFactor(
+      palette = c("#FDE725FF","#440154FF"), # Purple for 0.5, Yellow for 1
+      domain = c(0.1, 1)                    # Only 0.5 and 1 values
+    )
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
       setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_adult_blueback, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+      addRasterImage(SAV_adult_blueback, colors = viridis(10)) %>%
+      addLegend("bottomright", pal = pal, values = c(0.1, 1), title = "SAV Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
   })
   #####################################################################################
   # individual HSI Map: egg blueback
@@ -1602,8 +1623,8 @@ server <- function(input, output, session) {
   SAV_egg_blueback <- drop_z(SAV_egg_blueback)
   
   output$egg_blueback_temp_map <- renderLeaflet({
-    min_value <- min(values(temp_egg_blueback), na.rm = TRUE)
-    max_value <- max(values(temp_egg_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1613,8 +1634,8 @@ server <- function(input, output, session) {
   })
   
   output$egg_blueback_depth_map <- renderLeaflet({
-    min_value <- min(values(depth_egg_blueback), na.rm = TRUE)
-    max_value <- max(values(depth_egg_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1624,8 +1645,8 @@ server <- function(input, output, session) {
   })
   
   output$egg_blueback_salinity_map <- renderLeaflet({
-    min_value <- min(values(salinity_egg_blueback), na.rm = TRUE)
-    max_value <- max(values(salinity_egg_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1635,8 +1656,8 @@ server <- function(input, output, session) {
   })
   
   output$egg_blueback_velocity_map <- renderLeaflet({
-    min_value <- min(values(velocity_egg_blueback), na.rm = TRUE)
-    max_value <- max(values(velocity_egg_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1646,26 +1667,31 @@ server <- function(input, output, session) {
   })
   
   output$egg_blueback_substrate_map <- renderLeaflet({
-    min_value <- min(values(substrate_egg_blueback), na.rm = TRUE)
-    max_value <- max(values(substrate_egg_blueback), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_egg_blueback, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#482878FF","#440154FF"), # Purple for 0.5, Yellow for 1 [1] 
+    domain = c(0.0,0.1, 1.0)                    # Only 0.5 and 1 values
+  )
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(substrate_egg_blueback, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.0,0.1, 1.0), title = "Substrate Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   
   output$egg_blueback_SAV_map <- renderLeaflet({
-    min_value <- min(values(SAV_egg_blueback), na.rm = TRUE)
-    max_value <- max(values(SAV_egg_blueback), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_egg_blueback, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#440154FF"), # Purple for 0.5, Yellow for 1
+    domain = c(0.1, 1)                    # Only 0.5 and 1 values
+  )
+  
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(SAV_egg_blueback, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.1, 1), title = "SAV Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   #####################################################################################
   # individual HSI Map: egg blueback
   temp_juv_blueback <- terra::rast("www/nonmigratory_juvenile_blueback_habitat_Temp_data.tif")
@@ -1687,8 +1713,8 @@ server <- function(input, output, session) {
   SAV_juv_blueback <- drop_z(SAV_juv_blueback)
   
   output$juv_blueback_temp_map <- renderLeaflet({
-    min_value <- min(values(temp_juv_blueback), na.rm = TRUE)
-    max_value <- max(values(temp_juv_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1698,8 +1724,8 @@ server <- function(input, output, session) {
   })
   
   output$juv_blueback_depth_map <- renderLeaflet({
-    min_value <- min(values(depth_juv_blueback), na.rm = TRUE)
-    max_value <- max(values(depth_juv_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1709,8 +1735,8 @@ server <- function(input, output, session) {
   })
   
   output$juv_blueback_salinity_map <- renderLeaflet({
-    min_value <- min(values(salinity_juv_blueback), na.rm = TRUE)
-    max_value <- max(values(salinity_juv_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1720,8 +1746,8 @@ server <- function(input, output, session) {
   })
   
   output$juv_blueback_velocity_map <- renderLeaflet({
-    min_value <- min(values(velocity_juv_blueback), na.rm = TRUE)
-    max_value <- max(values(velocity_juv_blueback), na.rm = TRUE)
+    min_value <- 0
+    max_value <- 1
     
     leaflet() %>%
       addProviderTiles("Esri.WorldImagery") %>%
@@ -1731,26 +1757,30 @@ server <- function(input, output, session) {
   })
   
   output$juv_blueback_substrate_map <- renderLeaflet({
-    min_value <- min(values(substrate_juv_blueback), na.rm = TRUE)
-    max_value <- max(values(substrate_juv_blueback), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(substrate_egg_blueback, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "Substrate Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
-  
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#482878FF","#440154FF"), # Purple for 0.5, Yellow for 1 [1] 
+    domain = c(0.0,0.1, 1.0)                    # Only 0.5 and 1 values
+  )
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(substrate_juv_blueback, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.0,0.1, 1.0), title = "Substrate Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   output$juv_blueback_SAV_map <- renderLeaflet({
-    min_value <- min(values(SAV_juv_blueback), na.rm = TRUE)
-    max_value <- max(values(SAV_juv_blueback), na.rm = TRUE)
-    
-    leaflet() %>%
-      addProviderTiles("Esri.WorldImagery") %>%
-      setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
-      addRasterImage(SAV_juv_blueback, colors = rev(viridis(10))) %>%
-      addLegend("bottomright", pal = colorNumeric(rev(viridis(10)), domain = c(0, 1)), values = seq(0, 1), title = "SAV Suitability", labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
-  })
+  # Define a color palette for categorical values
+  pal <- colorFactor(
+    palette = c("#FDE725FF","#440154FF"), # Purple for 0.5, Yellow for 1
+    domain = c(0.5, 1)                    # Only 0.5 and 1 values
+  )
+  
+  leaflet() %>%
+    addProviderTiles("Esri.WorldImagery") %>%
+    setView(lng = -70.7916, lat = 41.3328, zoom = 12) %>%
+    addRasterImage(SAV_juv_blueback, colors = viridis(10)) %>%
+    addLegend("bottomright", pal = pal, values = c(0.5, 1.0), title = "SAV Suitability", labels = c("Absence", "Presence"), labFormat = labelFormat(transform = function(x) sort(x, decreasing = TRUE)))
+})
   #####################################################################################
   # Adult Alewife Suitability Indices
   output$adult_alewife_temp_plot <- renderPlotly({
@@ -1823,7 +1853,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',
-      marker = list(color = c("#440154FF", "#FDE725FF"))  # Set bar colors
+      marker = list(color = c("#365C8DFF", "#FDE725FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -1916,7 +1946,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = c("#440154FF","#FDE725FF"))  # Set bar colors
+      marker = list(color = c("#365C8DFF","#FDE725FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2009,7 +2039,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = c("#FDE725FF", "#440154FF"))  # Set bar colors
+      marker = list(color = c("#FDE725FF", "#365C8DFF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2103,7 +2133,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = c("#FDE725FF","#440154FF"))  # Set bar colors
+      marker = list(color = c("#FDE725FF","#482878FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2196,7 +2226,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = c("#440154FF","#FDE725FF"))  # Set bar colors
+      marker = list(color = c("#482878FF","#FDE725FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
@@ -2289,7 +2319,7 @@ server <- function(input, output, session) {
       x = ~Substrate,
       y = ~SuitabilityIndex,
       type = 'bar',  # Change to 'bar' for bar graph
-      marker = list(color = c("#FDE725FF","#440154FF"))  # Set bar colors
+      marker = list(color = c("#FDE725FF","#482878FF"))  # Set bar colors
     ) %>% layout(
       title = "Substrate Classification",
       xaxis = list(title = "Substrate Types"),
