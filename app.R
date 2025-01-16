@@ -22,7 +22,7 @@ library(leaflet.extras)
 library(DT)
 
 # Set up your Google API key
-api_key <- "AIzaSyBXMCgi4IjTws4noaeAl7XvgFkETFgH4Zw"
+api_key <- Sys.getenv("API_KEY")
 
 # Register your Google API key
 register_google(key = api_key)
