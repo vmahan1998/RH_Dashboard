@@ -312,8 +312,8 @@ ui <- fluidPage(
                     div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Welcome!"))),
                     p(style = "color: black; text-align: left;", "This app transforms ecological data into an accessible tool for the Wampanoag Tribe of Gayhead (Aquinnah), promoting informed decisions, conservation, and understanding of river herring challenges in Aquinnah, Massachusetts."),
                     p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),
-                    p("Quintana, V., Huguenard, K., Stevens, J., Galaitsi, S., Jacobs, A. & McKay, K. (2024). River Herring Habitat in the Eastern United States. [Manuscript in preparation.]"),
-                    p("Quintana, V., Galaitsi, S., Jacobs, A., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2024). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
+                    p("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., Abate, M., & Jacobs, A. (2025). River Herring Habitat in the Eastern United States. [Manuscript in preparation.]"),
+                    p("Quintana, V., Jacobs, A.,Abate, M., Galaitsi, S., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2025). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
                       "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
                   ),
@@ -470,7 +470,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Spawning adult alewives find the most suitable habitats in Squibnocket Pond, where high-quality areas cluster along the southwestern and eastern shores, with additional favorable conditions near the northern point. Menemsha Pond and Herring Creek, by contrast, provide less suitable environments, offering only moderate-quality habitats and lacking high-quality zones. Moderate-quality habitat dominates much of the landscape, while low-quality areas occur in deeper sections of the ponds. Squibnocket Pond emerges as the most critical location for spawning adult alewives, offering a combination of diverse and optimal habitat conditions essential for successful reproduction.")))
+                            "Adult alewives find the highest quality spawning habitat in the southwestern and eastern sides of Squibnocket Pond, with moderate-quality areas covering much of the pond. Deeper sections of Squibnocket Pond, as well as Menemsha Pond, tend to have lower-quality habitat, making them less suitable for spawning. In contrast, Herring Creek stands out as an exceptional habitat, offering mostly high-quality conditions and no low-quality areas. Squibnocket Pond is the largest and most diverse site, with a mix of high-, moderate-, and low-quality habitats, emphasizing its importance as a key spawning area. Menemsha Pond, while large, is dominated by moderate-quality habitat with very little high-quality area. Herring Creek, though much smaller, provides the most consistently favorable conditions for spawning adult alewives.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -533,14 +533,14 @@ ui <- fluidPage(
                               )
                             )
                    ),
-                   tabPanel("Sub-Aquatic Vegetation",
+                   tabPanel("Submerged-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
                                      div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Submerged-Aquatic Vegetation Suitability"))),
                                      leafletOutput("adult_alewife_SAV_map")
                               )
                             )
@@ -559,7 +559,7 @@ ui <- fluidPage(
                      column(6,
                             div(style = "height: 20px;"),
                             p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                              "Alewife eggs and larvae benefit from diverse, high-quality habitats across the pond system, with Squibnocket Pond and Herring Creek providing the most favorable conditions. Herring Creek, dominated by high-quality habitat, serves as an important connection between Squibnocket and Menemsha Ponds, facilitating larval passage. Squibnocket Pond features a mix of high and moderate-quality habitats, supporting egg and larval development, while Menemsha Pond offers predominantly moderate-quality conditions, with some high-quality areas and low-quality area. The hydrodynamic movement of eggs and larvae likely disperses them across habitats in Aquinnah, which provides extensive areas for growth and dispersal. Overall, the region supports strong habitat suitability for eggs and larvae, critical for alewife development.")))
+                              "Alewife eggs and larvae thrive in a variety of habitats within the pond system, with Squibnocket Pond providing the most favorable conditions. Herring Creek, which is dominated by high-quality habitat, plays a crucial role in connecting Squibnocket and Menemsha Ponds, allowing larvae to move between them. Squibnocket Pond offers a mix of habitats that support the development and dispersal of eggs and larvae. Menemsha Pond, while mostly moderate-quality, has some low-quality areas in its deeper sections. Eggs and larvae are likely dispersed across these habitats by natural water movements, with Squibnocket Pond standing out for its extensive areas suitable for growth and dispersal. The region as a whole provides diverse and supportive conditions for the development of alewife eggs and larvae, critical for their survival and population sustainability.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -622,14 +622,14 @@ ui <- fluidPage(
                               )
                             )
                    ),
-                   tabPanel("Sub-Aquatic Vegetation",
+                   tabPanel("Submerged-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
                                      div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Submerged-Aquatic Vegetation Suitability"))),
                                      leafletOutput("egg_alewife_SAV_map")
                               )
                             )
@@ -648,7 +648,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Non-migratory juvenile alewives find predominantly moderate-quality habitat throughout the pond system, with patches of high-quality habitat enhancing the suitability of specific locations. Menemsha Pond offers extensive moderate-quality conditions, with high-quality habitat concentrated near the Herring Creek entrance, likely benefiting from the nutrient and water exchange with the creek. Squibnocket Pond provides a mix of moderate and high-quality habitats, particularly in its eastern region, while Herring Creek supports a continuous stretch of high-quality habitat alongside moderate-quality areas. Overall, low-quality habitat is limited. and the prevalence of moderate-quality areas ensures that the system provides broadly suitable conditions for non-migratory juveniles to thrive.")))
+                            "Non-migratory juvenile alewives benefit from a variety of habitats across the pond system, with Menemsha Pond offering the highest proportion of high-quality habitat. In Menemsha Pond, the majority of the area is highly suitable for juveniles, where water and nutrient exchange with the ocean creates favorable conditions. Squibnocket Pond, by contrast, features a mix of moderate- and low-quality habitats, with only small patches of high-quality areas scattered throughout. Herring Creek stands out as a key corridor, providing a continuous stretch of high-quality habitat alongside moderate-quality areas, which connects the ponds.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -711,14 +711,14 @@ ui <- fluidPage(
                               )
                             )
                    ),
-                   tabPanel("Sub-Aquatic Vegetation",
+                   tabPanel("Submerged-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
                                      div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_alewife_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Submerged-Aquatic Vegetation Suitability"))),
                                      leafletOutput("juv_alewife_SAV_map")
                               )
                             )
@@ -737,7 +737,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Spawning adult blueback herring encounter predominantly moderate to low-quality habitats throughout the study area, with high-quality spawning conditions being scarce. Squibnocket Pond stands out as the most suitable location, offering a mix of moderate and low-quality habitats and a small area of high-quality habitat in its western region. Menemsha Pond, while dominated by moderate-quality conditions, lacks high-quality habitat entirely, making it less favorable for spawning. Herring Creek, primarily classified as low-quality with minimal moderate-quality areas, provides limited passage suitability between ponds. Overall, the scarcity of high-quality habitat across the system suggests significant challenges for blueback herring spawning, with Squibnocket Pond offering the best but still limited opportunities.")))
+                            "Spawning adult blueback herring face substantial challenges due to the scarcity of high-quality habitat throughout the study area. While Squibnocket Pond offers some of the most favorable conditions, with moderate- and low-quality habitats and small patches of high-quality habitat along its edges, poor habitat quality in other parts of the system, particularly Menemsha Pond, may hinder access to these better spawning areas. Menemsha Pond is dominated by low-quality habitat, with almost no moderate-quality areas and no high-quality habitat at all. These unfavorable conditions could prevent adult blueback herring from successfully navigating through Menemsha Pond to reach the more suitable spawning habitats in Squibnocket Pond.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -800,14 +800,14 @@ ui <- fluidPage(
                               )
                             )
                    ),
-                   tabPanel("Sub-Aquatic Vegetation",
+                   tabPanel("Submerged-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
                                      div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("adult_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Submerged-Aquatic Vegetation Suitability"))),
                                      leafletOutput("adult_blueback_SAV_map")
                               )
                             )
@@ -826,7 +826,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Blueback herring eggs and larvae encounter largely low-quality habitat conditions throughout the study area, with limited areas of high-quality habitat. Herring Creek provides entirely low-quality habitat, posing significant barriers to connectivity and potentially restricting the movement and development of eggs and larvae. Menemsha Pond offers slightly more favorable conditions, with a mix of low, moderate, and high-quality habitats, though high-quality areas remain concentrated in its northern region. Squibnocket Pond provides similar conditions, with high-quality habitat primarily around the western edges and its southern region. Despite these localized favorable areas, the overall scarcity of high-quality habitat across the system suggests suboptimal conditions for blueback herring egg and larval development.")))
+                            "Blueback herring eggs and larvae encounter a mix of habitat conditions across the study area, with Squibnocket and Menemsha Ponds providing more favorable environments compared to Herring Creek. Squibnocket Pond offers the most balanced habitat distribution, with high-quality areas concentrated along the edges of the shoreline, as well as extensive moderate-quality habitat. Menemsha Pond also supports egg and larval development, with large portions of moderate- and high-quality habitat throughout. In contrast, Herring Creek primarily consists of low- and moderate-quality habitats, with no high-quality areas, which may restrict connectivity between the ponds.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -889,14 +889,14 @@ ui <- fluidPage(
                               )
                             )
                    ),
-                   tabPanel("Sub-Aquatic Vegetation",
+                   tabPanel("Submerged-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
                                      div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("eggs_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Submerged-Aquatic Vegetation Suitability"))),
                                      leafletOutput("egg_blueback_SAV_map")
                               )
                             )
@@ -915,7 +915,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Non-migratory juvenile blueback herring benefit from more favorable habitat conditions than other life stages, with an abundance of high-quality areas across the study system. Herring Creek stands out as entirely high-quality habitat, providing ideal conditions for juvenile development and connectivity between ponds. Menemsha Pond also offers optimal conditions, with the majority of its area classified as high-quality and no low-quality habitat present. Squibnocket Pond, while dominated by moderate-quality areas, includes a significant portion of high-quality habitat in its northeastern region, further supporting juvenile growth and survival. However, the overall less suitable conditions for spawning adults and egg and larval stages suggest that the presence of juvenile blueback herring in these habitats may be limited, as earlier life stages face significant challenges in establishing a strong population within the system.")))
+                            "Non-migratory juvenile blueback herring benefit from the most favorable habitat conditions compared to other life stages, with abundant high-quality areas across the study system. Menemsha Pond stands out as the most suitable location, with nearly all of its habitat classified as high-quality, providing ideal conditions for juvenile growth and survival. Herring Creek also plays a key role, offering primarily moderate-quality habitat with some high-quality areas, ensuring connectivity between the ponds. Squibnocket Pond provides a mix of moderate- and high-quality habitat, with its northeastern region offering particularly favorable conditions for juveniles. Despite these favorable juvenile habitats, the challenges faced by earlier life stages, such as poor spawning and limited habitat connectivity during egg development conditions, may limit the overall presence of juvenile blueback herring in the system.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -978,14 +978,14 @@ ui <- fluidPage(
                               )
                             )
                    ),
-                   tabPanel("Sub-Aquatic Vegetation",
+                   tabPanel("Submerged-Aquatic Vegetation",
                             fluidRow(
                               column(6, 
                                      div(style = "text-align:center", h3(tags$b(style = "color: black;","Suitability Index"))),
                                      plotlyOutput("juv_blueback_SAV_plot")
                               ),
                               column(6, 
-                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Sub-Aquatic Vegetation Suitability"))),
+                                     div(style = "text-align:center", h3(tags$b(style = "color: black;","Submerged-Aquatic Vegetation Suitability"))),
                                      leafletOutput("juv_blueback_SAV_map")
                               )
                             )
@@ -1108,14 +1108,14 @@ tabPanel(
 server <- function(input, output, session) {
   
   input_data <- data.frame(
-    Variable = c("Temperature", "Bathymetry", "Salinity", "Flow Velocity", "Substrate", "Sub-Aquatic Vegetation"),
+    Variable = c("Temperature", "Bathymetry", "Salinity", "Flow Velocity", "Substrate", "Submerged-Aquatic Vegetation"),
     Description = c(
-      "Utilized data from 2004 to 2022 collected as part of the Wampanoag Tribe of Gay Head (Aquinnah)’s long-term water quality monitoring initiative.",
+      "Utilized data from 2020 to 2023 collected as part of the Wampanoag Tribe of Gay Head (Aquinnah)’s long-term water quality monitoring initiative. Life stage focus captures seasonal water temperature variations for different migratory periods and life stages.",
       "Menemsha Pond data collected by Richard Lloyd using bathymetric surveying techniques in August 2023. Squibnocket Pond data obtained from a substrate analysis conducted by Brian Yellen, Molly Autery, and Asha Ajmani in 2022.",
-      "Collected as part of the Wampanoag Tribe of Gayhead (Aquinnah)'s long-term water quality monitoring initiative using standard water quality monitoring equipment deployed at various locations within the study area.",
-      "Collected by Richard Loyd and his team in August 2023 using tilt meters to capture water velocity variations over a full tide cycle.",
+      "Utilized data from 2020 to 2023 collected as part of the Wampanoag Tribe of Gay Head (Aquinnah)’s long-term water quality monitoring initiative. Life stage focus captures seasonal salinity variations for different migratory periods and life stages.",
+      "Collected for Herring Creek by Richard Lloyd and his team in August 2023. Measurements taken using tilt meters at identified locations in the pond system. Data captures water velocity variations over a full tide cycle for Herring Creek.",
       "Obtained from the substrate analysis by Brian Yellen, Molly Autery, and Asha Ajmani in 2022. Substrate types determined through direct observation and analysis of sediment samples collected from Squibnocket Pond.",
-      "Collected by Richard Loyd and his team in August 2023 through visual surveys conducted using underwater surveying equipment and techniques."
+      "Surveys on eelgrass conducted on Menemsha Pond using underwater surveying equipment and techniques. Collected for Menemsha Pond by Richard Lloyd and his team in August 2023. Surveys on unknown vegetation conducted on Squibnocket Pond using available satellite imagery and local expertise. Collected for Squibnocket Pond by the Wampanoag Tribe of Gay Head (Aquinnah) in 2025."
     )
   )
   
