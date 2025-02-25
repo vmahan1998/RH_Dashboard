@@ -230,9 +230,9 @@ juvenile_blueback_SAV_suitability_data <- data.frame(
 # Migration Model Results
 # Load Model Results
 adult_alewife_data <- read.csv("www/adult_alewife_habitat_data.csv") #HSI
-adult_alewife_patch_data <- read.csv("www/adult_alewife_baseline_results_with_lat_long.csv")
-adult_alewife_patch_data_low <- read.csv("www/adult_alewife_low_results_with_lat_long_herring_counts24.csv")
-adult_alewife_patch_data_mod <- read.csv("www/adult_alewife_moderate_results_with_lat_long_herring_counts24.csv")
+adult_alewife_patch_data <- read.csv("www/adult_alewife_baseline_results_with_lat_long_herring_counts25.csv")
+adult_alewife_patch_data_low <- read.csv("www/adult_alewife_low_results_with_lat_long_herring_counts25.csv")
+adult_alewife_patch_data_mod <- read.csv("www/adult_alewife_moderate_results_with_lat_long_herring_counts25.csv")
 adult_alewife_patch_data_high <- read.csv("www/adult_alewife_high_results_with_lat_long_herring_counts24.csv")
 
 # Combine all datasets to find the global min and max for scaling
@@ -313,7 +313,7 @@ ui <- fluidPage(
                     p(style = "color: black; text-align: left;", "This app transforms ecological data into an accessible tool for the Wampanoag Tribe of Gayhead (Aquinnah), promoting informed decisions, conservation, and understanding of river herring challenges in Aquinnah, Massachusetts."),
                     p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),
                     p("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., Abate, M., & Jacobs, A. (2025). River Herring Habitat in the Eastern United States. [Manuscript in preparation.]"),
-                    p("Quintana, V., Jacobs, A.,Abate, M., Galaitsi, S., DuPuy, P., McKay, K., Huguenard, K., & Swannack, T. (2025). Weaving Traditional Ecological Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
+                    p("Quintana, V., Galaitsi, S., Swannack, T., Abate, M., DuPuy, P., McKay, K., Huguenard, K., & Jacobs, A. (2025). Weaving Indigenous Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
                       "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
                   ),
@@ -2418,9 +2418,9 @@ server <- function(input, output, session) {
     datatable(
       data.frame(
         "Simulation" = c("Baseline", "Low", "Moderate", "High"),
-        "Initial Prey Population (river herring)" = c(11543, 11543, 11543, 11543),
+        "Initial Prey Population (river herring)" = c(1000, 1000, 1000, 1000),
         "Predation Level (%)" = c(0, 0.1, 0.5, 1),
-        "Initial Predator Population (Striped Bass)" = c(0, 12, 58, 115)
+        "Initial Predator Population (Striped Bass)" = c(0, 1, 5, 10)
       ),
       colnames = c("Simulation", "Initial Prey Population (river herring)", "Predation Level (%)", "Initial Predator Population (striped bass)"),
       options = list(
