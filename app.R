@@ -314,6 +314,10 @@ ui <- fluidPage(
                     p(style = "color: black; text-align: left; font-weight: bold;", "Data and information in this app are based on the following reports:"),
                     p("Quintana, V., Huguenard, K., Stevens, J., McKay, K., Galaitsi, S., Abate, M., & Jacobs, A. (2025). River Herring Habitat in the Eastern United States. [Manuscript in preparation.]"),
                     p("Quintana, V., Galaitsi, S., Swannack, T., Abate, M., DuPuy, P., McKay, K., Huguenard, K., & Jacobs, A. (2025). Weaving Indigenous Knowledge into Ecological Modeling. [Manuscript in preparation.]"),
+                    div(style = "text-align:center; margin-top: 10px;", 
+                        a(href = "https://github.com/vmahan1998/RH_Dashboard.git", target = "_blank", 
+                          tags$b("View App Respository on GitHub"), style = "color: black; font-size: 16px;")
+                    ),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
                       "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
                   ),
