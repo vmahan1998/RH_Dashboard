@@ -319,7 +319,7 @@ ui <- fluidPage(
                           tags$b("View App Respository on GitHub"), style = "color: black; font-size: 16px;")
                     ),
                     p(style = "color: #8fbc8f ; padding: 10px; text-align: center; font-weight: bold;",
-                      "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah). All input data and results presented in this application are the exclusive property of the Tribe. Any reuse of this data requires written permission.")
+                      "This research was conducted on the Traditional and Ancestral Lands of the Wampanoag Tribe of Gayhead (Aquinnah).")
                   ),
                   tabPanel(
                     title = tagList(icon("fish"),"Species Information"), 
@@ -362,7 +362,7 @@ ui <- fluidPage(
                     div(style = "text-align:center", h4(tags$b(style = "color: #8fbc8f;","Herring Creek Fishery"))),
                     p("The Herring Creek Fishery in Aquinnah, Massachusetts, managed by the Wampanoag Tribe of Gayhead (Aquinnah), is a critical site for the study and preservation of river herring."),
                     div(style = "height: 10px;"),
-                    p("Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects traditional ecological knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe of Gayhead (Aquinnah) in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
+                    p("Over recent decades, river herring populations have faced severe declines due to factors such as offshore fishing, habitat loss, and increased predation, particularly by striped bass during their migration. Understanding and managing these dynamics is crucial for the sustainability of the fishery and the broader ecosystem. By developing a comprehensive model that includes both habitat suitability assessments and Agent-Based Modeling (ABM), this project seeks to create a tool that reflects local knowledge and addresses the Tribe's environmental concerns. This collaborative approach aims to support the Wampanoag Tribe of Gayhead (Aquinnah) in their pursuit for the recovery and long-term health of river herring in Aquinnah."),
                   ),
                   tabPanel(
                     title = tagList(icon("cog"), "Ecological Modeling"), 
@@ -474,7 +474,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Adult alewives find the highest quality spawning habitat in the southwestern and eastern sides of Squibnocket Pond, with moderate-quality areas covering much of the pond. Deeper sections of Squibnocket Pond, as well as Menemsha Pond, tend to have lower-quality habitat, making them less suitable for spawning. In contrast, Herring Creek stands out as an exceptional habitat, offering mostly high-quality conditions and no low-quality areas. Squibnocket Pond is the largest and most diverse site, with a mix of high-, moderate-, and low-quality habitats, emphasizing its importance as a key spawning area. Menemsha Pond, while large, is dominated by moderate-quality habitat with very little high-quality area. Herring Creek, though much smaller, provides the most consistently favorable conditions for spawning adult alewives.")))
+                            "Adult alewives find the highest quality spawning habitat around the borders of Squibnocket Pond, with moderate-quality areas covering much of the pond. Deeper sections of Squibnocket Pond, as well as Menemsha Pond, tend to have lower-quality habitat, making them less suitable for spawning. Herring Creek stands out as moderate- to high-quality habitat. Squibnocket Pond is the largest and most diverse site, with a mix of high-, moderate-, and low-quality habitats, emphasizing its importance as a key spawning area. Menemsha Pond, while large, is dominated by moderate-quality habitat with very little high-quality area.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -563,7 +563,7 @@ ui <- fluidPage(
                      column(6,
                             div(style = "height: 20px;"),
                             p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                              "Alewife eggs and larvae thrive in a variety of habitats within the pond system, with Squibnocket Pond providing the most favorable conditions. Herring Creek, which is dominated by high-quality habitat, plays a crucial role in connecting Squibnocket and Menemsha Ponds, allowing larvae to move between them. Squibnocket Pond offers a mix of habitats that support the development and dispersal of eggs and larvae. Menemsha Pond, while mostly moderate-quality, has some low-quality areas in its deeper sections. Eggs and larvae are likely dispersed across these habitats by natural water movements, with Squibnocket Pond standing out for its extensive areas suitable for growth and dispersal. The region as a whole provides diverse and supportive conditions for the development of alewife eggs and larvae, critical for their survival and population sustainability.")))
+                              "Alewife eggs and larvae thrive in a variety of habitats within Aquinnah. Squibnocket Pond provides the most favorable conditions, offering a mix of habitats that support the development and dispersal of eggs and larvae.  Menemsha Pond, while mostly moderate-quality, has some low-quality areas in its deeper sections. Herring Creek, which is dominated by high-quality habitat, plays a crucial role in connecting Squibnocket and Menemsha Ponds, allowing larvae to move between them. Eggs and larvae are likely dispersed across these habitats by natural water movements, with Squibnocket Pond standing out for its extensive areas suitable for growth and dispersal. The region as a whole provides diverse and supportive conditions for the development of alewife eggs and larvae.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -652,7 +652,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Non-migratory juvenile alewives benefit from a variety of habitats across the pond system, with Menemsha Pond offering the highest proportion of high-quality habitat. In Menemsha Pond, the majority of the area is highly suitable for juveniles, where water and nutrient exchange with the ocean creates favorable conditions. Squibnocket Pond, by contrast, features a mix of moderate- and low-quality habitats, with only small patches of high-quality areas scattered throughout. Herring Creek stands out as a key corridor, providing a continuous stretch of high-quality habitat alongside moderate-quality areas, which connects the ponds.")))
+                            "For non-migratory juvenile alewives, Menemsha Pond offers the most suitable habitat. The majority of the Menemsha Pond is highly suitable for juveniles, where water and nutrient exchange with the ocean creates favorable conditions. Squibnocket Pond, by contrast, features a mix of moderate- and low-quality habitats, with only small patches of high-quality areas scattered throughout. Herring Creek stands out as a key corridor, providing a continuous stretch of high-quality moderate-quality habitat, which connects the ponds.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -741,7 +741,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Spawning adult blueback herring face substantial challenges due to the scarcity of high-quality habitat throughout the study area. While Squibnocket Pond offers some of the most favorable conditions, with moderate- and low-quality habitats and small patches of high-quality habitat along its edges, poor habitat quality in other parts of the system, particularly Menemsha Pond, may hinder access to these better spawning areas. Menemsha Pond is dominated by low-quality habitat, with almost no moderate-quality areas and no high-quality habitat at all. These unfavorable conditions could prevent adult blueback herring from successfully navigating through Menemsha Pond to reach the more suitable spawning habitats in Squibnocket Pond.")))
+                            "There is a scarcity of high-quality habitat for blueback herring throughout the pond system. Squibnocket Pond offers some favorable conditions, with moderate- and low-quality habitats and small patches of high-quality habitat along its edges. Low habitat quality in other parts of the system, particularly Menemsha Pond, may hinder access to these better spawning areas. These conditions could help explain the greater prevalence of alewife than blueback herring in the pond system.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -830,7 +830,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Blueback herring eggs and larvae encounter a mix of habitat conditions across the study area, with Squibnocket and Menemsha Ponds providing more favorable environments compared to Herring Creek. Squibnocket Pond offers the most balanced habitat distribution, with high-quality areas concentrated along the edges of the shoreline, as well as extensive moderate-quality habitat. Menemsha Pond also supports egg and larval development, with large portions of moderate- and high-quality habitat throughout. In contrast, Herring Creek primarily consists of low- and moderate-quality habitats, with no high-quality areas, which may restrict connectivity between the ponds.")))
+                            "Blueback herring eggs and larvae encounter a mix of habitat conditions within the pond system. Squibnocket and Menemsha Ponds provide more favorable conditions than Herring Creek. Squibnocket Pond offers the most balanced habitat distribution, with high-quality areas concentrated along the edges of the shoreline. Menemsha Pond also supports egg and larval development, with large portions of moderate- and high-quality habitat found throughout. Herring Creek primarily consists of low- and moderate-quality habitats, with no high-quality areas, which may restrict connectivity between the ponds.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -919,7 +919,7 @@ ui <- fluidPage(
                    column(6,
                           div(style = "height: 20px;"),
                           p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center;", 
-                            "Non-migratory juvenile blueback herring benefit from the most favorable habitat conditions compared to other life stages, with abundant high-quality areas across the study system. Menemsha Pond stands out as the most suitable location, with nearly all of its habitat classified as high-quality, providing ideal conditions for juvenile growth and survival. Herring Creek also plays a key role, offering primarily moderate-quality habitat with some high-quality areas, ensuring connectivity between the ponds. Squibnocket Pond provides a mix of moderate- and high-quality habitat, with its northeastern region offering particularly favorable conditions for juveniles. Despite these favorable juvenile habitats, the challenges faced by earlier life stages, such as poor spawning and limited habitat connectivity during egg development conditions, may limit the overall presence of juvenile blueback herring in the system.")))
+                            "The pond system provides abundant high-quality areas for non-migratory juvenile blueback herring. Menemsha Pond provides the most favorable conditions, with nearly all of its habitat classified as high-quality. Herring Creek offers primarily moderate-quality habitat with some high-quality areas, ensuring connectivity between the ponds. Squibnocket Pond provides a mix of moderate- and high-quality habitat, with its northeastern region offering particularly favorable conditions for juveniles. Despite these favorable juvenile habitats, low habitat for adult blueback herring, may limit the presence of juvenile blueback herring in the pond system.")))
                  ),
                  tabsetPanel(
                    tabPanel("Average Daily Temperature",
@@ -1008,7 +1008,7 @@ tabPanel(
            div(style = "height: 20px;"),
            p("This page provides an overview of the River Herring Migration Model application in Aquinnah, MA where the Agent-Based-Model (ABM) simulates the migration patterns of river herring under various striped bass predation conditions. By analyzing the dynamics of river herring migration under different predation pressures, this model can be used to identify locations where predation impacts spawning behavior in river herring."),
            div(style = "height: 10px;"),
-           p("The Aquinnah, MA simulation used the most recent herring count data from 2024, provided by the Wampanoag Tribe of Gayhead (Aquinnah), to test three predation levels against a no-predation baseline, as shown in the table below."),
+           p("The Aquinnah, MA simulation tests three predation levels against a no-predation baseline, shown in the table below."),
     ),
     column(6, 
            div(style = "height: 20px;"),
@@ -1031,7 +1031,7 @@ tabPanel(
            div(style = "height: 20px;"),
            div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Baseline Spawning"))),
            div(style = "height: 10px;"),
-           p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Users can explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring. By adjusting model parameters and running simulations, users can gain insights into the potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions."),
+           p("The baseline simulation assumes no predation and provides a reference point for comparing the impacts of different factors on migration success. Simulations can be used to explore how changes in environmental variables, such as temperature, salinity, and flow velocity, affect the migration routes and success rates of river herring. By adjusting model parameters and running simulations, we can look into potential outcomes of different management strategies and environmental changes, helping to inform conservation and management decisions."),
            div(style = "height: 35px;"), # Add a gap between the paragraphs
            p(style = "background-color: #8fbc8f; color: white; padding: 10px; text-align: center; font-weight: bold;", 
              "Compare the Spawning Activity from the Baseline Simulation to Different Predation Levels by Clicking the Tabs Below")
@@ -1098,8 +1098,8 @@ tabPanel(
     column(12,
            div(style = "text-align:center", h3(tags$b(style = "color: #8fbc8f;", "Summary"))),
            p("The simulation results reveal that river herring are highly vulnerable to predation by striped bass, with even low predation levels forcing them into safer areas. Moderate to high predation drastically reduces spawning success and increases migration mortality."),
-           p("For fisheries management, this showcases the need for conservation strategies, such as protecting key spawning habitats and improving fish passage at critical bottlenecks like the Herring Creek culvert. Adaptive management, informed by the migration model, can help regulate predator populations and implement timely protection measures based on real-time data."),
-           p("These findings can guide policy decisions and foster collaboration among communities, promoting the conservation of river herring and supporting Aquinnah's ecosystem. This model also paves the way for ongoing research and monitoring to tackle the complex challenges faced by river herring populations.")
+           p("This model is designed as a tool to explore questions about river herring in Aquinnah. It can help examine how factors such as predator abundance, spawning habitat conditions, or passage conditions at places like the Herring Creek culvert may influence river herring movement and survival."),
+           p("By running scenarios based on local knowledge, the model responds directly to concerns about the system, providing information that supports informed decision-making and management planning.")
     )
   )
 )
